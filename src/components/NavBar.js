@@ -58,7 +58,12 @@ const useStyles = makeStyles(theme => ({
       flexGrow: 1,
     },
 }));
-
+const options = [
+  'Show some love to Material-UI',
+  'Show all notification content',
+  'Hide sensitive notification content',
+  'Hide all notification content',
+];
 
 const NavBar = () =>{
     const classes = useStyles();
