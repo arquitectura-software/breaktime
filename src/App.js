@@ -1,17 +1,33 @@
-import React from 'react';
-import './App.css';
-import Grid from '@material-ui/core/Grid'
-import { Container } from '@material-ui/core';
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import Button from '@material-ui/core/Button'
+import Navbar from './components/NavBar'
+import Buttons from './components/SpecialButtons'
+import Card from './components/Card'
+import Grid from '@material-ui/core/Grid' 
 
-function App() {
-  return (
-    <Grid className="App">
-      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" />
-      
+import './App.css'
 
-    </Grid>
-  );
+class App extends Component{
+  render(){
+    
+    return(
+      <div>
+        <Navbar/>
+        <Buttons/>
+        <Grid container  wrap="nowrap" spacing={2} >
+          <Grid item xs={8} sm={6}> <Card/>  </Grid>
+          <Grid item xs={8} sm={6}> <Card/> </Grid>
+          <Grid item xs={8} sm={6}> <Card/> </Grid>        
+        </Grid>
+        <Grid container  wrap="nowrap" spacing={2} >
+          <Grid item xs={8} sm={6}> <Card/>  </Grid>
+          <Grid item xs={8} sm={6}> <Card/> </Grid>
+          <Grid item xs={8} sm={6}> <Card/> </Grid>        
+        </Grid>
+      </div>
+    );
+  }
 }
 
 export default App;
