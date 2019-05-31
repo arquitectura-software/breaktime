@@ -52,9 +52,9 @@ class App extends Component{
     let cards = this.state.cards.map(card => {
       return (
         <Grid container  wrap="nowrap" spacing={2} >
-          <Grid item xs={8} sm={4}></Grid>
-          <Grid item xs={8} sm={4}> <Card card={card}/> </Grid>  
-          <Grid item xs={8} sm={4}></Grid>        
+          <Grid item xs={1} sm={3}></Grid>
+          <Grid item xs={10} sm={8}> <Card card={card}/> </Grid>  
+          <Grid item xs={1} sm={1}></Grid>        
         </Grid>
       )
     })
@@ -64,9 +64,9 @@ class App extends Component{
         <Buttons/>
         {cards}
         <Grid container  wrap="nowrap" spacing={2} >
-          <Grid item xs={8} sm={3}></Grid>
-          <Grid item xs={8} sm={6}> <TextField/> </Grid>  
-          <Grid item xs={8} sm={3}></Grid>        
+          <Grid item xs={1} sm={3}></Grid>
+          <Grid item xs={10} sm={8}> <TextField/> </Grid>  
+          <Grid item xs={1} sm={1}></Grid>        
         </Grid>
       </div>
     );
