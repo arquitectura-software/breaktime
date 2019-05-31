@@ -33,13 +33,13 @@ function IconLabelButtons() {
         <DeleteIcon className={classes.rightIcon} />
       </Button>
       
-      <Button variant="contained" color="default" className={classes.button}>
+      <Button variant="contained" className={classes.button}>
         Upload
         <CloudUploadIcon className={classes.rightIcon} />
       </Button>
       
-      <Button variant="contained" size="small" className={classes.button}>
-        <SaveIcon className={clsx(classes.leftIcon, classes.iconSmall)} />
+      <Button variant="contained" className={classes.button}>
+        <SaveIcon className={clsx(classes.leftIcon, classes.iconBig)} />
         Save
       </Button>
     </div>

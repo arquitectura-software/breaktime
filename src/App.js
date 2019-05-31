@@ -50,19 +50,21 @@ class App extends Component{
     // person = person
     // first person es para el objeto del component card y el segundo del arrow function
     let cards = this.state.cards.map(card => {
-      return (
-        <Grid container  wrap="nowrap" spacing={2} >
-          <Grid item xs={1} sm={3}></Grid>
-          <Grid item xs={10} sm={8}> <Card card={card}/> </Grid>  
-          <Grid item xs={1} sm={1}></Grid>        
-        </Grid>
+      return (        
+        <Grid item xs={12} sm={12}><Card card={card}/></Grid>      
       )
     })
     return(
       <div>
         <Navbar/>
         <Buttons/>
-        {cards}
+
+        <Grid container  wrap="nowrap" spacing={2} >
+        <Grid item xs={5} sm={4}></Grid> //Grid para los filtros
+        <Grid container xs={7} sm={7} spacing={2}>{cards}</Grid>
+        <Grid item xs={0} sm={1}></Grid>
+        </Grid>
+
         <Grid container  wrap="nowrap" spacing={2} >
           <Grid item xs={1} sm={3}></Grid>
           <Grid item xs={10} sm={8}> <TextField/> </Grid>  
