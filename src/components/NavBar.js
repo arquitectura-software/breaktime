@@ -54,7 +54,7 @@ const useStyles = makeStyles(theme => ({
         },
     },
     menuButton: {
-      marginRight: theme.spacing(3),
+
     },
     title: {
       flexGrow: 1,
