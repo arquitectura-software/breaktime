@@ -14,12 +14,12 @@ const currencies = [
     label: '2',
   },
   {
-    value: 'Plus-2',
+    value: 'Three',
     label: '3',
   },
   {
-    value: 'Plus-5',
-    label: '5',
+    value: 'Four',
+    label: '4',
   },
 ];
 
@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
 function OutlinedTextFields() {
   const classes = useStyles();
   const [values, setValues] = React.useState({
-    name: 'Cat in the Hat',
+    name: 'Ubicacion..',
     EventName: 'None',
     age: '',
     multiline: 'Controlled',
@@ -58,7 +58,7 @@ function OutlinedTextFields() {
     <form className={classes.container} noValidate autoComplete="off">
       <TextField
         id="outlined-name"
-        label="Name"
+        label="Cantidad"
         className={classes.textField}
         value={values.name}
         onChange={handleChange('name')}
@@ -77,7 +77,7 @@ function OutlinedTextFields() {
             className: classes.menu,
           },
         }}
-        helperText="Please select your currency"
+        helperText="Por favor seleccione la cantidad"
         margin="normal"
         variant="outlined"
       >
@@ -87,15 +87,7 @@ function OutlinedTextFields() {
           </MenuItem>
         ))}
       </TextField>
-      <TextField
-        id="outlined-name"
-        label="Event Name"
-        className={classes.textField}
-        value={values.EventName}
-        onChange={handleChange('EventName')}
-        margin="normal"
-        variant="outlined"
-      />
+      
     </form>
   );
 }

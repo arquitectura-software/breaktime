@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
 class MediaCard extends Component {
 
@@ -22,7 +23,7 @@ class MediaCard extends Component {
         <CardActionArea>
           <CardMedia
             className="height: 70"
-            image="./resources/universe.jpg"
+            image="../resources/universe.jpg"
             title="Universe"
           />
           <CardContent>
@@ -35,12 +36,8 @@ class MediaCard extends Component {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
-            Reservar
-        </Button>
-          <Button size="small" color="primary">
-            Ver más
-        </Button>
+          <Button href="/Reservation" size="small" color="primary">{this.props.card.option1}</Button>            
+          <Button size="small" color="primary">{this.props.card.option2}</Button>
         </CardActions>
       </Card>
     );
