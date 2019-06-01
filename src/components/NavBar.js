@@ -75,14 +75,14 @@ const NavBar = () =>{
                         <MenuIcon />
                     </IconButton>
                    <Typografy variant="h6" color ="inherit" className={classes.title}>
-                        Break Time
+                        BreakTime
                     </Typografy>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
                             <SearchIcon />
                         </div>
                         <InputBase
-                            placeholder="Search…"
+                            placeholder="Buscar…"
                             classes={{root: classes.inputRoot,input: classes.inputInput,}}/>
                     </div>
                     <Button color="inherit">Login</Button>

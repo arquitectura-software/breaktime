@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid' 
+import Container from '@material-ui/core/Container';
+
 import Navbar from './components/NavBar'
 import Buttons from './components/SpecialButtons'
 import Card from './components/Card'
-import Loading from './components/Loading.js';
-import Grid from '@material-ui/core/Grid' 
-import './App.css'
+import Loading from './components/Loading.js'
 import TextField from './components/TextField'
+import EventFilters from './components/EventFilters'
+
+import './App.css'
+
 
 class App extends Component{
   constructor(props){
@@ -55,22 +60,16 @@ class App extends Component{
       )
     })
     return(
-      <div>
+      <Grid>
+        <Grid item spacing={2}>
         <Navbar/>
-        <Buttons/>
-
-        <Grid container  wrap="nowrap" spacing={2} >
-        <Grid item xs={5} sm={4}></Grid> //Grid para los filtros
+        </Grid>
+        <Grid container>
+        <Grid item xs={5} sm={4}><Container><EventFilters/></Container></Grid>
         <Grid container xs={7} sm={7} spacing={2}>{cards}</Grid>
         <Grid item xs={0} sm={1}></Grid>
         </Grid>
-
-        <Grid container  wrap="nowrap" spacing={2} >
-          <Grid item xs={1} sm={3}></Grid>
-          <Grid item xs={10} sm={8}> <TextField/> </Grid>  
-          <Grid item xs={1} sm={1}></Grid>        
-        </Grid>
-      </div>
+      </Grid>
     );
   }
 }

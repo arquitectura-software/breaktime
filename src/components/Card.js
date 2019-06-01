@@ -36,10 +36,10 @@ class MediaCard extends Component {
         </CardActionArea>
         <CardActions>
           <Button size="small" color="primary">
-            Take
+            Reservar
         </Button>
           <Button size="small" color="primary">
-            Learn More
+            Ver más
         </Button>
         </CardActions>
       </Card>
