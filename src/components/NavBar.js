@@ -10,6 +10,18 @@ import MenuIcon from '@material-ui/icons/Menu'
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 
+
+
+import Drawer from '@material-ui/core/Drawer';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import Divider from '@material-ui/core/Divider';
+import List from '@material-ui/core/List';
+import { mainListItems, secondaryListItems } from './listItems';
+
+
+
+import clsx from 'clsx';
+
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
 import Grid from '@material-ui/core/Grid' 
@@ -68,6 +80,64 @@ const useStyles = makeStyles(theme => ({
       color: 'white',
       textDecorationLine: 'none',
     },
+
+
+
+    appBar: {
+      zIndex: theme.zIndex.drawer + 1,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+    },
+    appBarShift: {
+      marginLeft: drawerWidth,
+      width: `calc(100% - ${drawerWidth}px)`,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    },
+
+    toolbar: {
+      paddingRight: 24, // keep right padding when drawer closed
+    },
+
+
+
+    menuButtonHidden: {
+      display: 'none',
+    },
+
+    drawerPaper: {
+      position: 'relative',
+      whiteSpace: 'nowrap',
+      width: drawerWidth,
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    },
+    drawerPaperClose: {
+      overflowX: 'hidden',
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      width: theme.spacing(7),
+      [theme.breakpoints.up('sm')]: {
+        width: theme.spacing(9),
+      },
+    },
+
+    toolbarIcon: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      padding: '0 8px',
+      ...theme.mixins.toolbar,
+    },
+
 }));
 const options = [
   'Show some love to Material-UI',
@@ -76,31 +146,67 @@ const options = [
   'Hide all notification content',
 ];
 
+const drawerWidth = 240;
+
 const NavBar = () =>{
-    const classes = useStyles();
+
+
+      const classes = useStyles();
+    const [open, setOpen] = React.useState(true);
+    const handleDrawerOpen = () => {
+      setOpen(true);
+    };
+    const handleDrawerClose = () => {
+      setOpen(false);
+    };
+
+
+
     return(
         <Grid className={classes.barra}>
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="Menu">
+            <AppBar position="absolute"  className={clsx(classes.appBar, open && classes.appBarShift)}>
+                <Toolbar className={classes.toolbar}>
+                
+                <IconButton edge="start" color="inherit" aria-label="Open drawer" onClick={handleDrawerOpen} 
+              className={clsx(classes.menuButton, open && classes.menuButtonHidden)}>  
+                        
+                        
                         <MenuIcon />
                     </IconButton>
-                   <Typografy variant="h6" color ="inherit" className={classes.title}>
+
+                   <Typografy component="h1" variant="h6" color ="inherit" noWrap className={classes.title}>
                         BreakTime
                     </Typografy>
-                    <div className={classes.search}>
-                        <div className={classes.searchIcon}>
-                            <SearchIcon />
-                        </div>
-                        <InputBase
-                            placeholder="Buscar…"
-                            classes={{root: classes.inputRoot,input: classes.inputInput,}}/>
-                    </div>
+
+            
                     <Link className={classes.textoButton} to="/Login">
                       <Button><p className ={classes.textoButton}>Login</p></Button>
                     </Link>
                 </Toolbar>
             </AppBar>
+
+
+            <Drawer
+        variant="permanent"
+        classes={{
+          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+        }}
+        open={open}
+      >
+        <div className={classes.toolbarIcon}>
+          <IconButton onClick={handleDrawerClose}>
+            <ChevronLeftIcon />
+          </IconButton>
+        </div>
+        <Divider />
+        <List>{mainListItems}</List>
+        <Divider />
+        <List>{secondaryListItems}</List>
+      </Drawer>
+
+
+
+
         </Grid>
     )
 }
