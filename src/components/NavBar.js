@@ -10,6 +10,8 @@ import MenuIcon from '@material-ui/icons/Menu'
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 
+import Grid from '@material-ui/core/Grid' 
+
 const useStyles = makeStyles(theme => ({
     root: {
       flexGrow: 1,
@@ -57,6 +59,9 @@ const useStyles = makeStyles(theme => ({
     title: {
       flexGrow: 1,
     },
+    barra: {
+      marginBottom: '3%',
+    },
 }));
 const options = [
   'Show some love to Material-UI',
@@ -68,7 +73,7 @@ const options = [
 const NavBar = () =>{
     const classes = useStyles();
     return(
-        <div>
+        <Grid className={classes.barra}>
             <AppBar position="static">
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="Menu">
@@ -88,7 +93,7 @@ const NavBar = () =>{
                     <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
-        </div>
+        </Grid>
     )
 }
 

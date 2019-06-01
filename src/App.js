@@ -61,12 +61,10 @@ class App extends Component{
     })
     return(
       <Grid>
-        <Grid item spacing={2}>
         <Navbar/>
-        </Grid>
         <Grid container>
-        <Grid item xs={5} sm={4}><Container><EventFilters/></Container></Grid>
-        <Grid container xs={7} sm={7} spacing={2}>{cards}</Grid>
+        <Grid item xs={5} sm={3}><Container><EventFilters/></Container></Grid>
+        <Grid container xs={7} sm={8} spacing={2}>{cards}</Grid>
         <Grid item xs={0} sm={1}></Grid>
         </Grid>
       </Grid>
