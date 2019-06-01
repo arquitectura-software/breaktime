@@ -12,8 +12,8 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 
 ReactDOM.render(<BrowserRouter>
                 
-        <Route path="/reservation" component={Reservation} />
         <Route exact path="/" exact component={App}/>
+        <Route path="/reservation" component={Reservation} />
         <Route path="/login" component={Login} />
                 
     </BrowserRouter>, document.getElementById('root')
