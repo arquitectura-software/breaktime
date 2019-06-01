@@ -10,6 +10,9 @@ import Card from './components/Card'
 import Loading from './components/Loading.js'
 import TextField from './components/TextField'
 import EventFilters from './components/EventFilters'
+import Login from './components/Login'
+
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
 import './App.css'
 
@@ -49,6 +52,7 @@ class App extends Component{
   }
   render(){
     
+
     if( !this.state.isDataLoaded ){
       return <Loading/>
     }
@@ -59,15 +63,15 @@ class App extends Component{
         <Grid item xs={12} sm={12}><Card card={card}/></Grid>      
       )
     })
-    return(
-      <Grid>
-        <Navbar/>
+    return(   
+      <Grid>   
+      <Navbar/>
         <Grid container>
         <Grid item xs={5} sm={3}><Container><EventFilters/></Container></Grid>
         <Grid container xs={7} sm={8} spacing={2}>{cards}</Grid>
         <Grid item xs={0} sm={1}></Grid>
         </Grid>
-      </Grid>
+        </Grid>
     );
   }
 }

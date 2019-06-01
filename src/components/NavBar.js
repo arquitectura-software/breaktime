@@ -10,6 +10,8 @@ import MenuIcon from '@material-ui/icons/Menu'
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 
+import { BrowserRouter, Route, Link } from "react-router-dom";
+
 import Grid from '@material-ui/core/Grid' 
 
 const useStyles = makeStyles(theme => ({
@@ -62,6 +64,10 @@ const useStyles = makeStyles(theme => ({
     barra: {
       marginBottom: '3%',
     },
+    textoButton: {
+      color: 'white',
+      textDecorationLine: 'none',
+    },
 }));
 const options = [
   'Show some love to Material-UI',
@@ -90,7 +96,9 @@ const NavBar = () =>{
                             placeholder="Buscar…"
                             classes={{root: classes.inputRoot,input: classes.inputInput,}}/>
                     </div>
-                    <Button color="inherit">Login</Button>
+                    <Link className={classes.textoButton} to="/Login">
+                      <Button><p className ={classes.textoButton}>Login</p></Button>
+                    </Link>
                 </Toolbar>
             </AppBar>
         </Grid>
