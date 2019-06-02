@@ -16,9 +16,6 @@ const styles = theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.grey['100'],
     overflow: 'hidden',
-    backgroundSize: 'cover',
-    backgroundPosition: '0 400px',
-    paddingBottom: 200
   },
   appBarSpacer: theme.mixins.toolbar,
   content: {
@@ -29,6 +26,7 @@ const styles = theme => ({
   container: {
     paddingTop: theme.spacing(10),
     paddingBottom: theme.spacing(2),
+    height: '100vh',
   },
   columna: {
     direction: 'row',
