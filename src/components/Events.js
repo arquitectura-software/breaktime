@@ -34,7 +34,7 @@ const styles = theme => ({
 
 })
 
-class Home extends Component{
+class Events extends Component{
   constructor(props){
     super(props);
 
@@ -108,4 +108,4 @@ class Home extends Component{
   }
 }
 
-export default withRouter(withStyles(styles)(Home));
+export default withRouter(withStyles(styles)(Events));
