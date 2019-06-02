@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import AppBar from '@material-ui/core/AppBar'
@@ -7,8 +7,6 @@ import Typografy from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
-import SearchIcon from '@material-ui/icons/Search';
-import InputBase from '@material-ui/core/InputBase';
 
 import Drawer from '@material-ui/core/Drawer';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -17,12 +15,12 @@ import List from '@material-ui/core/List';
 import { mainListItems, secondaryListItems } from './listItems';
 
 import clsx from 'clsx';
-
-import { BrowserRouter, Route, Link } from "react-router-dom";
-
+import { Link, withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid' 
+import { withStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles(theme => ({
+const drawerWidth = 240;
+const styles = theme => ({
     root: {
       flexGrow: 1,
     },
@@ -135,72 +133,69 @@ const useStyles = makeStyles(theme => ({
       ...theme.mixins.toolbar,
     },
 
-}));
-const options = [
-  'Show some love to Material-UI',
-  'Show all notification content',
-  'Hide sensitive notification content',
-  'Hide all notification content',
-];
+});
 
-const drawerWidth = 240;
+class NavBar extends Component{
+  state = {
+    open: false,
+  }
 
-const NavBar = () =>{
+  handleDrawerOpen = () => {
+    this.setState({open: true})
+  };
 
-    const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
-    const handleDrawerOpen = () => {
-      setOpen(true);
-    };
-    const handleDrawerClose = () => {
-      setOpen(false);
-    };
+  handleDrawerClose = () => {
+    this.setState({open: false})
+  };
 
-
+  render(){
+    const { classes } = this.props;
 
     return(
-        <Grid className={classes.barra}>
-            <AppBar position="absolute"  className={clsx(classes.appBar, open && classes.appBarShift)}>
-                <Toolbar className={classes.toolbar}>
-                
-                <IconButton edge="start" color="inherit" aria-label="Open drawer" onClick={handleDrawerOpen} 
-              className={clsx(classes.menuButton, open && classes.menuButtonHidden)}>  
-                        
-                        
-                        <MenuIcon />
-                    </IconButton>
+      <Grid className={classes.barra}>
+          <AppBar position="absolute"  className={clsx(classes.appBar, this.state.open && classes.appBarShift)}>
+              <Toolbar className={classes.toolbar}>
+              
+              <IconButton edge="start" color="inherit" aria-label="Open drawer" onClick={this.handleDrawerOpen} 
+            className={clsx(classes.menuButton, this.state.open && classes.menuButtonHidden)}>  
+                      
+                      
+                      <MenuIcon />
+                  </IconButton>
 
-                   <Typografy component="h1" variant="h6" color ="inherit" noWrap className={classes.title}>
-                        BreakTime
-                    </Typografy>
+                 <Typografy component="h1" variant="h6" color ="inherit" noWrap className={classes.title}>
+                      BreakTime
+                  </Typografy>
 
-            
-                    <Link className={classes.textoButton} to="/Login">
-                      <Button><p className ={classes.textoButton}>Login</p></Button>
-                    </Link>
-                </Toolbar>
-            </AppBar>
+          
+                  <Link className={classes.textoButton} to="/Login">
+                    <Button><p className ={classes.textoButton}>Login</p></Button>
+                  </Link>
+              </Toolbar>
+          </AppBar>
 
 
-            <Drawer
-        variant="permanent"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
-        open={open}
-      >
-        <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <List>{mainListItems}</List>
-        <Divider />
-        
-      </Drawer>
-        </Grid>
-    )
+        <Drawer
+          variant="permanent"
+          classes={{
+            paper: clsx(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
+          }}
+          open={this.state.open}
+        >
+          <div className={classes.toolbarIcon}>
+            <IconButton onClick={this.handleDrawerClose}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </div>
+          <Divider />
+          <List>{mainListItems}</List>
+          <Divider />
+      
+        </Drawer>
+      </Grid>
+  )
+  }
+  
 }
 
-export default NavBar;
+export default withRouter(withStyles(styles)(NavBar))
