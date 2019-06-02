@@ -74,9 +74,6 @@ const styles = theme => ({
       color: 'white',
       textDecorationLine: 'none',
     },
-
-
-
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
       transition: theme.transitions.create(['width', 'margin'], {
@@ -158,7 +155,7 @@ class NavBar extends Component{
     return(
       <Grid className={classes.barra}>
           <AppBar position="absolute"  className={clsx(classes.appBar, this.state.open && classes.appBarShift)}>
-              <Toolbar className={classes.toolbar}>
+              <Toolbar variant="dense" className={classes.toolbar}>
               
               <IconButton edge="start" color="inherit" aria-label="Open drawer" onClick={this.handleDrawerOpen} 
             className={clsx(classes.menuButton, this.state.open && classes.menuButtonHidden)}>  
@@ -181,7 +178,7 @@ class NavBar extends Component{
 
 
         <Drawer
-          variant="permanent"
+          variant="temporary"
           classes={{
             paper: clsx(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
           }}
