@@ -28,7 +28,7 @@ const styles = theme => ({
   },
   container: {
     paddingTop: theme.spacing(10),
-    paddingBottom: theme.spacing(4),
+    paddingBottom: theme.spacing(2),
   },
   columna: {
     direction: 'row',
@@ -99,8 +99,8 @@ class Home extends Component{
             <div className={classes.appBarSpacer}>
               <Container maxWidth="lg" direction="row" className={classes.container}>
                 <Grid container direction="row" justify="flex-start" alignItems="flex-start">
-                <Grid item xs={3} sm={3}><Container><EventFilters/></Container></Grid>
-                <Grid container xs={9} sm={9} spacing={2}>{cards}</Grid>
+                <Grid item xs={5} sm={4} md={4}><Container><EventFilters/></Container></Grid>
+                <Grid container xs={7} sm={8} md={8} spacing={2}>{cards}</Grid>
                 </Grid>
               </Container> 
             </div>

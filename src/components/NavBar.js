@@ -150,7 +150,7 @@ const NavBar = () =>{
 
 
       const classes = useStyles();
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
     const handleDrawerOpen = () => {
       setOpen(true);
     };
