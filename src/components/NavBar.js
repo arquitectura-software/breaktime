@@ -199,12 +199,8 @@ const NavBar = () =>{
         <Divider />
         <List>{mainListItems}</List>
         <Divider />
-        <List>{secondaryListItems}</List>
+        
       </Drawer>
-
-
-
-
         </Grid>
     )
 }
