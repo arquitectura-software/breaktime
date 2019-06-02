@@ -16,11 +16,11 @@ import { makeStyles } from '@material-ui/core/styles';
 function MadeWithLove() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Built with love by the '}
+      {'Proyecto realizado para Arquitectura de Software II mediante '}
       <Link color="inherit" href="https://material-ui.com/">
         Material-UI
       </Link>
-      {' team.'}
+      {'.'}
     </Typography>
   );
 }
@@ -52,6 +52,7 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+
 }));
 
 export default function Login() {
@@ -75,27 +76,33 @@ export default function Login() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="identificación"
+              label="Identificación"
+              name="Identificación"
+              autoComplete="id"
               autoFocus
             />
+            
+            <Grid container justify="space-between">
             <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
+              id="date"
+              label="Birthday"
+              type="date"
+              defaultValue="2017-05-24"
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              />
+
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+
+            </Grid>
+
+
             <Button
               type="submit"
               fullWidth
@@ -107,13 +114,10 @@ export default function Login() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
               </Grid>
               <Grid item>
                 <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  {"¿No puede ingresar? ¡Podemos ayudarle!"}
                 </Link>
               </Grid>
             </Grid>
