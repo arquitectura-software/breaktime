@@ -16,8 +16,6 @@ import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
 import { mainListItems, secondaryListItems } from './listItems';
 
-
-
 import clsx from 'clsx';
 
 import { BrowserRouter, Route, Link } from "react-router-dom";
@@ -108,6 +106,7 @@ const useStyles = makeStyles(theme => ({
     },
 
     drawerPaper: {
+      height: theme.spacing(200),
       position: 'relative',
       whiteSpace: 'nowrap',
       width: drawerWidth,
@@ -123,6 +122,7 @@ const useStyles = makeStyles(theme => ({
         duration: theme.transitions.duration.leavingScreen,
       }),
       width: theme.spacing(7),
+      
       [theme.breakpoints.up('sm')]: {
         width: theme.spacing(9),
       },
@@ -148,8 +148,7 @@ const drawerWidth = 240;
 
 const NavBar = () =>{
 
-
-      const classes = useStyles();
+    const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const handleDrawerOpen = () => {
       setOpen(true);

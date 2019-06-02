@@ -9,38 +9,50 @@ import RoomIcon from '@material-ui/icons/Room'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import ArtTrackIcon from '@material-ui/icons/ArtTrack'
 
+import { BrowserRouter, Route, Link } from "react-router-dom";
+
 export const mainListItems = (
   <div>
+
+
+    <Link to="/Events">
     <ListItem button>
       <ListItemIcon>
         <ArtTrackIcon />
       </ListItemIcon>
       <ListItemText primary="Eventos" />
     </ListItem>
+    </Link>
+
+
     <ListItem button>
       <ListItemIcon>
         <AccountBoxIcon />
       </ListItemIcon>
       <ListItemText primary="Administrador" />
     </ListItem>
+
     <ListItem button>
       <ListItemIcon>
         <RoomIcon />
       </ListItemIcon>
       <ListItemText primary="Destinos" />
     </ListItem>
+
     <ListItem button>
       <ListItemIcon>
         <ShoppingCartIcon />
       </ListItemIcon>
       <ListItemText primary="Promociones" />
     </ListItem>
+
     <ListItem button>
       <ListItemIcon>
         <EventIcon/>
       </ListItemIcon>
       <ListItemText primary="Reservaciones" />
     </ListItem>
+
   </div>
 );
 
