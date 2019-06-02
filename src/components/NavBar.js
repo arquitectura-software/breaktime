@@ -106,7 +106,6 @@ const useStyles = makeStyles(theme => ({
     },
 
     drawerPaper: {
-      height: theme.spacing(200),
       position: 'relative',
       whiteSpace: 'nowrap',
       width: drawerWidth,

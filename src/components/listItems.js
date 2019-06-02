@@ -24,34 +24,41 @@ export const mainListItems = (
     </ListItem>
     </Link>
 
-
+    <Link to="/Admin">
     <ListItem button>
       <ListItemIcon>
         <AccountBoxIcon />
       </ListItemIcon>
       <ListItemText primary="Administrador" />
     </ListItem>
+    </Link>
 
+    <Link to="/Diary">
     <ListItem button>
       <ListItemIcon>
         <RoomIcon />
       </ListItemIcon>
       <ListItemText primary="Destinos" />
     </ListItem>
+    </Link>
 
+    <Link to="/Promos">
     <ListItem button>
       <ListItemIcon>
         <ShoppingCartIcon />
       </ListItemIcon>
       <ListItemText primary="Promociones" />
     </ListItem>
+    </Link>
 
+    <Link to="/Reservations">
     <ListItem button>
       <ListItemIcon>
         <EventIcon/>
       </ListItemIcon>
       <ListItemText primary="Reservaciones" />
     </ListItem>
+    </Link>
 
   </div>
 );
