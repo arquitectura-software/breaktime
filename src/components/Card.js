@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -12,14 +11,12 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 class MediaCard extends Component {
 
   constructor(props){
-    super(props);
-    this.Width = "maxWidth: 400"
-    
+    super(props);   
   }
   
   render() {
     return (
-      <Card className={this.Width}>
+      <Card >
         <CardActionArea>
           <CardMedia
             className="height: 70"
