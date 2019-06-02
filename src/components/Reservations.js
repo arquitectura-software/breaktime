@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid' 
 import Container from '@material-ui/core/Container';
 import Navbar from './NavBar'
-import Card from './Card'
+import Card from './CardReservas'
 import Loading from './Loading'
 import EventFilters from './EventFilters'
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -86,7 +86,7 @@ class Reservations extends Component{
     // first person es para el objeto del component card y el segundo del arrow function
     let cards = this.state.cards.map(card => {
       return (        
-        <Grid item xs={12} sm={12}><Card card={card}/></Grid>      
+        <Grid item xs={12} sm={6} md={4}><Card card={card}/></Grid>      
       )
     })
     return(   
