@@ -8,12 +8,21 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox'
 import RoomIcon from '@material-ui/icons/Room'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import ArtTrackIcon from '@material-ui/icons/ArtTrack'
+import HomeIcon from '@material-ui/icons/Home'
 
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
 export const mainListItems = (
   <div>
 
+<Link to="/">
+    <ListItem button>
+      <ListItemIcon>
+        <HomeIcon />
+      </ListItemIcon>
+      <ListItemText primary="Inicio" />
+    </ListItem>
+    </Link>
 
     <Link to="/Events">
     <ListItem button>
@@ -24,7 +33,7 @@ export const mainListItems = (
     </ListItem>
     </Link>
 
-    <Link to="/Admin">
+    <Link to="/LoginAdmin">
     <ListItem button>
       <ListItemIcon>
         <AccountBoxIcon />

@@ -162,9 +162,11 @@ class NavBar extends Component{
                       
                       <MenuIcon />
                   </IconButton>
-
+                
                  <Typografy component="h1" variant="h6" color ="inherit" noWrap className={classes.title}>
+                 <Link className={classes.textoButton} to="/">
                       BreakTime
+                      </Link>
                   </Typografy>
 
           

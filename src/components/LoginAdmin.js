@@ -55,7 +55,7 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-export default function Login() {
+export default function LoginAdmin() {
   const classes = useStyles();
 
   return (
@@ -68,7 +68,7 @@ export default function Login() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Ingreso como pasajero
+            Ingresar como administrador
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
