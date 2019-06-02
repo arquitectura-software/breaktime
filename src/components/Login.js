@@ -16,7 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 function MadeWithLove() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Proyecto realizado para Arquitectura de Software II mediante '}
+      {'Proyecto realizado para Arquitectura de Software mediante '}
       <Link color="inherit" href="https://material-ui.com/">
         Material-UI
       </Link>

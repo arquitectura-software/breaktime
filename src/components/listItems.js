@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
@@ -9,66 +9,85 @@ import RoomIcon from '@material-ui/icons/Room'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import ArtTrackIcon from '@material-ui/icons/ArtTrack'
 import HomeIcon from '@material-ui/icons/Home'
+import { withStyles } from '@material-ui/styles';
 
-import { BrowserRouter, Route, Link } from "react-router-dom";
 
-export const mainListItems = (
-  <div>
+import { withRouter, Link } from "react-router-dom";
 
-<Link to="/">
-    <ListItem button>
-      <ListItemIcon>
-        <HomeIcon />
-      </ListItemIcon>
-      <ListItemText primary="Inicio" />
-    </ListItem>
-    </Link>
+const styles = theme => ({
+  texto: {
+    color: '#464646',
+    textDecorationLine: 'none',
+  },
+})
 
-    <Link to="/Events">
-    <ListItem button>
-      <ListItemIcon>
-        <ArtTrackIcon />
-      </ListItemIcon>
-      <ListItemText primary="Eventos" />
-    </ListItem>
-    </Link>
+class ListItems extends Component {
 
-    <Link to="/LoginAdmin">
-    <ListItem button>
-      <ListItemIcon>
-        <AccountBoxIcon />
-      </ListItemIcon>
-      <ListItemText primary="Administrador" />
-    </ListItem>
-    </Link>
+  constructor(props){
+    super(props);
+  }
 
-    <Link to="/Diary">
-    <ListItem button>
-      <ListItemIcon>
-        <RoomIcon />
-      </ListItemIcon>
-      <ListItemText primary="Destinos" />
-    </ListItem>
-    </Link>
+  render(){
+    const { classes } = this.props;
 
-    <Link to="/Promos">
-    <ListItem button>
-      <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Promociones" />
-    </ListItem>
-    </Link>
+    return(
+      <div>
+      <Link className={classes.texto} to="/">
+          <ListItem button >
+            <ListItemIcon >
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText className={classes.texto} primary="Inicio" />
+          </ListItem>
+          </Link>
 
-    <Link to="/Reservations">
-    <ListItem button>
-      <ListItemIcon>
-        <EventIcon/>
-      </ListItemIcon>
-      <ListItemText primary="Reservaciones" />
-    </ListItem>
-    </Link>
+          <Link className={classes.texto} to="/Events">
+          <ListItem button>
+            <ListItemIcon>
+              <ArtTrackIcon />
+            </ListItemIcon>
+            <ListItemText className={classes.texto} primary="Eventos" />
+          </ListItem>
+          </Link>
 
-  </div>
-);
+          <Link className={classes.texto} to="/LoginAdmin">
+          <ListItem button>
+            <ListItemIcon>
+              <AccountBoxIcon />
+            </ListItemIcon>
+            <ListItemText className={classes.texto} primary="Administrador" />
+          </ListItem>
+          </Link>
 
+          <Link className={classes.texto} to="/Diary">
+          <ListItem button>
+            <ListItemIcon>
+              <RoomIcon />
+            </ListItemIcon>
+            <ListItemText className={classes.texto} primary="Destinos" />
+          </ListItem>
+          </Link>
+
+          <Link className={classes.texto} to="/Promos">
+          <ListItem button>
+            <ListItemIcon>
+              <ShoppingCartIcon />
+            </ListItemIcon>
+            <ListItemText  className={classes.texto} primary="Promociones" />
+          </ListItem>
+          </Link>
+
+          <Link className={classes.texto} to="/Reservations">
+          <ListItem button>
+            <ListItemIcon>
+              <EventIcon/>
+            </ListItemIcon>
+            <ListItemText className={classes.texto} primary="Reservaciones" />
+          </ListItem>
+          </Link>
+      </div>
+    )
+  }
+}
+
+export default withRouter(withStyles(styles)(ListItems))

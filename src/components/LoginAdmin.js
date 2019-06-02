@@ -16,7 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 function MadeWithLove() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Proyecto realizado para Arquitectura de Software II mediante '}
+      {'Proyecto realizado para Arquitectura de Software mediante '}
       <Link color="inherit" href="https://material-ui.com/">
         Material-UI
       </Link>
@@ -82,25 +82,6 @@ export default function LoginAdmin() {
               autoComplete="id"
               autoFocus
             />
-            
-            <Grid container justify="space-between">
-            <TextField
-              id="date"
-              label="Birthday"
-              type="date"
-              defaultValue="2017-05-24"
-              className={classes.textField}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              />
-
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-
-            </Grid>
 
 
             <Button

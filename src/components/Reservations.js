@@ -77,7 +77,7 @@ class Reservations extends Component{
     await this.setState( {isDataLoaded: true} );
   }
   render(){
-        const { classes } = this.props;
+    const { classes } = this.props;
 
     if( !this.state.isDataLoaded ){
       return <Loading/>
