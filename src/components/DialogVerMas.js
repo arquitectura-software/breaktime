@@ -5,6 +5,19 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Typography from '@material-ui/core/Typography';
+import { withRouter } from 'react-router-dom';
+import withStyles from '@material-ui/core/styles/withStyles';
+
+const styles = theme => ({
+    texto: {
+      marginTop: "1em",
+    },
+    descripcion: {
+      marginTop: "1em",
+      marginBottom: "1em"
+    }
+})
 
 class DialogVerMas extends Component{
     constructor(props){
@@ -12,34 +25,39 @@ class DialogVerMas extends Component{
     }
 
     render(){
-        const {open, onClose} = this.props;
+        const {open, onClose, card} = this.props;
+        const { classes } = this.props;
 
         return(         
                 <Dialog open={open} onClose={onClose} scroll='paper' aria-labelledby="scroll-dialog-title">
-                    <DialogTitle id="scroll-dialog-title">Titulo</DialogTitle>
+                    
+                    <DialogTitle id="scroll-dialog-title">
+                        {card.title}
+                    </DialogTitle>
+                   
                     <DialogContent >
-                    <DialogContentText>
-                    {[...new Array(50)]
-              .map(
-                () => `Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
-              )
-              .join('\n')}
-                    </DialogContentText>
+                        <Typography gutterBottom variant="subtitle1" component="h2" className={classes.texto}>
+                            {this.props.card.tipo}
+                        </Typography>
+                        <Typography gutterBottom variant="subtitle2" component="h2" className={classes.texto}>
+                            Fecha y hora: {this.props.card.date}
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p" className={classes.descripcion}>
+                            {this.props.card.description}
+                        </Typography>
+                        <Typography gutterBottom variant="subtitle2" component="h2" className={classes.texto}>
+                            Lugar: {this.props.card.ubicacion}
+                        </Typography>
                     </DialogContent>
+
                     <DialogActions>
-                    <Button onClick={onClose} color="primary">
-                        Cancel
-                    </Button>
-                    <Button onClick={onClose} color="primary">
-                        Subscribe
-                    </Button>
+                        <Button onClick={onClose} color="primary">
+                            Cancel
+                        </Button>
                     </DialogActions>
                 </Dialog>
         );
     }
 }
 
-export default DialogVerMas;
+export default withRouter(withStyles(styles)(DialogVerMas));
