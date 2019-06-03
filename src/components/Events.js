@@ -7,6 +7,7 @@ import Loading from './Loading'
 import EventFilters from './EventFilters'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
+import DialogVerMas from './DialogVerMas'
 
 import { CssBaseline } from '@material-ui/core';
 
@@ -39,9 +40,8 @@ class Events extends Component{
     super(props);
 
     this.state = {
-      isDataLoaded: false
-    };
-    this.state = {
+      isDataLoaded: false,
+      DialogVerMas: false,
       cards: [
           {
             title: "Idiosincrasia --",
@@ -73,6 +73,18 @@ class Events extends Component{
 
   }
 
+  handleClose = () => {
+    this.setState({
+      dialogVerMas: false
+    })
+  }
+
+  handleClickOpen = () => {
+    this.setState({
+      dialogVerMas: true
+    })
+  }
+
   async componentDidMount(){
     await this.setState( {isDataLoaded: true} );
   }
@@ -86,7 +98,7 @@ class Events extends Component{
     // first person es para el objeto del component card y el segundo del arrow function
     let cards = this.state.cards.map(card => {
       return (        
-        <Grid item xs={12} sm={12}><Card card={card}/></Grid>      
+        <Grid item xs={12} sm={12}><Card card={card}  onOpen={this.handleClickOpen}/></Grid>      
       )
     })
     return(   
@@ -100,7 +112,8 @@ class Events extends Component{
                   <Grid item xs={12} sm={4} md={3}><Container><EventFilters/></Container></Grid>
                   <Grid container xs={12} sm={8} md={9} spacing={2}>{cards}</Grid>
                 </Grid>
-              </Container> 
+                <DialogVerMas open={this.state.DialogVerMas} onClose={this.handleClose}/>
+              </Container>
             </div>
           </main>
         </div>

@@ -7,6 +7,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid' 
+import { Divider } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,6 +16,16 @@ const useStyles = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(3),
   },
+  labelFiltro: {
+    fontSize: "h1",
+    fontStyle: "bold",
+    marginTop: '1em',
+    marginBottom: '1em'
+  },
+  labelPublico: {
+    marginBottom: '1em',
+    marginTop: '2em'
+  }
 }));
 
 function EventFilters() {
@@ -41,7 +52,9 @@ function EventFilters() {
   return (
     <Grid container direction="column">
       <FormControl component="fieldset" className={classes.formControl}>
-        <FormLabel component="legend">Tipo de público</FormLabel>
+        <FormLabel component="legend" className={classes.labelFiltro}>Filtros de busqueda</FormLabel>
+        <Divider></Divider>
+        <FormLabel component="legend" className={classes.labelPublico}>Tipo de público</FormLabel>
         <FormGroup>
           <FormControlLabel
             control={<Checkbox checked={niños} onChange={handleChange('niños')} value="niños" />}
@@ -60,9 +73,9 @@ function EventFilters() {
         </FormGroup>
       </FormControl>
 
-
       <FormControl component="fieldset" className={classes.formControl}>
-        <FormLabel component="legend">Tipo de evento</FormLabel>
+        <Divider></Divider>
+        <FormLabel component="legend" className={classes.labelPublico}>Tipo de evento</FormLabel>
         <FormGroup>
           <FormControlLabel
             control={<Checkbox checked={conciertos} onChange={handleChange('conciertos')} value="conciertos" />}

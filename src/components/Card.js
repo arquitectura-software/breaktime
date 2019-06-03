@@ -6,15 +6,18 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { BrowserRouter, Route, Link } from "react-router-dom";
 
 class MediaCard extends Component {
 
   constructor(props){
     super(props);   
   }
+
+  
   
   render() {
+    const onOpen = this.props;
+
     return (
       <Card >
         <CardActionArea>
@@ -33,8 +36,8 @@ class MediaCard extends Component {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button href="/Reservation" size="small" color="primary">{this.props.card.option1}</Button>            
-          <Button size="small" color="primary">{this.props.card.option2}</Button>
+          <Button size="small" color="primary">Reservar</Button>            
+          <Button onClick={onOpen} size="small" color="primary">Ver más</Button>
         </CardActions>
       </Card>
     );
