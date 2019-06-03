@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid'
 import DialogVerMas from './DialogVerMas'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
+import DialogReservar from './DialogReservar';
 
 const styles = theme => ({
   texto: {
@@ -27,22 +28,35 @@ class MediaCard extends Component {
   constructor(props){
     super(props);  
     this.state = {
-      dialogVerMas: false
+      dialogVerMas: false,
+      dialogReservar: false
     } 
   }
 
-  handleClose = () => {
+  handleCloseVerMas = () => {
     this.setState({
       dialogVerMas: false,
     })
   }
 
-  handleClickOpen = () => {
+  handleCloseReservar = () => {
+    this.setState({
+      dialogReservar: false,
+    })
+  }
+
+  handleClickOpenVerMas = () => {
     this.setState({
       dialogVerMas: true
     })
   }
   
+  handleClickOpenReservar = () => {
+    this.setState({
+      dialogReservar: true
+    })
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -73,13 +87,13 @@ class MediaCard extends Component {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button size="small" color="primary">Reservar</Button>            
-            <Button onClick={this.handleClickOpen} size="small" color="primary">Ver más</Button>
+            <Button onClick={this.handleClickOpenReservar} size="small" color="primary">Reservar</Button>            
+            <Button onClick={this.handleClickOpenVerMas} size="small" color="primary">Ver más</Button>
           </CardActions>
         </Card>
 
-        <DialogVerMas open={this.state.dialogVerMas} onClose={this.handleClose} card={this.props.card}/>
-
+        <DialogVerMas open={this.state.dialogVerMas} onClose={this.handleCloseVerMas} card={this.props.card}/>
+        <DialogReservar open={this.state.dialogReservar} onClose={this.handleCloseReservar} card={this.props.card}/>
       </Grid>
     );
   }
