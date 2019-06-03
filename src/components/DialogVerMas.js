@@ -12,12 +12,11 @@ class DialogVerMas extends Component{
     }
 
     render(){
-
         const {open, onClose} = this.props;
 
         return(         
                 <Dialog open={open} onClose={onClose} scroll='paper' aria-labelledby="scroll-dialog-title">
-                    <DialogTitle id="scroll-dialog-title">Subscribe</DialogTitle>
+                    <DialogTitle id="scroll-dialog-title">Titulo</DialogTitle>
                     <DialogContent >
                     <DialogContentText>
                     {[...new Array(50)]
@@ -31,10 +30,10 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
                     </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                    <Button  color="primary">
+                    <Button onClick={onClose} color="primary">
                         Cancel
                     </Button>
-                    <Button  color="primary">
+                    <Button onClick={onClose} color="primary">
                         Subscribe
                     </Button>
                     </DialogActions>
