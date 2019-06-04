@@ -63,8 +63,8 @@ export default function Login() {
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <NavBar></NavBar>
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid item xs={false} sm={7} md={8} className={classes.image} />
+      <Grid item xs={12} sm={5} md={4} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />

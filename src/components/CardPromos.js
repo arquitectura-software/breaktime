@@ -87,7 +87,7 @@ class CardPromos extends Component {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button onClick={this.handleClickOpenReservar} variant="contained" size="small" color="primary">Activar Notificación</Button>            
+            <Button variant="contained" size="small" color="primary">Activar Notificación</Button>            
             <Button onClick={this.handleClickOpenVerMas} size="small" color="primary">Ver más</Button>
           </CardActions>
         </Card>
