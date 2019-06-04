@@ -23,7 +23,7 @@ const styles = theme => ({
 })
 
 
-class MediaCard extends Component {
+class CardPromos extends Component {
 
   constructor(props){
     super(props);  
@@ -70,24 +70,24 @@ class MediaCard extends Component {
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2" align="center">
-                {this.props.card.title}
-              </Typography>
-              <Typography gutterBottom variant="subtitle1" component="h2" className={classes.texto}>
-                {this.props.card.tipo}
-              </Typography>
-              <Typography gutterBottom variant="subtitle2" component="h2" className={classes.texto}>
-                Fecha y hora: {this.props.card.date}
+                {this.props.card.nombreTienda}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p" className={classes.descripcion}>
                 {this.props.card.description.length >=50 ? this.props.card.description.substring(0,250)+"..." : this.props.card.description}
               </Typography>
-              <Typography gutterBottom variant="subtitle2" component="h2" className={classes.texto}>
-                Lugar: {this.props.card.ubicacion}
+              <Typography gutterBottom variant="subtitle2" component="h2">
+                Inicia: {this.props.card.fechaInicio}
+              </Typography>
+              <Typography gutterBottom variant="subtitle2" component="h2">
+                Finaliza: {this.props.card.fechaFin}
+              </Typography>
+              <Typography gutterBottom variant="subtitle2" component="h2">
+                Ubicada en {this.props.card.ubicacion}
               </Typography>
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button onClick={this.handleClickOpenReservar} size="small" color="primary">Reservar</Button>            
+            <Button variant="contained" size="small" color="primary">Activar Notificación</Button>            
             <Button onClick={this.handleClickOpenVerMas} size="small" color="primary">Ver más</Button>
           </CardActions>
         </Card>
@@ -100,4 +100,4 @@ class MediaCard extends Component {
 }
 
 
-export default withRouter(withStyles(styles)(MediaCard));
+export default withRouter(withStyles(styles)(CardPromos));

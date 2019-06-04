@@ -12,7 +12,6 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import NavBar from './NavBar';
 
 function MadeWithLove() {
   return (
@@ -56,21 +55,20 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-export default function Login() {
+export default function LoginAdmin() {
   const classes = useStyles();
 
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <NavBar></NavBar>
-      <Grid item xs={false} sm={7} md={8} className={classes.image} />
-      <Grid item xs={12} sm={5} md={4} component={Paper} elevation={6} square>
+      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Ingreso como pasajero
+            Ingresar como administrador
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
@@ -84,25 +82,6 @@ export default function Login() {
               autoComplete="id"
               autoFocus
             />
-            
-            <Grid container justify="space-between">
-            <TextField
-              id="date"
-              label="Birthday"
-              type="date"
-              defaultValue="2017-05-24"
-              className={classes.textField}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              />
-
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-
-            </Grid>
 
 
             <Button

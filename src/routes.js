@@ -8,6 +8,7 @@ import Admin from './components/Admin'
 import Diary from './components/Diary'
 import Promos from './components/Promos'
 import Reservations from './components/Reservations'
+import LoginAdmin from './components/LoginAdmin'
 
 import Home from './Home';
 
@@ -20,6 +21,7 @@ export default props => (
             <Route exact path="/login" component={Login} />
 
             <Route exact path="/events" component={Events} />
+            <Route exact path="/LoginAdmin" component={LoginAdmin} />
             <Route exact path="/Admin" component={Admin} />
             <Route exact path="/Diary" component={Diary} />
             <Route exact path="/Promos" component={Promos} />
