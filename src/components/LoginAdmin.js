@@ -76,13 +76,25 @@ export default function LoginAdmin() {
               margin="normal"
               required
               fullWidth
-              id="identificación"
-              label="Identificación"
-              name="Identificación"
-              autoComplete="id"
+              type="email"
+              id="username"
+              label="Correo"
+              name="Correo"
+              autoComplete="correo"
               autoFocus
             />
 
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              type="password"
+              id="password"
+              label="Contraseña"
+              name="Contraseña"
+              autoComplete="password"
+            />
 
             <Button
               type="submit"

@@ -8,7 +8,7 @@ import EventFilters from './EventFilters'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
 
-import { CssBaseline } from '@material-ui/core';
+import { CssBaseline, Typography } from '@material-ui/core';
 
 const styles = theme => ({
   root: {
@@ -31,6 +31,11 @@ const styles = theme => ({
   columna: {
     direction: 'row',
   },
+  titulo: {
+    marginTop: "0.5em",
+    marginBottom: "0.5em",
+    align: 'flex-end'
+  }
 
 })
 
@@ -82,13 +87,7 @@ class Reservations extends Component{
     if( !this.state.isDataLoaded ){
       return <Loading/>
     }
-    // person = person
-    // first person es para el objeto del component card y el segundo del arrow function
-    let cards = this.state.cards.map(card => {
-      return (        
-        <Grid item xs={12} sm={6} md={4}><Card card={card}/></Grid>      
-      )
-    })
+    
     return(   
         <div className={classes.root}>
           <CssBaseline/>
@@ -96,9 +95,16 @@ class Reservations extends Component{
           <main className={classes.content}>
             <div className={classes.appBarSpacer}>
               <Container maxWidth="lg" direction="row" className={classes.container}>
-                <Grid container direction="row" justify="flex-start" alignItems="flex-start">
-                  <Grid item xs={4} sm={4} ></Grid>
-                  <Grid container spacing={2}>{cards}</Grid>
+                <Grid container spacing={2} direction="row" justify="flex-start" alignItems="flex-start">
+                    <Typography  variant="h3" component="h2" className={classes.titulo}>
+                      Aqui tiene todas sus reservaciones
+                    </Typography>
+
+                    {this.state.cards.map(card => {
+                      return (
+                        <Card card={card}/>
+                      )
+                    })}
                 </Grid>
               </Container> 
             </div>
