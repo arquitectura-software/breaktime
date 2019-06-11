@@ -170,8 +170,8 @@ class NavBar extends Component{
                   </Typografy>
 
           
-                  <Link className={classes.textoButton} to="/Login">
-                    <Button><p className ={classes.textoButton}>Login</p></Button>
+                  <Link className={classes.textoButton} to="#">
+                    <Button><p className ={classes.textoButton}>Username</p></Button>
                   </Link>
               </Toolbar>
           </AppBar>

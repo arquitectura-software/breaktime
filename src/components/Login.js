@@ -5,14 +5,14 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
+import { Link, withRouter } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import NavBar from './components/NavBar';
+import NavBar from './NavBar';
 
 function MadeWithLove() {
   return (
@@ -100,7 +100,7 @@ export default function Login() {
                 />
 
               </Grid>
-
+              <Link to="/events">
                 <Button
                   fullWidth
                   variant="contained"
@@ -109,6 +109,8 @@ export default function Login() {
                 >
                   Sign In
                 </Button>
+                </Link>
+
               <Grid container>
                 <Grid item xs>
                 </Grid>

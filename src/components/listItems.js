@@ -50,15 +50,6 @@ class ListItems extends Component {
           </ListItem>
           </Link>
 
-          <Link className={classes.texto} to="/LoginAdmin">
-          <ListItem button>
-            <ListItemIcon>
-              <AccountBoxIcon />
-            </ListItemIcon>
-            <ListItemText className={classes.texto} primary="Administrador" />
-          </ListItem>
-          </Link>
-
           <Link className={classes.texto} to="/Diary">
           <ListItem button>
             <ListItemIcon>
