@@ -31,7 +31,7 @@ class CardReservas extends Component {
     const { classes } = this.props;
 
     return (
-      <Grid item xs={12} sm={6} md={6} spacing={2} key={this.props.card.id}>
+      <Grid item xs={12} sm={6} md={4} spacing={2} key={this.props.card.id}>
         <Card >
           <CardActionArea>
             <CardMedia

@@ -34,7 +34,7 @@ const styles = theme => ({
   titulo: {
     marginTop: "0.5em",
     marginBottom: "0.5em",
-    align: 'flex-end'
+    textAlign: "center"
   }
 
 })
@@ -95,11 +95,12 @@ class Reservations extends Component{
           <main className={classes.content}>
             <div className={classes.appBarSpacer}>
               <Container maxWidth="lg" direction="row" className={classes.container}>
-                <Grid container spacing={2} direction="row" justify="flex-start" alignItems="flex-start">
-                    <Typography  variant="h3" component="h2" className={classes.titulo}>
-                      Aqui tiene todas sus reservaciones
-                    </Typography>
-
+                <Grid container spacing={2} direction="row" justify="flex-start" alignItems="center">
+                    <Grid container direction="row" justify="center" alignContent="center" alignItems="center">
+                      <Typography xs={12} variant="h4" className={classes.titulo}>
+                        Aqui tiene todas sus reservaciones
+                      </Typography>
+                    </Grid>
                     {this.state.cards.map(card => {
                       return (
                         <Card card={card}/>
