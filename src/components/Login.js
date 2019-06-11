@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Link, withRouter } from 'react-router-dom';
+import LinkUI from '@material-ui/core/Link'
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -18,9 +19,9 @@ function MadeWithLove() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Proyecto realizado para Arquitectura de Software mediante '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <LinkUI color="inherit" href="https://material-ui.com/">
         Material-UI
-      </Link>
+      </LinkUI>
       {'.'}
     </Typography>
   );
@@ -69,7 +70,7 @@ export default function Login() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Ingreso como pasajero
+              Ingreso
             </Typography>
             <form className={classes.form} noValidate>
               <TextField

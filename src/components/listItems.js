@@ -41,7 +41,7 @@ class ListItems extends Component {
           </ListItem>
           </Link>
 
-          <Link className={classes.texto} to="/Events">
+          <Link className={classes.texto} to="/events">
           <ListItem button>
             <ListItemIcon>
               <ArtTrackIcon />
@@ -50,7 +50,7 @@ class ListItems extends Component {
           </ListItem>
           </Link>
 
-          <Link className={classes.texto} to="/Diary">
+          <Link className={classes.texto} to="/diary">
           <ListItem button>
             <ListItemIcon>
               <RoomIcon />
@@ -59,7 +59,7 @@ class ListItems extends Component {
           </ListItem>
           </Link>
 
-          <Link className={classes.texto} to="/Promos">
+          <Link className={classes.texto} to="/promos">
           <ListItem button>
             <ListItemIcon>
               <ShoppingCartIcon />
@@ -68,7 +68,7 @@ class ListItems extends Component {
           </ListItem>
           </Link>
 
-          <Link className={classes.texto} to="/Reservations">
+          <Link className={classes.texto} to="/reservations">
           <ListItem button>
             <ListItemIcon>
               <EventIcon/>
