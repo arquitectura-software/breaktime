@@ -52,7 +52,7 @@ const rutas = [
     "reservations"
 ]
 
-class Admin extends Component{
+class AdminReservas extends Component{
   constructor(props){
     super(props);
 
@@ -95,4 +95,4 @@ hoverOff = (hover) => {
   }
 }
 
-export default withRouter(withStyles(styles)(Admin));
+export default withRouter(withStyles(styles)(AdminReservas));

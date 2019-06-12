@@ -6,7 +6,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button'
 
 import { CssBaseline } from '@material-ui/core';
-import BarraAdmin from './BarraAdmin';
 
 const styles = theme => ({
   
@@ -52,7 +51,7 @@ const rutas = [
     "reservations"
 ]
 
-class Admin extends Component{
+class BarraAdmin extends Component{
   constructor(props){
     super(props);
 
@@ -69,30 +68,54 @@ class Admin extends Component{
   }
 
 
-hoverOn = (hover) => {
-  this.setState({ hover: true })
-}
-
-hoverOff = (hover) => {
-  this.setState({ hover: false })
-}
+  hoverOn = (hover) => {
+    this.setState({ hover: true })
+  }
+  
+  hoverOff = (hover) => {
+    this.setState({ hover: false })
+  }
+  
 
 
   render(){
     const { classes } = this.props;
     return(
-      <div className={classes.root}>
-        <CssBaseline/> 
       <main className={classes.content}>
-        <BarraAdmin/>
-            <div className={classes.appBarSpacer}>
+          <div className="toolbar">
+            <Link 
+            component="h2"
+            variant="h5"
+            color="inherit"
+            align="center"
+            className="hoverAnimation"
+            to={"/admin_eventos"}>
+              Eventos
+            </Link>
 
+            <Link 
+            component="h2"
+            variant="h5"
+            color="inherit"
+            align="center"
+            className="hoverAnimation"
+            to={"/admin_promociones"}>
+              Promociones
+            </Link>
 
-            </div>
+            <Link 
+            component="h2"
+            variant="h5"
+            color="inherit"
+            align="center"
+            className="hoverAnimation"
+            to={"/admin_reservas"}>
+              Reservas
+            </Link>
+          </div>
         </main>
-      </div>
     );
   }
 }
 
-export default withRouter(withStyles(styles)(Admin));
+export default withRouter(withStyles(styles)(BarraAdmin));
