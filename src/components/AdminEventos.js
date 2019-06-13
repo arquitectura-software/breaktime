@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
-import Card from '@material-ui/core/Card';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { withRouter, Link } from 'react-router-dom';
-import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button'
+import { withRouter } from 'react-router-dom';
 
 import { CssBaseline } from '@material-ui/core';
 import BarraAdmin from './BarraAdmin';
@@ -22,35 +19,14 @@ const styles = theme => ({
     backgroundRepeat: 'no-repeat',
   },
 
-  toolbarSecondary: {
-    justifyContent: 'space-between',
-    overflowX: 'auto',
-    backgroundColor: theme.palette.primary.main
-  },
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
     height: '100vh',
     overflow: 'auto',
   },
-  container: {
-    paddingTop: theme.spacing(10),
-    paddingBottom: theme.spacing(2),
-  },
-
 });
 
-const items = [
-    "Eventos",
-    "Promociones",
-    "Reservas"
-]
-
-const rutas = [
-    "events",
-    "promos",
-    "reservations"
-]
 
 class AdminEventos extends Component{
   constructor(props){
@@ -58,25 +34,13 @@ class AdminEventos extends Component{
 
     this.state = {
       isDataLoaded: false,
-      hoverEvent: false,
-      hoverPromos: false,
-      hoverReservas: false
+      
     };
   }
 
   async componentDidMount(){
     await this.setState( {isDataLoaded: true} );
   }
-
-
-hoverOn = (hover) => {
-  this.setState({ hover: true })
-}
-
-hoverOff = (hover) => {
-  this.setState({ hover: false })
-}
-
 
   render(){
     const { classes } = this.props;
