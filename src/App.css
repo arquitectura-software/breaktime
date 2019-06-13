@@ -3,21 +3,16 @@ body {
 }
 
 .principal {
-
   font-size: 200px;
   font-family: Roboto;
 }
 
 .toolbar{
   display: flex;
+  position: absolute;
   justify-content: space-between;
-  overflow-x: hidden;
-  overflow-y: hidden;
   background-color: #3647B5;
-  height: 40px;
-  max-height: 40px;
-  min-height: 20px;
-  align-items: center
+  width: 100%;
   
 }
 .hoverAnimation{
@@ -48,9 +43,9 @@ body {
     font-weight: 300;
 
   } to {
-    transform: scale(1.05);
-    color: #C7C7C7;
-    background-color: #2F3E9E;
+    transform: scale(1);
+    color: grey;
+    background-color: darkblue;
     font-weight: 500;
   }
 }

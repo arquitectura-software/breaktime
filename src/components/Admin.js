@@ -9,10 +9,6 @@ const styles = theme => ({
   
   root: {
     display: 'flex',
-    flex: '1',
-    flexGrow: 1,
-    backgroundColor: '#000000',
-    overflow: 'hidden',
     backgroundImage: "url(" + "http://consejerosviajeros.com/wp-content/uploads/2015/10/1.Portada1-e1444214421337.jpg" + ")",
     backgroundPosition: 'center',
     backgroundSize: 'cover',
@@ -47,8 +43,8 @@ class Admin extends Component{
     return(
       <div className={classes.root}>
         <CssBaseline/> 
-      <main className={classes.content}>
         <BarraAdmin/>
+      <main className={classes.content}>
             <div className={classes.appBarSpacer}>
 
 

@@ -47,8 +47,8 @@ class AdminReservas extends Component{
     return(
       <div className={classes.root}>
         <CssBaseline/> 
-      <main className={classes.content}>
         <BarraAdmin/>
+      <main className={classes.content}>
             <div className={classes.appBarSpacer}>
 
 
