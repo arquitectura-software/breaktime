@@ -81,6 +81,7 @@ const styles = theme => ({
         duration: theme.transitions.duration.leavingScreen,
       }),
     },
+    
     appBarShift: {
       marginLeft: drawerWidth,
       width: `calc(100% - ${drawerWidth}px)`,
