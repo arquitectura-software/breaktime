@@ -53,6 +53,7 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    textDecorationLine: 'none',
   },
 
 }));
@@ -70,7 +71,7 @@ export default function Login() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Ingreso
+              Inicio de sesión
             </Typography>
             <form className={classes.form} noValidate>
               <TextField
@@ -97,18 +98,17 @@ export default function Login() {
               <Grid container justify="flex-end">
                 <FormControlLabel
                   control={<Checkbox value="remember" color="primary" />}
-                  label="Remember me"
+                  label="Recuérdame"
                 />
 
               </Grid>
-              <Link to="/events">
+              <Link to="/events" className={classes.submit}>
                 <Button
                   fullWidth
                   variant="contained"
                   color="primary"
-                  className={classes.submit}
-                >
-                  Sign In
+                  className={classes.submit}>
+                  Iniciar sesión
                 </Button>
                 </Link>
 
