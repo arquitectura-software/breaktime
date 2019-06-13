@@ -45,10 +45,10 @@ class Admin extends Component{
         <CssBaseline/> 
         <BarraAdmin/>
       <main className={classes.content}>
-            <div className={classes.appBarSpacer}>
+            <div className={classes.appBarSpacer} />
 
 
-            </div>
+            
         </main>
       </div>
     );

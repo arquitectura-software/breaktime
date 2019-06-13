@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
+import AdminEventosForm from './AdminEventosForm';
+
+import Card from '@material-ui/core/Card';
+import Grid from '@material-ui/core/Grid';
+import CardContent from '@material-ui/core/CardContent';
 
 import { CssBaseline } from '@material-ui/core';
 import BarraAdmin from './BarraAdmin';
@@ -23,12 +28,13 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     height: '100vh',
+    margin: '10vh',
     overflow: 'auto',
   },
 });
 
 
-class AdminEventos extends Component{
+class AdminEventosNew extends Component{
   constructor(props){
     super(props);
 
@@ -49,13 +55,20 @@ class AdminEventos extends Component{
         <CssBaseline/> 
         <BarraAdmin/>
       <main className={classes.content}>
-            <div className={classes.appBarSpacer} /> 
-
-
+      <Grid className={classes.appBarSpacer} />
+      <Grid container xs={12} justify="center" alignItems="center">
+      <Grid container xs={8} justify="center" alignItems="center">
+            <Card>
+              <CardContent> 
+                <AdminEventosForm/>
+                  </CardContent> 
+            </Card>
+            </Grid>
+            </Grid>
         </main>
       </div>
     );
   }
 }
 
-export default withRouter(withStyles(styles)(AdminEventos));
+export default withRouter(withStyles(styles)(AdminEventosNew));

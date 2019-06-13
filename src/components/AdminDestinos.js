@@ -28,7 +28,7 @@ const styles = theme => ({
 });
 
 
-class AdminEventos extends Component{
+class AdminDestinos extends Component{
   constructor(props){
     super(props);
 
@@ -49,7 +49,7 @@ class AdminEventos extends Component{
         <CssBaseline/> 
         <BarraAdmin/>
       <main className={classes.content}>
-            <div className={classes.appBarSpacer} /> 
+            <div className={classes.appBarSpacer}/>
 
 
         </main>
@@ -58,4 +58,4 @@ class AdminEventos extends Component{
   }
 }
 
-export default withRouter(withStyles(styles)(AdminEventos));
+export default withRouter(withStyles(styles)(AdminDestinos));
