@@ -1,16 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import BarraAdmin from './BarraAdmin'
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
+import withStyles from '@material-ui/core/styles/withStyles';
+import { withRouter } from 'react-router-dom';
 import FormEvents from './FormEvents';
 
-
-
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   appBar: {
     position: 'relative',
   },
@@ -50,30 +48,34 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
   },
-}));
+});
 
+class Checkout extends Component{
+  constructor(props){
+    super(props)
+  }
 
-export default function Checkout() {
-  const classes = useStyles();
+  render(){
+
+    const { classes } = this.props;
+
+    return (
+      <React.Fragment>
+        <CssBaseline />
+        <BarraAdmin /> 
+        <div className={classes.appBarSpacer}/>
   
-
-  return (
-    <React.Fragment>
-      <CssBaseline />
-      <BarraAdmin /> 
-      <div className={classes.appBarSpacer}/>
-
-      <main className={classes.layout}>
-        <Paper className={classes.paper}>
-          
-          <FormEvents />
+        <main className={classes.layout}>
+          <Paper className={classes.paper}>
             
+            <FormEvents />
+              
               <React.Fragment>
                 <div className={classes.buttons}>
                   
-                    <Button className={classes.button}>
-                      Cancelar
-                    </Button>
+                  <Button className={classes.button}>
+                    Cancelar
+                  </Button>
                   
                   <Button
                     variant="contained"
@@ -83,10 +85,12 @@ export default function Checkout() {
                     Aceptar
                   </Button>
                 </div>
-              </React.Fragment>              
-          
-        </Paper>
-      </main>
-    </React.Fragment>
-  );
+              </React.Fragment>                          
+          </Paper>
+        </main>
+      </React.Fragment>
+    );
+  }
 }
+
+export default withRouter(withStyles(styles)(Checkout));
