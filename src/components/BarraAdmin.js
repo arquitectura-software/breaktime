@@ -166,7 +166,7 @@ class BarraAdmin extends Component{
                   </IconButton>
                 
                  <Typografy component="h1" variant="h6" color ="inherit" noWrap className={classes.title}>
-                 <Link className={classes.textoButton} to="/">
+                 <Link className={classes.textoButton} to="/Admin">
                       Administrador
                       </Link>
                   </Typografy>

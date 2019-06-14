@@ -1,12 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Navbar from './NavBar'
-import Toolbar from '@material-ui/core/Toolbar';
+import BarraAdmin from './BarraAdmin'
 import Paper from '@material-ui/core/Paper';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
@@ -74,7 +70,7 @@ export default function Checkout() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Navbar /> 
+      <BarraAdmin /> 
       <div className={classes.appBarSpacer}/>
 
       <main className={classes.layout}>
@@ -89,20 +85,18 @@ export default function Checkout() {
                 <div className={classes.buttons}>
                   
                     <Button className={classes.button}>
-                      Back
+                      Cancelar
                     </Button>
                   
                   <Button
                     variant="contained"
                     color="primary"
-                    
                     className={classes.button}
                   >
-                    
+                    Aceptar
                   </Button>
                 </div>
-              </React.Fragment>
-              
+              </React.Fragment>              
           
         </Paper>
         <MadeWithLove />
