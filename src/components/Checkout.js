@@ -6,7 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
-import Form from './Form';
+import FormEvents from './FormEvents';
 
 function MadeWithLove() {
   return (
@@ -75,11 +75,8 @@ export default function Checkout() {
 
       <main className={classes.layout}>
         <Paper className={classes.paper}>
-          <Typography component="h1" variant="h4" align="center">
-            Checkout
-          </Typography>
           
-          <Form />
+          <FormEvents />
             
               <React.Fragment>
                 <div className={classes.buttons}>
