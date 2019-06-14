@@ -4,7 +4,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import EventIcon from '@material-ui/icons/Event';
-import AccountBoxIcon from '@material-ui/icons/AccountBox'
+import StoreIcon from '@material-ui/icons/Store'
 import RoomIcon from '@material-ui/icons/Room'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import ArtTrackIcon from '@material-ui/icons/ArtTrack'
@@ -56,6 +56,15 @@ class ListItemsAdmin extends Component {
               <RoomIcon />
             </ListItemIcon>
             <ListItemText className={classes.texto} primary="Destinos" />
+          </ListItem>
+          </Link>
+
+          <Link className={classes.texto} to="/admin_tiendas">
+          <ListItem button>
+            <ListItemIcon>
+              <StoreIcon/>
+            </ListItemIcon>
+            <ListItemText className={classes.texto} primary="Tiendas" />
           </ListItem>
           </Link>
 

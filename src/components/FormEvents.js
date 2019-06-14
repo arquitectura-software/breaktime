@@ -1,96 +1,184 @@
-import React from 'react';
+import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-export default function FormEvents() {
-  return (
-    <React.Fragment>
-      <Typography variant="h6" gutterBottom>
-        Shipping address
-      </Typography>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="firstName"
-            name="firstName"
-            label="First name"
-            fullWidth
-            autoComplete="fname"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="lastName"
-            name="lastName"
-            label="Last name"
-            fullWidth
-            autoComplete="lname"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            id="address1"
-            name="address1"
-            label="Address line 1"
-            fullWidth
-            autoComplete="billing address-line1"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            id="address2"
-            name="address2"
-            label="Address line 2"
-            fullWidth
-            autoComplete="billing address-line2"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="city"
-            name="city"
-            label="City"
-            fullWidth
-            autoComplete="billing address-level2"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField id="state" name="state" label="State/Province/Region" fullWidth />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="zip"
-            name="zip"
-            label="Zip / Postal code"
-            fullWidth
-            autoComplete="billing postal-code"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="country"
-            name="country"
-            label="Country"
-            fullWidth
-            autoComplete="billing country"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
-            label="Use this address for payment details"
-          />
-        </Grid>
-      </Grid>
-    </React.Fragment>
-  );
+import { withRouter } from 'react-router-dom';
+import withStyles from '@material-ui/core/styles/withStyles';
+
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import Input from '@material-ui/core/Input';
+
+
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+
+
+const styles = theme => ({
+  texto: {
+    marginTop: "1em",
+  },
+  descripcion: {
+    marginTop: "1em",
+    marginBottom: "1em"
+  },
+  formControl: {
+      margin: theme.spacing(1),
+      minWidth: 200,
+  }
+})
+
+class FormEvents extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+        tipo: "",
+        tipopublico: "",
+        fecha: "",
+        ubicación: "",
+    }
+  }
+
+
+    handleDateChange = date => {
+      this.setState({
+        date: date
+      })
+    }
+
+    handleChange1 = tipo => {
+      this.setState({
+          tipo: tipo
+      })
+    }
+
+    handleChange2 = tipopublico => {
+      this.setState({
+          tipopublico: tipopublico
+      })
+    }
+
+    handleChange3 = fecha => {
+      this.setState({
+          fecha: fecha
+      })
+    }
+
+    handleChange3 = ubicación => {
+      this.setState({
+          ubicación: ubicación
+      })
+    }
+
+    render(){
+      const { classes } = this.props;
+      return (
+        <React.Fragment>
+          <Typography variant="h5" gutterBottom>
+            Editar evento
+          </Typography>
+          <Grid container spacing={3}>
+
+            <Grid item xs={12} sm={12}>
+              <TextField
+                required
+                id="firstName"
+                name="firstName"
+                label="First name"
+                fullWidth
+                autoComplete="fname"
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+                  <InputLabel shrink>
+                      Tipo de evento
+                  </InputLabel>
+                  <NativeSelect fullWidth value={this.state.tipo} onChange={event => this.handleChange1(event.target.value)}
+                      input={<Input name="tipo"/>}>
+                      <option value={1}>Uno</option>
+                      <option value={2}>Dos</option>
+                      <option value={3}>Tres</option>
+                      <option value={4}>Cuatro</option>
+                      <option value={5}>Cinco</option>
+                      <option value={6}>Seis</option>
+                    </NativeSelect>
+                </Grid>
+
+                <Grid item xs={12} sm={6}>
+                  <InputLabel shrink>
+                      Tipo de público
+                  </InputLabel>
+                  <NativeSelect fullWidth value={this.state.tipopublico} onChange={event => this.handleChange2(event.target.value)}
+                      input={<Input name="tipopublico"/>}>
+                      <option value={1}>Uno</option>
+                      <option value={2}>Dos</option>
+                      <option value={3}>Tres</option>
+                      <option value={4}>Cuatro</option>
+                      <option value={5}>Cinco</option>
+                      <option value={6}>Seis</option>
+                    </NativeSelect>
+                  </Grid>
+
+                  <Grid item xs={12} sm={6}>
+                  <InputLabel shrink>
+                      Ubicación
+                  </InputLabel>
+                  <NativeSelect fullWidth value={this.state.ubicación} onChange={event => this.handleChange4(event.target.value)}
+                      input={<Input name="ubicación"/>}>
+                      <option value={1}>Uno</option>
+                      <option value={2}>Dos</option>
+                      <option value={3}>Tres</option>
+                      <option value={4}>Cuatro</option>
+                      <option value={5}>Cinco</option>
+                      <option value={6}>Seis</option>
+                    </NativeSelect>
+            </Grid>
+
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      fullWidth
+                      id="fecha"
+                      label="Fecha"
+                      type="date"
+                      defaultValue="2019-06-14"
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                    />
+                  </Grid>
+
+            
+            <Grid item xs={12} sm={12}>
+            <TextField
+                id="address2"
+                name="address2"
+                type="number"
+                label="Capacidad"
+                fullWidth
+                autoComplete={100}
+              />
+            </Grid>
+
+
+            <Grid item xs={12}>
+              <TextField multiline id="state" name="state" label="Descripción" fullWidth />
+            </Grid>
+            
+          </Grid>
+        </React.Fragment>
+      );
+
+    }
+
 }
+
+export default withRouter(withStyles(styles)(FormEvents));

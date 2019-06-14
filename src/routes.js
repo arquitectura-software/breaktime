@@ -15,6 +15,7 @@ import AdminPromociones from './components/AdminPromociones'
 import AdminReservas from './components/AdminReservas'
 import AdminUsuarios from './components/AdminUsuarios'
 import AdminDestinos from './components/AdminDestinos'
+import AdminTiendas from './components/AdminTiendas'
 
 import Checkout from './components/Checkout'
 
@@ -35,6 +36,7 @@ export default props => (
             <Route exact path="/admin_reservas" component={AdminReservas}/>
             <Route exact path="/admin_destinos" component={AdminDestinos}/>
             <Route exact path="/admin_usuarios" component={AdminUsuarios}/>
+            <Route exact path="/admin_tiendas" component={AdminTiendas}/>
 
             <Route exact path="/checkout" component={Checkout}/>
         </Switch>
