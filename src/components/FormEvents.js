@@ -2,23 +2,13 @@ import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 
 import { withRouter } from 'react-router-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import Input from '@material-ui/core/Input';
-
-
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
 
 
 const styles = theme => ({
@@ -41,6 +31,7 @@ class FormEvents extends Component {
     this.state = {
         tipo: "",
         tipopublico: "",
+        capacidad: 200,
         fecha: "",
         ubicación: "",
     }
@@ -71,9 +62,15 @@ class FormEvents extends Component {
       })
     }
 
-    handleChange3 = ubicación => {
+    handleChange4 = ubicación => {
       this.setState({
           ubicación: ubicación
+      })
+    }
+
+    handleChange5 = capacidad => {
+      this.setState({
+          capacidad: capacidad
       })
     }
 
@@ -91,7 +88,7 @@ class FormEvents extends Component {
                 required
                 id="firstName"
                 name="firstName"
-                label="First name"
+                label="Nombre del evento"
                 fullWidth
                 autoComplete="fname"
               />
@@ -162,9 +159,10 @@ class FormEvents extends Component {
                 id="address2"
                 name="address2"
                 type="number"
+                onChange={event => this.handleChange5(event.target.value)}
                 label="Capacidad"
                 fullWidth
-                autoComplete={100}
+                defaultValue="200"
               />
             </Grid>
 
