@@ -6,6 +6,8 @@ import { withRouter } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
 import BarraAdmin from './BarraAdmin';
 import Card from './Cards/CardUsersAdmin'
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 const styles = theme => ({
   
@@ -18,6 +20,15 @@ const styles = theme => ({
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
+  },
+
+  fab: {
+    marginRight: "1em",
+    top: 'auto',
+    right: '1em',
+    bottom: '1em',
+    left: 'auto',
+    position: 'fixed',
   },
 
   appBarSpacer: {
@@ -90,7 +101,9 @@ class AdminUsuarios extends Component{
                 })}
             </Grid>
           </Container>
-
+          <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
+            <AddIcon color="white"/>            
+          </Fab>
         </main>
       </div>
     );

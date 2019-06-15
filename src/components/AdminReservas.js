@@ -6,6 +6,8 @@ import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container';
 import Card from './CardReservas'
 import BarraAdmin from './BarraAdmin';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 const styles = theme => ({
   
@@ -20,6 +22,15 @@ const styles = theme => ({
     flexGrow: 1,
     height: '100vh',
     overflow: 'auto',
+  },
+
+  fab: {
+    marginRight: "1em",
+    top: 'auto',
+    right: '1em',
+    bottom: '1em',
+    left: 'auto',
+    position: 'fixed',
   },
 
   container: {
@@ -85,21 +96,24 @@ class AdminReservas extends Component{
         <CssBaseline/> 
         <BarraAdmin/>
         <main className={classes.content}>
-            <Container maxWidth="lg" direction="row" className={classes.container}>
-                <Grid container spacing={2} direction="row" justify="flex-start" alignItems="center">
-                    <Grid container direction="row" justify="center" alignContent="center" alignItems="center">
-                      <Typography xs={12} variant="h4" className={classes.titulo}>
-                        Aqui tiene todas sus reservaciones
-                      </Typography>
-                    </Grid>
-                    {this.state.cards.map(card => {
-                      return (
-                        <Card card={card}/>
-                      )
-                    })}
-                </Grid>
-              </Container>
-            </main>
+          <Container maxWidth="lg" direction="row" className={classes.container}>
+            <Grid container spacing={2} direction="row" justify="flex-start" alignItems="center">
+              <Grid container direction="row" justify="center" alignContent="center" alignItems="center">
+                <Typography xs={12} variant="h4" className={classes.titulo}>
+                  Aqui tiene todas sus reservaciones
+                </Typography>
+              </Grid>
+                {this.state.cards.map(card => {
+                  return (
+                    <Card card={card}/>
+                  )
+                })}
+            </Grid>
+          </Container>
+          <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
+            <AddIcon color="white"/>            
+          </Fab>
+        </main>
       </div>
     );
   }

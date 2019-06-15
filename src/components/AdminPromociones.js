@@ -7,6 +7,8 @@ import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container';
 import PromosFilters from './PromosFilters'
 import Card from './CardPromos'
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 const styles = theme => ({
   
@@ -19,6 +21,15 @@ const styles = theme => ({
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
+  },
+
+  fab: {
+    marginRight: "1em",
+    top: 'auto',
+    right: '1em',
+    bottom: '1em',
+    left: 'auto',
+    position: 'fixed',
   },
 
   appBarSpacer: {
@@ -98,14 +109,17 @@ class AdminPromociones extends Component{
       <div className={classes.root}>
         <CssBaseline/> 
         <BarraAdmin/>
-      <main className={classes.content}>        
+        <main className={classes.content}>        
           <div className={classes.appBarSpacer} />
           <Container maxWidth="lg" direction="row" className={classes.container}>
-                <Grid container direction="row" justify="flex-start" alignItems="flex-start">
-                  <Grid item xs={12} sm={4} md={3}><Container><PromosFilters/></Container></Grid>
-                  <Grid container xs={12} sm={8} md={9} spacing={2}>{cards}</Grid>
-                </Grid>
-              </Container>
+            <Grid container direction="row" justify="flex-start" alignItems="flex-start">
+              <Grid item xs={12} sm={4} md={3}><Container><PromosFilters/></Container></Grid>
+              <Grid container xs={12} sm={8} md={9} spacing={2}>{cards}</Grid>
+            </Grid>
+          </Container>
+          <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
+            <AddIcon color="white"/>            
+          </Fab>
         </main>
       </div>
     );
