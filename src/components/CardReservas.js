@@ -48,8 +48,8 @@ class CardReservas extends Component {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button variant="outlined" size="big" color="secondary">Ver más</Button>            
-            <Button variant="contained" size="big" color="primary">Eliminar reserva</Button>
+            <Button variant="outlined" size="big" color="secondary">{this.props.card.button1}</Button>            
+            <Button variant="contained" size="big" color="primary">{this.props.card.button2}</Button>
           </CardActions>
         </Card>
       </Grid>

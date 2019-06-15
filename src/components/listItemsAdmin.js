@@ -8,7 +8,7 @@ import StoreIcon from '@material-ui/icons/Store'
 import RoomIcon from '@material-ui/icons/Room'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import ArtTrackIcon from '@material-ui/icons/ArtTrack'
-import HomeIcon from '@material-ui/icons/Home'
+import PersonIcon from '@material-ui/icons/Person'
 import { withStyles } from '@material-ui/styles';
 
 
@@ -31,7 +31,7 @@ class ListItemsAdmin extends Component {
       <Link className={classes.texto} to="/admin_usuarios">
           <ListItem button >
             <ListItemIcon >
-              <HomeIcon />
+              <PersonIcon />
             </ListItemIcon>
             <ListItemText className={classes.texto} primary="Usuarios" />
           </ListItem>
