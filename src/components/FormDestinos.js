@@ -79,7 +79,7 @@ class FormDestinos extends Component {
       return (
         <React.Fragment>
           <Typography variant="h5" gutterBottom>
-            Editar evento
+            Editar destino
           </Typography>
           <Grid container spacing={3}>
 
@@ -87,12 +87,51 @@ class FormDestinos extends Component {
               <TextField
                 required
                 id="firstName"
-                name="firstName"
-                label="Nombre del evento"
+                label="Nombre del destino"
                 fullWidth
-                autoComplete="fname"
               />
             </Grid>
+
+
+            <Grid item xs={12} sm={6}>
+            <TextField
+                id="address2"
+                name="address2"
+                type="number"
+                onChange={event => this.handleChange5(event.target.value)}
+                label="Clima"
+                fullWidth
+                defaultValue="25"
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+                    <TextField
+                      fullWidth
+                      id="fecha"
+                      label="Fecha"
+                      type="date"
+                      defaultValue="2019-06-14"
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                    />
+                  </Grid>
+
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      fullWidth
+                      id="fecha"
+                      label="Fecha"
+                      type="date"
+                      defaultValue="2019-06-14"
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                    />
+                  </Grid>
 
             <Grid item xs={12} sm={6}>
                   <InputLabel shrink>
@@ -109,66 +148,8 @@ class FormDestinos extends Component {
                     </NativeSelect>
                 </Grid>
 
-                <Grid item xs={12} sm={6}>
-                  <InputLabel shrink>
-                      Tipo de público
-                  </InputLabel>
-                  <NativeSelect fullWidth value={this.state.tipopublico} onChange={event => this.handleChange2(event.target.value)}
-                      input={<Input name="tipopublico"/>}>
-                      <option value={1}>Uno</option>
-                      <option value={2}>Dos</option>
-                      <option value={3}>Tres</option>
-                      <option value={4}>Cuatro</option>
-                      <option value={5}>Cinco</option>
-                      <option value={6}>Seis</option>
-                    </NativeSelect>
-                  </Grid>
-
-                  <Grid item xs={12} sm={6}>
-                  <InputLabel shrink>
-                      Ubicación
-                  </InputLabel>
-                  <NativeSelect fullWidth value={this.state.ubicación} onChange={event => this.handleChange4(event.target.value)}
-                      input={<Input name="ubicación"/>}>
-                      <option value={1}>Uno</option>
-                      <option value={2}>Dos</option>
-                      <option value={3}>Tres</option>
-                      <option value={4}>Cuatro</option>
-                      <option value={5}>Cinco</option>
-                      <option value={6}>Seis</option>
-                    </NativeSelect>
-            </Grid>
-
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      fullWidth
-                      id="fecha"
-                      label="Fecha"
-                      type="date"
-                      defaultValue="2019-06-14"
-                      className={classes.textField}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                    />
-                  </Grid>
-
-            
-            <Grid item xs={12} sm={12}>
-            <TextField
-                id="address2"
-                name="address2"
-                type="number"
-                onChange={event => this.handleChange5(event.target.value)}
-                label="Capacidad"
-                fullWidth
-                defaultValue="200"
-              />
-            </Grid>
-
-
             <Grid item xs={12}>
-              <TextField multiline id="state" name="state" label="DESTINOOOS" fullWidth />
+              <TextField multiline id="state" name="state" label="Descripción" fullWidth />
             </Grid>
             
           </Grid>
