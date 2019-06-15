@@ -1,45 +1,45 @@
 import React, { Component } from 'react'
-import Grid from '@material-ui/core/Grid' 
-import Container from '@material-ui/core/Container';
-import Navbar from './NavBar'
-import Card from './CardDestinos'
-import Loading from './Loading'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
-
+import Card from './CardDestinosAdmin'
+import Grid from '@material-ui/core/Grid'
+import Container from '@material-ui/core/Container';
 import { CssBaseline } from '@material-ui/core';
+import BarraAdmin from './BarraAdmin';
 
 const styles = theme => ({
+  
   root: {
     display: 'flex',
+    flex: '1',
     flexGrow: 1,
-    backgroundColor: theme.palette.grey['100'],
+    backgroundColor: '#FFFFFF',
     overflow: 'hidden',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
   },
-  appBarSpacer: theme.mixins.toolbar,
+
+  appBarSpacer: {
+    marginBottom: theme.spacing(12)
+  },
+
   content: {
     flexGrow: 1,
     height: '100vh',
     overflow: 'auto',
   },
-  container: {
-    paddingTop: theme.spacing(10),
-    paddingBottom: theme.spacing(2),
-    height: '100vh',
-  },
-  columna: {
-    direction: 'row',
-  },
+});
 
-})
 
-class Diary extends Component{
+class AdminDestinos extends Component{
   constructor(props){
     super(props);
 
     this.state = {
-      isDataLoaded: false
+      isDataLoaded: false,
     };
+
     this.state = {
       cards: [
         {
@@ -72,41 +72,41 @@ class Diary extends Component{
         },
       ]
     }
-
   }
 
   async componentDidMount(){
     await this.setState( {isDataLoaded: true} );
   }
-  render(){
-    const { classes } = this.props;
 
-    if( !this.state.isDataLoaded ){
-      return <Loading/>
-    }
-    // person = person
-    // first person es para el objeto del component card y el segundo del arrow function
+  render(){
+
     let cards = this.state.cards.map(card => {
       return (        
-        <Grid item xs={12} sm={6} md={4}><Card card={card}/></Grid>      
+        <Grid item xs={12} sm={6} md={4}>
+          <Card card={card}>
+          </Card>
+        </Grid>      
       )
     })
-    return(   
-        <div className={classes.root}>
-          <CssBaseline/>
-          <Navbar/>
-          <main className={classes.content}>
-            <div className={classes.appBarSpacer}>
+
+    const { classes } = this.props;
+
+    return(
+      <div className={classes.root}>
+        <CssBaseline/> 
+        <BarraAdmin/>
+
+      <main className={classes.content}>
+            <div className={classes.appBarSpacer}/>
               <Container maxWidth="lg" direction="row" className={classes.container}>
-                <Grid container direction="row" justify="flex-start" alignItems="flex-start">
-                  <Grid container xs={12} sm={12}  spacing={2}>{cards}</Grid>
-                </Grid>
-              </Container> 
-            </div>
-          </main>
-        </div>
+                  <Grid container direction="row" justify="flex-start" alignItems="flex-start">
+                    <Grid container xs={12} sm={12}  spacing={2}>{cards}</Grid>
+                  </Grid>
+                </Container>
+        </main>
+      </div>
     );
   }
 }
 
-export default withRouter(withStyles(styles)(Diary));
+export default withRouter(withStyles(styles)(AdminDestinos));

@@ -1,9 +1,51 @@
 body {
-  font-family: "Roboto";
+  font-family: Roboto;
 }
 
 .principal {
-
   font-size: 200px;
-  font-family: "Roboto";
+  font-family: Roboto;
+}
+
+.toolbar{
+  display: flex;
+  position: absolute;
+  justify-content: space-between;
+  background-color: #3647B5;
+  width: 100%;
+  
+}
+.hoverAnimation{
+  flex: 1;
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  font-family: inherit;
+  margin-top: 0;
+  margin-bottom: 0;
+  align-items: center;
+  text-align: center;
+  height: inherit;
+  padding-top: 5px;
+}
+
+.hoverAnimation:hover{
+  animation-name: focus-efect;
+  animation-duration: .2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear
+}
+
+@keyframes focus-efect {
+  from {
+    transform: scale(1);
+    color: white;
+    font-weight: 300;
+
+  } to {
+    transform: scale(1);
+    color: grey;
+    background-color: darkblue;
+    font-weight: 500;
+  }
 }

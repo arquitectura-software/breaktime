@@ -62,7 +62,6 @@ class Home extends Component{
 
             </div>
         </main>
-
       </div>
     );
   }

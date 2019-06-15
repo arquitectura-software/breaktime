@@ -4,10 +4,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import EventIcon from '@material-ui/icons/Event';
+import StoreIcon from '@material-ui/icons/Store'
 import RoomIcon from '@material-ui/icons/Room'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import ArtTrackIcon from '@material-ui/icons/ArtTrack'
-import HomeIcon from '@material-ui/icons/Home'
+import PersonIcon from '@material-ui/icons/Person'
 import { withStyles } from '@material-ui/styles';
 
 
@@ -20,23 +21,23 @@ const styles = theme => ({
   },
 })
 
-class ListItems extends Component {
+class ListItemsAdmin extends Component {
 
   render(){
     const { classes } = this.props;
 
     return(
       <div>
-      <Link className={classes.texto} to="/">
+      <Link className={classes.texto} to="/admin_usuarios">
           <ListItem button >
             <ListItemIcon >
-              <HomeIcon />
+              <PersonIcon />
             </ListItemIcon>
-            <ListItemText className={classes.texto} primary="Inicio" />
+            <ListItemText className={classes.texto} primary="Usuarios" />
           </ListItem>
           </Link>
 
-          <Link className={classes.texto} to="/events">
+          <Link className={classes.texto} to="/admin_eventos">
           <ListItem button>
             <ListItemIcon>
               <ArtTrackIcon />
@@ -45,7 +46,7 @@ class ListItems extends Component {
           </ListItem>
           </Link>
 
-          <Link className={classes.texto} to="/diary">
+          <Link className={classes.texto} to="/admin_destinos">
           <ListItem button>
             <ListItemIcon>
               <RoomIcon />
@@ -54,7 +55,16 @@ class ListItems extends Component {
           </ListItem>
           </Link>
 
-          <Link className={classes.texto} to="/promos">
+          <Link className={classes.texto} to="/admin_tiendas">
+          <ListItem button>
+            <ListItemIcon>
+              <StoreIcon/>
+            </ListItemIcon>
+            <ListItemText className={classes.texto} primary="Tiendas" />
+          </ListItem>
+          </Link>
+
+          <Link className={classes.texto} to="/admin_promociones">
           <ListItem button>
             <ListItemIcon>
               <ShoppingCartIcon />
@@ -63,12 +73,12 @@ class ListItems extends Component {
           </ListItem>
           </Link>
 
-          <Link className={classes.texto} to="/reservations">
+          <Link className={classes.texto} to="/admin_reservas">
           <ListItem button>
             <ListItemIcon>
               <EventIcon/>
             </ListItemIcon>
-            <ListItemText className={classes.texto} primary="Reservaciones" />
+            <ListItemText className={classes.texto} primary="Reservas" />
           </ListItem>
           </Link>
       </div>
@@ -76,4 +86,4 @@ class ListItems extends Component {
   }
 }
 
-export default withRouter(withStyles(styles)(ListItems))
+export default withRouter(withStyles(styles)(ListItemsAdmin))

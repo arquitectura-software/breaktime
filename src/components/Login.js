@@ -5,22 +5,22 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
+import { Link } from 'react-router-dom';
+import LinkUI from '@material-ui/core/Link'
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import NavBar from './NavBar';
 
 function MadeWithLove() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Proyecto realizado para Arquitectura de Software mediante '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <LinkUI color="inherit" href="https://material-ui.com/">
         Material-UI
-      </Link>
+      </LinkUI>
       {'.'}
     </Typography>
   );
@@ -52,6 +52,7 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    textDecorationLine: 'none',
   },
 
 }));
@@ -62,73 +63,69 @@ export default function Login() {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <NavBar></NavBar>
-      <Grid item xs={false} sm={7} md={8} className={classes.image} />
-      <Grid item xs={12} sm={5} md={4} component={Paper} elevation={6} square>
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Ingreso como pasajero
-          </Typography>
-          <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="identificación"
-              label="Identificación"
-              name="Identificación"
-              autoComplete="id"
-              autoFocus
-            />
-            
-            <Grid container justify="space-between">
-            <TextField
-              id="date"
-              label="Birthday"
-              type="date"
-              defaultValue="2017-05-24"
-              className={classes.textField}
-              InputLabelProps={{
-                shrink: true,
-              }}
+        <Grid item xs={false} sm={7} md={8} className={classes.image} />
+        <Grid item xs={12} sm={5} md={4} component={Paper} elevation={6} square>
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Inicio de sesión
+            </Typography>
+            <form className={classes.form} noValidate>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="Usuario"
+                name="username"
+                autoFocus
               />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                type="password"
+                id="password"
+                label="Contraseña"
+                name="password"
+              />
+              
+              <Grid container justify="flex-end">
+                <FormControlLabel
+                  control={<Checkbox value="remember" color="primary" />}
+                  label="Recuérdame"
+                />
 
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-
-            </Grid>
-
-
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
               </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"¿No puede ingresar? ¡Podemos ayudarle!"}
+              <Link to="/events" className={classes.submit}>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}>
+                  Iniciar sesión
+                </Button>
                 </Link>
+
+              <Grid container>
+                <Grid item xs>
+                </Grid>
+                <Grid item>
+                  <Link href="#" variant="body2">
+                    {"¿No puede ingresar? ¡Podemos ayudarle!"}
+                  </Link>
+                </Grid>
               </Grid>
-            </Grid>
-            <Box mt={5}>
-              <MadeWithLove />
-            </Box>
-          </form>
-        </div>
-      </Grid>
+              <Box mt={5}>
+                <MadeWithLove />
+              </Box>
+            </form>
+          </div>
+        </Grid>
     </Grid>
   );
 }
