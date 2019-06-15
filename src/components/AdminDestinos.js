@@ -6,6 +6,8 @@ import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container';
 import { CssBaseline } from '@material-ui/core';
 import BarraAdmin from './BarraAdmin';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 const styles = theme => ({
   
@@ -18,6 +20,15 @@ const styles = theme => ({
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
+  },
+
+  fab: {
+    marginRight: "1em",
+    top: 'auto',
+    right: '1em',
+    bottom: '1em',
+    left: 'auto',
+    position: 'fixed',
   },
 
   appBarSpacer: {
@@ -99,10 +110,13 @@ class AdminDestinos extends Component{
       <main className={classes.content}>
             <div className={classes.appBarSpacer}/>
               <Container maxWidth="lg" direction="row" className={classes.container}>
-                  <Grid container direction="row" justify="flex-start" alignItems="flex-start">
-                    <Grid container xs={12} sm={12}  spacing={2}>{cards}</Grid>
-                  </Grid>
-                </Container>
+                <Grid container direction="row" justify="flex-start" alignItems="flex-start">
+                  <Grid container xs={12} sm={12}  spacing={2}>{cards}</Grid>
+                </Grid>
+              </Container>
+              <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
+                <AddIcon color="white"/>            
+              </Fab>
         </main>
       </div>
     );

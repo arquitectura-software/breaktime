@@ -7,6 +7,8 @@ import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container';
 import Card from './CardEventos'
 import EventFilters from './EventFilters'
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 const styles = theme => ({
   
@@ -22,8 +24,17 @@ const styles = theme => ({
   },
 
   appBarSpacer: {
-    marginBottom: theme.spacing(12)
-},
+    marginBottom: theme.spacing(12) 
+  },
+
+  fab: {
+    marginRight: "1em",
+    top: 'auto',
+    right: '1em',
+    bottom: '1em',
+    left: 'auto',
+    position: 'fixed',
+  },
 
   content: {
     flexGrow: 1,
@@ -108,6 +119,9 @@ class AdminEventos extends Component{
                   </Grid>
                 </Grid>
               </Container>
+              <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
+                <AddIcon color="white"/>            
+              </Fab>
         </main>
       </div>
     );

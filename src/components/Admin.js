@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
-import Fab from '@material-ui/core/Fab';
 import { CssBaseline } from '@material-ui/core';
 import BarraAdmin from './BarraAdmin';
-import HighlightOff from '@material-ui/icons/HighlightOff';
 
 const styles = theme => ({
   
@@ -55,7 +53,6 @@ class Admin extends Component{
         <BarraAdmin/>
         <main className={classes.content}>
           <div className={classes.appBarSpacer}/>
-
         </main>        
       </div>
     );
