@@ -7,6 +7,11 @@ import Button from '@material-ui/core/Button';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
 import FormEvents from './FormEvents';
+import FormDestinos from './FormDestinos';
+import FormPromociones from './FormPromociones';
+import FormReservas from './FormReservas';
+import FormTiendas from './FormTiendas';
+import FormUsuarios from './FormUsuarios';
 
 const styles = theme => ({
   appBar: {
