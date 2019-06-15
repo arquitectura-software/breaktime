@@ -7,7 +7,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { withRouter } from 'react-router-dom';
 
-class DialogEliminarEvento extends Component{
+class DialogEliminar extends Component{
     constructor(props){
         super(props);
         this.state = {
@@ -33,7 +33,7 @@ class DialogEliminarEvento extends Component{
                 
                 <DialogContent>
                     <DialogContentText>
-                        ¿Está seguro que desea eliminar este evento?
+                        ¿Está seguro que desea eliminar este elemento?
                     </DialogContentText>
                 </DialogContent>
 
@@ -50,4 +50,4 @@ class DialogEliminarEvento extends Component{
     }
 }
 
-export default withRouter(DialogEliminarEvento);
+export default withRouter(DialogEliminar);

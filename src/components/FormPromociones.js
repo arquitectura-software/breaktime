@@ -77,7 +77,7 @@ class FormPromociones extends Component {
       return (
         <React.Fragment>
           <Typography variant="h5" gutterBottom>
-            Editar evento
+            Editar promoción
           </Typography>
           <Grid container spacing={3}>
 
@@ -89,7 +89,7 @@ class FormPromociones extends Component {
                     <TextField
                       fullWidth
                       id="fecha"
-                      label="Fecha"
+                      label="Fecha de inicio"
                       type="date"
                       defaultValue="2019-06-14"
                       className={classes.textField}
@@ -103,7 +103,7 @@ class FormPromociones extends Component {
                     <TextField
                       fullWidth
                       id="fecha"
-                      label="Fecha"
+                      label="Fecha de finalización"
                       type="date"
                       defaultValue="2019-06-14"
                       className={classes.textField}
@@ -115,7 +115,7 @@ class FormPromociones extends Component {
 
                   <Grid item xs={12} sm={6}>
                   <InputLabel shrink>
-                      Tipo de evento
+                      Tienda
                   </InputLabel>
                   <NativeSelect fullWidth value={this.state.tipo} onChange={event => this.handleChange1(event.target.value)}
                       input={<Input name="tipo"/>}>

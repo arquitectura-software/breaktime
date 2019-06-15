@@ -10,7 +10,7 @@ import DialogVerMas from './DialogVerMas'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
 import DialogReservar from './DialogReservar';
-import DialogEliminarEvento from './DialogEliminarEvento';
+import DialogEliminar from './DialogEliminar';
 
 const styles = theme => ({
   texto: {
@@ -45,9 +45,9 @@ class MediaCard extends Component {
     })
   }
 
-  handleCloseEliminarEvento = () => {
+  handleCloseEliminar = () => {
     this.setState({
-      dialogEliminarEvento: false,
+      dialogEliminar: false,
     })
   }
 
@@ -70,7 +70,7 @@ class MediaCard extends Component {
       })
     }else{
       this.setState({
-        dialogEliminarEvento: true
+        dialogEliminar: true
       })      
     }
   }
@@ -108,7 +108,7 @@ class MediaCard extends Component {
 
         <DialogVerMas open={this.state.dialogVerMas} onClose={this.handleCloseVerMas} card={this.props.card}/>
         <DialogReservar open={this.state.dialogReservar} onClose={this.handleCloseReservar} card={this.props.card}/>
-        <DialogEliminarEvento open={this.state.dialogEliminarEvento} onClose={this.handleCloseEliminarEvento} card={this.props.card}/>
+        <DialogEliminar open={this.state.dialogEliminar} onClose={this.handleCloseEliminar} card={this.props.card}/>
       </Grid>
     );
   }

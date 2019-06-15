@@ -69,7 +69,7 @@ class Checkout extends Component{
         <main className={classes.layout}>
           <Paper className={classes.paper}>
             
-            <FormEvents />
+            <FormTiendas />
               
               <React.Fragment>
                 <div className={classes.buttons}>

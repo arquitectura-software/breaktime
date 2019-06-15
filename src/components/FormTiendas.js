@@ -35,7 +35,6 @@ class FormTiendas extends Component {
     }
   }
 
-
     handleDateChange = date => {
       this.setState({
         date: date
@@ -77,7 +76,7 @@ class FormTiendas extends Component {
       return (
         <React.Fragment>
           <Typography variant="h5" gutterBottom>
-            Editar evento
+            Editar tienda
           </Typography>
           <Grid container spacing={3}>
 

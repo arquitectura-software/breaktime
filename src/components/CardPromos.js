@@ -10,6 +10,7 @@ import DialogVerMas from './DialogVerMas'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
 import DialogReservar from './DialogReservar';
+import DialogEliminar from './DialogEliminar';
 
 const styles = theme => ({
   texto: {
@@ -56,6 +57,31 @@ class CardPromos extends Component {
     })
   }
 
+
+  handleClickButton1 = () => {
+    
+    if(this.props.card.button1 === 'Reservar'){
+      this.setState({
+        dialogReservar: true
+      })
+    }else{
+        this.props.history.push("/checkout");      
+    }
+
+  }
+  
+  handleClickButton2 = () => {
+    if(this.props.card.button2 === 'Ver más'){
+      this.setState({
+        dialogVerMas: true
+      })
+    }else{
+      this.setState({
+        dialogEliminar: true
+      })      
+    }
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -82,13 +108,15 @@ class CardPromos extends Component {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button variant="contained" size="small" color="primary">Activar Notificación</Button>            
-            <Button onClick={this.handleClickOpenVerMas} size="small" color="primary">Ver más</Button>
+            <Button onClick={this.handleClickButton1} size="small" color="primary">{this.props.card.button1}</Button>            
+            <Button onClick={this.handleClickButton2} size="small" color="primary">{this.props.card.button2}</Button>
           </CardActions>
         </Card>
 
         <DialogVerMas open={this.state.dialogVerMas} onClose={this.handleCloseVerMas} card={this.props.card}/>
-        <DialogReservar open={this.state.dialogReservar} onClose={this.handleCloseReservar} card={this.props.card}/>
+        <DialogReservar open={this.state.dialogReservar} onClose={this.handleCloseReservar} card={this.props.card}/><DialogEliminar open={this.state.dialogEliminar} onClose={this.handleCloseEliminar} card={this.props.card}/>
+        <DialogEliminar open={this.state.dialogEliminar} onClose={this.handleCloseEliminar} card={this.props.card}/>
+      
       </Grid>
     );
   }

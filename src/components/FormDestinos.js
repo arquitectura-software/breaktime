@@ -94,22 +94,10 @@ class FormDestinos extends Component {
 
 
             <Grid item xs={12} sm={6}>
-            <TextField
-                id="address2"
-                name="address2"
-                type="number"
-                onChange={event => this.handleChange5(event.target.value)}
-                label="Clima"
-                fullWidth
-                defaultValue="25"
-              />
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
                     <TextField
                       fullWidth
                       id="fecha"
-                      label="Fecha"
+                      label="Fecha de llegada"
                       type="date"
                       defaultValue="2019-06-14"
                       className={classes.textField}
@@ -123,7 +111,7 @@ class FormDestinos extends Component {
                     <TextField
                       fullWidth
                       id="fecha"
-                      label="Fecha"
+                      label="Fecha de salida"
                       type="date"
                       defaultValue="2019-06-14"
                       className={classes.textField}
@@ -133,9 +121,24 @@ class FormDestinos extends Component {
                     />
                   </Grid>
 
+
+            <Grid item xs={12} sm={6}>
+            <TextField
+                id="address2"
+                name="address2"
+                type="number"
+                onChange={event => this.handleChange5(event.target.value)}
+                label="Clima"
+                fullWidth
+                defaultValue="25"
+              />
+            </Grid>
+
+            
+
             <Grid item xs={12} sm={6}>
                   <InputLabel shrink>
-                      Tipo de evento
+                      Huso horario
                   </InputLabel>
                   <NativeSelect fullWidth value={this.state.tipo} onChange={event => this.handleChange1(event.target.value)}
                       input={<Input name="tipo"/>}>

@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
+import DialogEliminar from './DialogEliminar';
 
 const styles = theme => ({
     media: {
@@ -18,6 +19,13 @@ const styles = theme => ({
 
 class CardDestinos extends Component {
 
+  constructor(props){
+    super(props);  
+    this.state = {
+      dialogEliminar: false,
+      dialogReservar: true,
+    } 
+  }
 
   handleClickButton1 = () => {    
     if(this.props.card.button1 === 'Reservar'){
@@ -31,15 +39,9 @@ class CardDestinos extends Component {
   }
   
   handleClickButton2 = () => {
-    if(this.props.card.button2 === 'Ver más'){
       this.setState({
-        dialogVerMas: true
-      })
-    }else{
-      this.setState({
-        dialogEliminarEvento: true
-      })      
-    }
+        dialogEliminar: true
+      }) 
   }
   
   render() {
@@ -47,6 +49,7 @@ class CardDestinos extends Component {
     const { classes } = this.props;
 
     return (
+      <Grid>
       <Card >
         <CardActionArea>
           <CardMedia className={classes.media} 
@@ -79,6 +82,8 @@ class CardDestinos extends Component {
           </CardContent>
         </CardActionArea>
       </Card>
+      <DialogEliminar open={this.state.dialogEliminar} onClose={this.handleCloseEliminar} card={this.props.card}/>
+      </Grid>
     );
   }
 }

@@ -35,7 +35,6 @@ class FormReservas extends Component {
     }
   }
 
-
     handleDateChange = date => {
       this.setState({
         date: date
@@ -77,7 +76,7 @@ class FormReservas extends Component {
       return (
         <React.Fragment>
           <Typography variant="h5" gutterBottom>
-            Editar evento
+            Editar reserva
           </Typography>
           <Grid container spacing={3}>
 
