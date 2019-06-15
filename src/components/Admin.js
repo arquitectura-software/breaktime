@@ -27,16 +27,6 @@ const styles = theme => ({
     position: 'relative'
   },
 
-  fab: {
-    margin: 0,
-    top: 'auto',
-    right: 'auto',
-    bottom: '1em',
-    left: '1em',
-    position: 'fixed',
-    BackgroundColor: "#2196f3"
-  },
-
   extendedIcon: {
     marginRight: theme.spacing(1),
   },
@@ -65,10 +55,7 @@ class Admin extends Component{
         <BarraAdmin/>
         <main className={classes.content}>
           <div className={classes.appBarSpacer}/>
-          <Fab size="medium" variant="extended" aria-label="Delete" className={classes.fab}>
-            <HighlightOff className={classes.extendedIcon} />
-            Cerrar sesión
-          </Fab>
+
         </main>        
       </div>
     );

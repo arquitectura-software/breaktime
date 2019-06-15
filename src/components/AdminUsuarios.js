@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles';
+import Grid from '@material-ui/core/Grid' 
+import Container from '@material-ui/core/Container';
 import { withRouter } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
 import BarraAdmin from './BarraAdmin';
+import Card from './Cards/CardUsersAdmin'
 
 const styles = theme => ({
   
@@ -35,7 +38,34 @@ class AdminUsuarios extends Component{
 
     this.state = {
       isDataLoaded: false,
-      
+      usuarios: [
+        {
+          id: 1,
+          username: "Alejosebasp",
+          name: "Alejandro Sebastian Alejo Patarroyo",
+          documento: "1030677408",
+          correo: "alsalejopa@unal.edu.co",
+          celular: "3213892239"
+        },
+
+        {
+          id: 2,
+          username: "Alejosebasp",
+          name: "Alejandro Sebastian Alejo Patarroyo",
+          documento: "1030677408",
+          correo: "alsalejopa@unal.edu.co",
+          celular: "3213892239"
+        },
+
+        {
+          id: 3,
+          username: "Alejosebasp",
+          name: "Alejandro Sebastian Alejo Patarroyo",
+          documento: "1030677408",
+          correo: "alsalejopa@unal.edu.co",
+          celular: "3213892239"
+        },
+      ]
     };
   }
 
@@ -50,8 +80,16 @@ class AdminUsuarios extends Component{
         <CssBaseline/> 
         <BarraAdmin/>
       <main className={classes.content}>
-            <div className={classes.appBarSpacer} />
-
+          <div className={classes.appBarSpacer} />
+          <Container maxWidth="lg" direction="row" className={classes.container}>
+            <Grid container spacing={2} direction="row" justify="flex-start" alignItems="center">
+                {this.state.usuarios.map(usuario => {
+                  return (
+                    <Card usuario={usuario}/>
+                  )
+                })}
+            </Grid>
+          </Container>
 
         </main>
       </div>
