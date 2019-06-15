@@ -54,7 +54,7 @@ class MediaCard extends Component {
 
   handleClickButton1 = () => {
     
-    if(this.props.card.button1 == 'Reservar'){
+    if(this.props.card.button1 === 'Reservar'){
       this.setState({
         dialogReservar: true
       })
@@ -65,7 +65,7 @@ class MediaCard extends Component {
   }
   
   handleClickButton2 = () => {
-    if(this.props.card.button2 == 'Ver más'){
+    if(this.props.card.button2 === 'Ver más'){
       this.setState({
         dialogVerMas: true
       })

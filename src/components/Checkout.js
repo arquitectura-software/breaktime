@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import BarraAdmin from './BarraAdmin'
 import Paper from '@material-ui/core/Paper';
@@ -56,9 +55,6 @@ const styles = theme => ({
 });
 
 class Checkout extends Component{
-  constructor(props){
-    super(props)
-  }
 
   render(){
 

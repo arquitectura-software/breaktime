@@ -4,7 +4,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import EventIcon from '@material-ui/icons/Event';
-import AccountBoxIcon from '@material-ui/icons/AccountBox'
 import RoomIcon from '@material-ui/icons/Room'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import ArtTrackIcon from '@material-ui/icons/ArtTrack'
@@ -22,10 +21,6 @@ const styles = theme => ({
 })
 
 class ListItems extends Component {
-
-  constructor(props){
-    super(props);
-  }
 
   render(){
     const { classes } = this.props;

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
-
 import { CssBaseline } from '@material-ui/core';
 import BarraAdmin from './BarraAdmin';
 
@@ -18,12 +17,16 @@ const styles = theme => ({
     backgroundRepeat: 'no-repeat',
   },
 
-  appBarSpacer: theme.mixins.toolbar,
+  appBarSpacer: {
+    marginBottom: theme.spacing(12)
+  },
+  
   content: {
     flexGrow: 1,
     height: '100vh',
     overflow: 'auto',
   },
+
 });
 
 
@@ -32,8 +35,7 @@ class AdminPromociones extends Component{
     super(props);
 
     this.state = {
-      isDataLoaded: false,
-      
+      isDataLoaded: false,      
     };
   }
 

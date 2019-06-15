@@ -10,13 +10,15 @@ const styles = theme => ({
   
   root: {
     display: 'flex',
-    backgroundImage: "url(" + "http://consejerosviajeros.com/wp-content/uploads/2015/10/1.Portada1-e1444214421337.jpg" + ")",
+    backgroundImage: "url(http://consejerosviajeros.com/wp-content/uploads/2015/10/1.Portada1-e1444214421337.jpg)",
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
   },
 
-  appBarSpacer: theme.mixins.toolbar,
+  appBarSpacer: {
+    marginBottom: theme.spacing(12)
+  },
   
   content: {
     flexGrow: 1,

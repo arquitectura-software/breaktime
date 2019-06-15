@@ -5,7 +5,7 @@ import { CssBaseline } from '@material-ui/core';
 import BarraAdmin from './BarraAdmin';
 import Grid from '@material-ui/core/Grid' 
 import Container from '@material-ui/core/Container';
-import Card from './Card'
+import Card from './CardEventos'
 import EventFilters from './EventFilters'
 
 const styles = theme => ({
@@ -30,9 +30,6 @@ const styles = theme => ({
     height: '100vh',
     overflow: 'auto',
   },
-
-
-
 });
 
 
@@ -99,7 +96,6 @@ class AdminEventos extends Component{
         <BarraAdmin/>
       <main className={classes.content}>
             <div className={classes.appBarSpacer} /> 
-            <main className={classes.content}>
               <Container maxWidth="lg" direction="row" className={classes.container}>
                 <Grid container direction="row" justify="flex-start" alignItems="flex-start">
                   <Grid item xs={12} sm={4} md={3}><Container><EventFilters/></Container></Grid>
@@ -112,7 +108,6 @@ class AdminEventos extends Component{
                   </Grid>
                 </Grid>
               </Container>
-          </main>
         </main>
       </div>
     );

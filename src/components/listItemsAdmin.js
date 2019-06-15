@@ -23,10 +23,6 @@ const styles = theme => ({
 
 class ListItemsAdmin extends Component {
 
-  constructor(props){
-    super(props);
-  }
-
   render(){
     const { classes } = this.props;
 

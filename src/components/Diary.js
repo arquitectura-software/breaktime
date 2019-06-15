@@ -4,7 +4,6 @@ import Container from '@material-ui/core/Container';
 import Navbar from './NavBar'
 import Card from './CardDestinos'
 import Loading from './Loading'
-import EventFilters from './EventFilters'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
 

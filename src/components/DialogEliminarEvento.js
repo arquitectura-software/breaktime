@@ -6,21 +6,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { withRouter } from 'react-router-dom';
-import withStyles from '@material-ui/core/styles/withStyles';
-
-const styles = theme => ({
-    texto: {
-      marginTop: "1em",
-    },
-    descripcion: {
-      marginTop: "1em",
-      marginBottom: "1em"
-    },
-    formControl: {
-        margin: theme.spacing(1),
-        minWidth: 200,
-    },
-})
 
 class DialogEliminarEvento extends Component{
     constructor(props){
@@ -38,7 +23,6 @@ class DialogEliminarEvento extends Component{
     //onChange={handleChange('age')}
     render(){
         const {open, onClose, card} = this.props;
-        const { classes } = this.props;
 
         return(         
             <Dialog maxWidth="xs" fullWidth={true} open={open} onClose={onClose} scroll='paper' aria-labelledby="scroll-dialog-title">
@@ -66,4 +50,4 @@ class DialogEliminarEvento extends Component{
     }
 }
 
-export default withRouter(withStyles(styles)(DialogEliminarEvento));
+export default withRouter(DialogEliminarEvento);

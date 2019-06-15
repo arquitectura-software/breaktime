@@ -21,10 +21,6 @@ const styles = theme => ({
 })
 
 class CardReservas extends Component {
-
-  constructor(props){
-    super(props);   
-  }
   
   render() {
 

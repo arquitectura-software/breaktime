@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
-
 import Card from './CardDestinosAdmin'
 import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container';
-
 import { CssBaseline } from '@material-ui/core';
 import BarraAdmin from './BarraAdmin';
 
@@ -74,9 +72,6 @@ class AdminDestinos extends Component{
         },
       ]
     }
-
-
-
   }
 
   async componentDidMount(){
@@ -89,13 +84,13 @@ class AdminDestinos extends Component{
       return (        
         <Grid item xs={12} sm={6} md={4}>
           <Card card={card}>
-            <p>hola</p>
           </Card>
         </Grid>      
       )
     })
 
     const { classes } = this.props;
+
     return(
       <div className={classes.root}>
         <CssBaseline/> 
