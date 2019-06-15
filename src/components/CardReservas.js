@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid' 
+import DialogEliminar from './DialogEliminar';
 
 const styles = theme => ({
   texto: {
@@ -20,6 +21,29 @@ const styles = theme => ({
 })
 
 class CardReservas extends Component {
+  constructor(props){
+    super(props);  
+    this.state = {
+      dialogEliminar: false,
+    } 
+  }
+
+    handleClickButton1 = () => {
+      this.props.history.push("/checkout");
+    }
+
+
+    handleClickButton2 = () => {
+        this.setState({
+          dialogEliminar: true
+        }) 
+    }
+
+    handleCloseEliminar = () => {
+      this.setState({
+        dialogEliminar: false,
+      })
+    }
   
   render() {
 
@@ -48,10 +72,11 @@ class CardReservas extends Component {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button variant="outlined" size="big" color="secondary">{this.props.card.button1}</Button>            
-            <Button variant="contained" size="big" color="primary">{this.props.card.button2}</Button>
+            <Button onClick={this.handleClickButton1} size="small" color="primary">{this.props.card.button1}</Button>            
+            <Button onClick={this.handleClickButton2} size="small" color="primary">{this.props.card.button2}</Button>
           </CardActions>
         </Card>
+        <DialogEliminar open={this.state.dialogEliminar} onClose={this.handleCloseEliminar} card={this.props.card}/>
       </Grid>
     );
   }

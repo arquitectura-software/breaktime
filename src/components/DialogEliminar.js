@@ -26,16 +26,11 @@ class DialogEliminar extends Component{
 
         return(         
             <Dialog maxWidth="xs" fullWidth={true} open={open} onClose={onClose} scroll='paper' aria-labelledby="scroll-dialog-title">
-                
-                <DialogTitle id="scroll-dialog-title">
-                    {card.title}
-                </DialogTitle>
-                
-                <DialogContent>
+                <DialogTitle>
                     <DialogContentText>
                         ¿Está seguro que desea eliminar este elemento?
                     </DialogContentText>
-                </DialogContent>
+                </DialogTitle>
 
                 <DialogActions>
                     <Button color="primary">

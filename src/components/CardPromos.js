@@ -33,6 +33,12 @@ class CardPromos extends Component {
     } 
   }
 
+  handleCloseEliminar = () => {
+    this.setState({
+      dialogEliminar: false,
+    })
+  }
+
   handleCloseVerMas = () => {
     this.setState({
       dialogVerMas: false,
@@ -58,8 +64,7 @@ class CardPromos extends Component {
   }
 
 
-  handleClickButton1 = () => {
-    
+  handleClickButton1 = () => {    
     if(this.props.card.button1 === 'Reservar'){
       this.setState({
         dialogReservar: true

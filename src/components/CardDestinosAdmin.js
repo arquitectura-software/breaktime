@@ -23,7 +23,6 @@ class CardDestinos extends Component {
     super(props);  
     this.state = {
       dialogEliminar: false,
-      dialogReservar: true,
     } 
   }
 
@@ -35,13 +34,18 @@ class CardDestinos extends Component {
     }else{
         this.props.history.push("/checkout");      
     }
-
   }
   
   handleClickButton2 = () => {
       this.setState({
         dialogEliminar: true
       }) 
+  }
+
+  handleCloseEliminar = () => {
+    this.setState({
+      dialogEliminar: false,
+    })
   }
   
   render() {

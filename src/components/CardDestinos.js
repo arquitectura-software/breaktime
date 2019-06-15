@@ -27,8 +27,7 @@ class CardDestinos extends Component {
         <CardActionArea>
           <CardMedia className={classes.media} 
           image="http://primicia.com.co/wp-content/uploads/2019/02/Cartagena_Colombia_cs-b9a2c77a9fe3.jpg" 
-          title="Cartagena"
-          />
+          title="Cartagena"/>
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
               {this.props.card.nombre}

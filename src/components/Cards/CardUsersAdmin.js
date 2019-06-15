@@ -5,10 +5,10 @@ import Grid from '@material-ui/core/Grid';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
+import DialogEliminar from '../DialogEliminar';
 
 const styles = theme => ({
     media: {
@@ -18,6 +18,29 @@ const styles = theme => ({
 
 class CardUsersAdmin extends Component {
 
+    constructor(props){
+        super(props);  
+        this.state = {
+          dialogEliminar: false,
+        } 
+      }
+
+    handleClickButton1 = () => {
+        this.props.history.push("/checkout");    
+      }
+    
+    handleClickButton2 = () => {
+        this.setState({
+            dialogEliminar: true
+        })    
+      }    
+    
+      handleCloseEliminar = () => {
+        this.setState({
+          dialogEliminar: false,
+        })
+      }
+  
   render() {
 
     const { classes } = this.props;
@@ -49,6 +72,8 @@ class CardUsersAdmin extends Component {
                     <Button onClick={this.handleClickButton2} size="medium" color="primary">Eliminar</Button>
                 </CardActions>
             </Card>
+            <DialogEliminar open={this.state.dialogEliminar} onClose={this.handleCloseEliminar} card={this.props.card}/>
+      
         </Grid>
     );
   }
