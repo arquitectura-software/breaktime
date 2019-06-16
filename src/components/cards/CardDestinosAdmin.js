@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
+import CardActions from '@material-ui/core/CardActions';
 import DialogEliminar from '../DialogEliminar';
 
 const styles = theme => ({
@@ -52,7 +53,7 @@ class CardDestinos extends Component {
     const { classes } = this.props;
 
     return (
-      <Grid>
+      <Grid item xs={12} sm={6} md={4}>
       <Card>
           <CardMedia className={classes.media} 
           image="http://primicia.com.co/wp-content/uploads/2019/02/Cartagena_Colombia_cs-b9a2c77a9fe3.jpg" 
@@ -70,21 +71,23 @@ class CardDestinos extends Component {
             </Typography>
             
             <Grid item xs={12} >
-                <Typography variant="body2" color="textSecondary" component="p">
-                    Hora de Desembarque: {this.props.card.horarioDesembarque}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    Hora de embarque: {this.props.card.horarioEmbarque}
-                </Typography>
-                </Grid>
-            <Grid container justify="flex-end">
-              <Button onClick={this.handleClickButton1} size="small" color="primary">Editar</Button>            
-              <Button onClick={this.handleClickButton2} size="small" color="primary">Eliminar</Button>
-            </Grid>          
+              <Typography variant="body2" color="textSecondary" component="p">
+                  Hora de Desembarque: {this.props.card.horarioDesembarque}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                  Hora de embarque: {this.props.card.horarioEmbarque}
+              </Typography>
+            </Grid>  
           </CardContent>
+          <CardActions>
+            <Grid container justify="flex-end">
+              <Button onClick={this.handleClickButton1} size="medium" color="primary">Editar</Button>            
+              <Button onClick={this.handleClickButton2} size="medium" color="primary">Eliminar</Button>
+            </Grid>      
+          </CardActions>  
       </Card>
       <DialogEliminar open={this.state.dialogEliminar} onClose={this.handleCloseEliminar} card={this.props.card}/>
-      </Grid>
+    </Grid>
     );
   }
 }

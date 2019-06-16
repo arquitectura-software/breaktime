@@ -4,7 +4,7 @@ import BarraAdmin from './BarraAdmin'
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import FormDestinos from './FormDestinos';
 
 const styles = theme => ({
@@ -26,6 +26,12 @@ const styles = theme => ({
       marginRight: 'auto',
     },
   },
+
+  textoButton: {
+    color: 'black',
+    textDecorationLine: 'none',
+  },
+
   paper: {
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(3),
@@ -68,11 +74,12 @@ class CheckoutDestinos extends Component{
               
               <React.Fragment>
                 <div className={classes.buttons}>
-                  
-                  <Button className={classes.button}>
-                    Cancelar
-                  </Button>
-                  
+                  <Link className={classes.textoButton} to="/admin_destinos">
+                    <Button className={classes.button}>
+                      Cancelar
+                    </Button>
+                  </Link>
+
                   <Button
                     variant="contained"
                     color="primary"

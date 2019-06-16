@@ -92,11 +92,9 @@ class AdminDestinos extends Component{
   render(){
 
     let cards = this.state.cards.map(card => {
-      return (        
-        <Grid item xs={12} sm={6} md={4}>
+      return (       
           <Card card={card}>
           </Card>
-        </Grid>      
       )
     })
 
@@ -110,11 +108,11 @@ class AdminDestinos extends Component{
       <main className={classes.content}>
             <div className={classes.appBarSpacer}/>
               <Container maxWidth="lg" direction="row" className={classes.container}>
-                <Grid container direction="row" justify="flex-start" alignItems="flex-start">
-                  <Grid container xs={12} sm={12} item={true} spacing={2}>{cards}</Grid>
+                <Grid container spacing={2} direction="row" justify="flex-start" alignItems="flex-start">
+                  {cards}
                 </Grid>
               </Container>
-              <Link className={classes.textoButton} to="/crear_destino">
+              <Link to="/crear_destino">
               <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
                 <AddIcon />            
               </Fab>
