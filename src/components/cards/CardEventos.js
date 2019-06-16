@@ -78,7 +78,7 @@ class MediaCard extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <Grid item xs={12} sm={12} md={6} spacing={2} key={this.props.card.id}>
+      <Grid item xs={12} sm={12} md={6} key={this.props.card.id}>
         <Card>
           <CardActionArea>       
             <CardContent>

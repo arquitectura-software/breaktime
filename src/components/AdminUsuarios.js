@@ -96,9 +96,9 @@ class AdminUsuarios extends Component{
                 })}
             </Grid>
           </Container>
-          <Link className={classes.textoButton} to="/editar_usuario">
+          <Link className={classes.textoButton} to="/crear_usuario">
               <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
-                <AddIcon color="white"/>            
+                <AddIcon />            
               </Fab>
               </Link>
         </main>

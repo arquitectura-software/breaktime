@@ -75,7 +75,7 @@ class FormReservas extends Component {
       return (
         <React.Fragment>
           <Typography variant="h5" gutterBottom>
-            Editar reserva
+            Crear reserva
           </Typography>
           <Grid container spacing={3}>
 

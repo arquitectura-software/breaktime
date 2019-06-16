@@ -77,7 +77,7 @@ class FormPromos extends Component {
       return (
         <React.Fragment>
           <Typography variant="h5" gutterBottom>
-            Editar promoción
+            Crear promoción
           </Typography>
           <Grid container spacing={3}>
 

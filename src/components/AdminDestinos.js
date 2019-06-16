@@ -111,12 +111,12 @@ class AdminDestinos extends Component{
             <div className={classes.appBarSpacer}/>
               <Container maxWidth="lg" direction="row" className={classes.container}>
                 <Grid container direction="row" justify="flex-start" alignItems="flex-start">
-                  <Grid container xs={12} sm={12}  spacing={2}>{cards}</Grid>
+                  <Grid container xs={12} sm={12} item={true} spacing={2}>{cards}</Grid>
                 </Grid>
               </Container>
-              <Link className={classes.textoButton} to="/editar_destino">
+              <Link className={classes.textoButton} to="/crear_destino">
               <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
-                <AddIcon color="white"/>            
+                <AddIcon />            
               </Fab>
               </Link>
         </main>

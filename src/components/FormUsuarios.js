@@ -74,7 +74,7 @@ class FormUsuarios extends Component {
       return (
         <React.Fragment>
           <Typography variant="h5" gutterBottom>
-            Editar usuario
+            Crear usuario
           </Typography>
           <Grid container spacing={3}>
 

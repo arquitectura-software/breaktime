@@ -44,7 +44,7 @@ class CardUsersAdmin extends Component {
   render() {
 
     return (
-        <Grid item xs={12} sm={6} md={6} spacing={2} key={this.props.usuario.id}>
+        <Grid item xs={12} sm={6} md={6} key={this.props.usuario.id}>
             <Card >
                 <CardActionArea>
                     <CardContent>

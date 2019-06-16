@@ -115,9 +115,9 @@ export default function Login() {
                 <Grid item xs>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <a href="https://github.com/Nigogu" variant="body2">
                     {"¿No puede ingresar? ¡Podemos ayudarle!"}
-                  </Link>
+                  </a>
                 </Grid>
               </Grid>
               <Box mt={5}>

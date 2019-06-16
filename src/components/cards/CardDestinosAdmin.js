@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import Grid from '@material-ui/core/Grid';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -54,8 +53,7 @@ class CardDestinos extends Component {
 
     return (
       <Grid>
-      <Card >
-        <CardActionArea>
+      <Card>
           <CardMedia className={classes.media} 
           image="http://primicia.com.co/wp-content/uploads/2019/02/Cartagena_Colombia_cs-b9a2c77a9fe3.jpg" 
           title="Cartagena"
@@ -78,13 +76,12 @@ class CardDestinos extends Component {
                 <Typography variant="body2" color="textSecondary" component="p">
                     Hora de embarque: {this.props.card.horarioEmbarque}
                 </Typography>
-            </Grid>
+                </Grid>
             <Grid container justify="flex-end">
-            <Button onClick={this.handleClickButton1} size="small" color="primary">Editar</Button>            
-            <Button onClick={this.handleClickButton2} size="small" color="primary">Eliminar</Button>
-            </Grid>
+              <Button onClick={this.handleClickButton1} size="small" color="primary">Editar</Button>            
+              <Button onClick={this.handleClickButton2} size="small" color="primary">Eliminar</Button>
+            </Grid>          
           </CardContent>
-        </CardActionArea>
       </Card>
       <DialogEliminar open={this.state.dialogEliminar} onClose={this.handleCloseEliminar} card={this.props.card}/>
       </Grid>

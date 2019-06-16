@@ -106,7 +106,7 @@ class Promos extends Component{
               <Container maxWidth="lg" direction="row" className={classes.container}>
                 <Grid container direction="row" justify="flex-start" alignItems="flex-start">
                   <Grid item xs={12} sm={4} md={3}><Container><PromosFilters/></Container></Grid>
-                  <Grid container xs={12} sm={8} md={9} spacing={2}>{cards}</Grid>
+                  <Grid container xs={12} sm={8} md={9} item={true} spacing={2}>{cards}</Grid>
                 </Grid>
               </Container> 
             </div>

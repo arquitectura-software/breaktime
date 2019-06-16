@@ -10,7 +10,7 @@ class DialogEliminar extends Component{
     constructor(props){
         super(props);
         this.state = {
-            cantidad: ""
+            cantidad: "",
         }
     }
 
@@ -21,7 +21,7 @@ class DialogEliminar extends Component{
     }
     //onChange={handleChange('age')}
     render(){
-        const {open, onClose } = this.props;
+        const {open = false, onClose = false } = this.props;
 
         return(         
             <Dialog maxWidth="xs" fullWidth={true} open={open} onClose={onClose} scroll='paper' aria-labelledby="scroll-dialog-title">
