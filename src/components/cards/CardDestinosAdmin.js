@@ -12,8 +12,13 @@ import DialogEliminar from '../DialogEliminar';
 
 const styles = theme => ({
     media: {
-        paddingTop: '25.25%', // 16:9
+      paddingTop: '25.25%', // 16:9
     },
+
+    description: {
+      marginTop: "1em",
+      marginBottom: "1em"
+    }
   
 })
 
@@ -59,23 +64,24 @@ class CardDestinos extends Component {
           image="http://primicia.com.co/wp-content/uploads/2019/02/Cartagena_Colombia_cs-b9a2c77a9fe3.jpg" 
           title="Cartagena"
           />
-          <CardContent>
+          <CardContent >
             <Typography gutterBottom variant="h5" component="h2">
-              {this.props.card.nombre}
+              {this.props.card.name}
             </Typography>
             <Typography variant="h4" color="textSecondary" component="h4">
-              {this.props.card.clima}
+              {this.props.card.weather}
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {this.props.card.descripcion}
+            <Typography variant="body2" align="justify" color="textSecondary" className={classes.description} component="p">
+              {this.props.card.description}
+              
             </Typography>
             
             <Grid item xs={12} >
-              <Typography variant="body2" color="textSecondary" component="p">
-                  Hora de Desembarque: {this.props.card.horarioDesembarque}
+              <Typography variant="body2" color="textPrimary" component="p">
+                  Hora de Desembarque: {this.props.card.landingtime}
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                  Hora de embarque: {this.props.card.horarioEmbarque}
+              <Typography variant="body2" color="textPrimary" component="p">
+                  Hora de embarque: {this.props.card.boardingtime}
               </Typography>
             </Grid>  
           </CardContent>

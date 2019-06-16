@@ -8,6 +8,8 @@ import { CssBaseline } from '@material-ui/core';
 import BarraAdmin from './BarraAdmin';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import {URLGRAPH} from '../constants'
+import axios from 'axios'
 
 const styles = theme => ({
   
@@ -49,9 +51,6 @@ class AdminDestinos extends Component{
 
     this.state = {
       isDataLoaded: false,
-    };
-
-    this.state = {
       cards: [
         {
           nombre: "Cartagena",
@@ -87,7 +86,40 @@ class AdminDestinos extends Component{
 
   async componentDidMount(){
     await this.setState( {isDataLoaded: true} );
+    await this.cargarDatos();
+    this.formatDatos();
   }
+
+  async cargarDatos () {
+
+    await axios({
+      url: URLGRAPH,
+      method: 'post',
+      data: {"query":"query{ getDestinations{ id name weather description timezone landingtime boardingtime } }","variables":null}
+    })
+      .then((result) => {
+        let data = result.data.data.getDestinations
+
+        this.setState({
+          cards: data
+        })
+        console.log(this.state.cards)
+      })
+      .catch(err => console.log(err))
+  }
+
+  async formatDatos () {
+    console.log(this.state.cards)
+    let newdata = this.state.cards
+    for (let i = 0; i < newdata.length; i++) {
+      newdata[i].landingtime = newdata[i].landingtime.substring(0,10) + " a las " + newdata[i].landingtime.substring(12,16) + "."
+      newdata[i].boardingtime = newdata[i].boardingtime.substring(0,10) + " a las " + newdata[i].boardingtime.substring(12,16) + "."     
+    }
+    this.setState({
+      cards: newdata
+    })
+
+    }
 
   render(){
 
