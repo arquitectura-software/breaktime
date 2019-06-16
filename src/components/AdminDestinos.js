@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles';
-import { withRouter } from 'react-router-dom';
-import Card from './CardDestinosAdmin'
+import { Link, withRouter } from 'react-router-dom';
+import Card from './cards/CardDestinosAdmin'
 import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container';
 import { CssBaseline } from '@material-ui/core';
@@ -114,9 +114,11 @@ class AdminDestinos extends Component{
                   <Grid container xs={12} sm={12}  spacing={2}>{cards}</Grid>
                 </Grid>
               </Container>
+              <Link className={classes.textoButton} to="/editar_destino">
               <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
                 <AddIcon color="white"/>            
               </Fab>
+              </Link>
         </main>
       </div>
     );

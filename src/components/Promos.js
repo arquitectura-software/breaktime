@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid' 
 import Container from '@material-ui/core/Container';
 import Navbar from './NavBar'
-import Card from './CardPromos'
+import Card from './cards/CardPromos'
 import Loading from './Loading'
 import PromosFilters from './PromosFilters'
 import withStyles from '@material-ui/core/styles/withStyles';

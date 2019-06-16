@@ -16,7 +16,7 @@ const styles = theme => ({
     },
 })
 
-class CardUsersAdmin extends Component {
+class CardTiendasAdmin extends Component {
 
     constructor(props){
         super(props);  
@@ -25,45 +25,40 @@ class CardUsersAdmin extends Component {
         } 
       }
 
+
     handleClickButton1 = () => {
-        this.props.history.push("/editar_usuario");    
+        this.props.history.push("/editar_tienda");
       }
+    
     
     handleClickButton2 = () => {
         this.setState({
-            dialogEliminar: true
-        })    
-      }    
-    
-      handleCloseEliminar = () => {
-        this.setState({
-          dialogEliminar: false,
-        })
-      }
+          dialogEliminar: true
+        }) 
+    }
   
+    handleCloseEliminar = () => {
+      this.setState({
+        dialogEliminar: false,
+      })
+    }
+    
+
   render() {
 
-    const { classes } = this.props;
-
     return (
-        <Grid item xs={12} sm={6} md={6} spacing={2} key={this.props.usuario.id}>
+        <Grid item xs={12} sm={6} md={4} spacing={2} key={this.props.tiendas.id}>
             <Card >
                 <CardActionArea>
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2" color="primary" align="center">
-                        {this.props.usuario.username}
+                        {this.props.tiendas.nombre}
                         </Typography>
                         <Typography variant="body1" color="textPrimary" component="h4">
-                        Nombre: {this.props.usuario.name}
+                        Ubicación: {this.props.tiendas.ubicacion}
                         </Typography>
                         <Typography variant="body1" color="textPrimary" component="p">
-                        Documento: {this.props.usuario.documento}
-                        </Typography>
-                        <Typography variant="body1" color="textPrimary" component="p">
-                        Correo: {this.props.usuario.correo}
-                        </Typography>
-                        <Typography variant="body1" color="textPrimary" component="p">
-                        Celular: {this.props.usuario.celular}
+                        Categoria: {this.props.tiendas.categoria}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
@@ -73,10 +68,9 @@ class CardUsersAdmin extends Component {
                 </CardActions>
             </Card>
             <DialogEliminar open={this.state.dialogEliminar} onClose={this.handleCloseEliminar} card={this.props.card}/>
-      
         </Grid>
     );
   }
 }
 
-export default withRouter(withStyles(styles)(CardUsersAdmin));
+export default withRouter(withStyles(styles)(CardTiendasAdmin));
