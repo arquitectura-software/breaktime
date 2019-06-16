@@ -17,7 +17,12 @@ import AdminUsuarios from './components/AdminUsuarios'
 import AdminDestinos from './components/AdminDestinos'
 import AdminTiendas from './components/AdminTiendas'
 
-import Checkout from './components/Checkout'
+import CheckoutPromos from './components/CheckoutPromos'
+import CheckoutReservas from './components/CheckoutReservas'
+import CheckoutUsuarios from './components/CheckoutUsuarios'
+import CheckoutEvents from './components/CheckoutEvents'
+import CheckoutDestinos from './components/CheckoutDestinos'
+import CheckoutTiendas from './components/CheckoutTiendas'
 
 
 export default props => (
@@ -38,7 +43,13 @@ export default props => (
             <Route exact path="/admin_usuarios" component={AdminUsuarios}/>
             <Route exact path="/admin_tiendas" component={AdminTiendas}/>
 
-            <Route exact path="/checkout" component={Checkout}/>
+            <Route exact path="/editar_evento" component={CheckoutEvents}/>
+            <Route exact path="/editar_promo" component={CheckoutPromos}/>
+            <Route exact path="/editar_reserva" component={CheckoutReservas}/>
+            <Route exact path="/editar_destino" component={CheckoutDestinos}/>
+            <Route exact path="/editar_usuario" component={CheckoutUsuarios}/>
+            <Route exact path="/editar_tienda" component={CheckoutTiendas}/>
+
         </Switch>
       </ScrollToTop>
     </BrowserRouter>

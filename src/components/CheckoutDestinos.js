@@ -5,12 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
-import FormEvents from './FormEvents';
 import FormDestinos from './FormDestinos';
-import FormPromociones from './FormPromociones';
-import FormReservas from './FormReservas';
-import FormTiendas from './FormTiendas';
-import FormUsuarios from './FormUsuarios';
 
 const styles = theme => ({
   appBar: {
@@ -54,7 +49,7 @@ const styles = theme => ({
   },
 });
 
-class Checkout extends Component{
+class CheckoutDestinos extends Component{
 
   render(){
 
@@ -69,7 +64,7 @@ class Checkout extends Component{
         <main className={classes.layout}>
           <Paper className={classes.paper}>
             
-            <FormTiendas />
+            <FormDestinos />
               
               <React.Fragment>
                 <div className={classes.buttons}>
@@ -94,4 +89,4 @@ class Checkout extends Component{
   }
 }
 
-export default withRouter(withStyles(styles)(Checkout));
+export default withRouter(withStyles(styles)(CheckoutDestinos));

@@ -32,7 +32,7 @@ class CardDestinos extends Component {
         dialogReservar: true
       })
     }else{
-        this.props.history.push("/checkout");      
+        this.props.history.push("/editar_destino");      
     }
   }
   

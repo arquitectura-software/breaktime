@@ -29,7 +29,7 @@ class CardReservas extends Component {
   }
 
     handleClickButton1 = () => {
-      this.props.history.push("/checkout");
+      this.props.history.push("/editar_reserva");
     }
 
 
