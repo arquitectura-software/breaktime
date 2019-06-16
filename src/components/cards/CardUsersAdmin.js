@@ -57,6 +57,15 @@ class CardUsersAdmin extends Component {
                         <Typography variant="body1" color="textPrimary" component="p">
                         Apellidos: {this.props.usuario.surnames}
                         </Typography>
+                        <Typography variant="body1" color="textPrimary" component="p">
+                        Phone: {this.props.usuario.surnames}
+                        </Typography>
+                        <Typography variant="body1" color="textPrimary" component="p">
+                        Apellidos: {this.props.usuario.surnames}
+                        </Typography>
+                        <Typography variant="body1" color="textPrimary" component="p">
+                        Apellidos: {this.props.usuario.surnames}
+                        </Typography>
                     </CardContent>
                 </CardActionArea>
                 <CardActions>

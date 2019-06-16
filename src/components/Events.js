@@ -94,7 +94,7 @@ class Events extends Component{
                   <Grid container xs={12} sm={8} md={9} item={true} spacing={2}>
                     {this.state.cards.map(card => {
                       return (
-                        <Card card={card}/>
+                        <Card key={card.id} card={card}/>
                       )
                     })}
                   </Grid>

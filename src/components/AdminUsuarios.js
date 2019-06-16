@@ -52,13 +52,28 @@ class AdminUsuarios extends Component{
 
     this.state = {
       isDataLoaded: false,
-      usuarios: []
+      usuarios: [],
+      passengers: [],
+      usuariosFusion: [],
     };
   }
 
+ 
   async componentDidMount(){
     await this.setState( {isDataLoaded: true} );
-    this.cargarDatos();
+    await this.cargarDatos();
+    await this.normalizarDatos();
+  }
+
+  async normalizarDatos () {
+    console.log(this.state.usuarios.length)    
+    this.state.passengers.forEach(passenger => {
+      this.state.usuarios.forEach(user => { 
+        if(passenger.id_user === user.id){
+          this.state.usuariosFusion.push({x: 'holi'})
+        }
+      })      
+    })
   }
 
   async cargarDatos () {
@@ -68,17 +83,31 @@ class AdminUsuarios extends Component{
       url: URLGRAPH,
       method: 'post',
       data: {"query":"query{ getUsers{ id names surnames } }","variables":null},
-      data2: {"query":"query{ getPassengers{ id id_user birthdate email phone } }","variables":null}
-    })
+      })
       .then((result) => {
         let data = result.data.data.getUsers
 
         this.setState({
-          usuarios: data
+          usuarios: data,
         })
       })
       .catch(err => console.log(err))
-  }
+
+
+  await axios({
+    url: URLGRAPH,
+    method: 'post',
+    data: {"query":"query{ getPassengers{ id id_user birthdate email phone } }","variables":null}
+  })
+    .then((result) => {
+      let data = result.data.data.getPassengers
+      console.log(data)
+      this.setState({
+        passengers: data,
+      })
+    })
+    .catch(err => console.log(err))
+    }
 
   render(){
     const { classes } = this.props;
@@ -90,9 +119,9 @@ class AdminUsuarios extends Component{
           <div className={classes.appBarSpacer} />
           <Container maxWidth="lg" direction="row" className={classes.container}>
             <Grid container spacing={2} direction="row" justify="flex-start" alignItems="center">
-                {this.state.usuarios.map(usuario => {
+                {this.state.usuariosFusion.map(usuario => {
                   return (
-                    <Card usuario={usuario}/>
+                    <Card usuario={usuario} />
                   )
                 })}
             </Grid>
