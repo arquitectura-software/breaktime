@@ -26,7 +26,7 @@ class CardUsersAdmin extends Component {
       }
 
     handleClickButton1 = () => {
-        this.props.history.push("/checkout");    
+        this.props.history.push("/editar_usuario");    
       }
     
     handleClickButton2 = () => {

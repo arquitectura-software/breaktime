@@ -23,7 +23,7 @@ const styles = theme => ({
   }
 })
 
-class FormPromociones extends Component {
+class FormPromos extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -136,4 +136,4 @@ class FormPromociones extends Component {
 
 }
 
-export default withRouter(withStyles(styles)(FormPromociones));
+export default withRouter(withStyles(styles)(FormPromos));
