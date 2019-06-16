@@ -44,24 +44,30 @@ class CardUsersAdmin extends Component {
   render() {
 
     return (
-        <Grid item xs={12} sm={6} md={6} spacing={2} key={this.props.usuario.id}>
+        <Grid item xs={12} sm={6} md={6} key={this.props.usuario.id}>
             <Card >
                 <CardActionArea>
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2" color="primary" align="center">
-                        {this.props.usuario.username}
+                        {this.props.usuario.id}
                         </Typography>
                         <Typography variant="body1" color="textPrimary" component="h4">
-                        Nombre: {this.props.usuario.name}
+                        Nombres: {this.props.usuario.names}
                         </Typography>
                         <Typography variant="body1" color="textPrimary" component="p">
-                        Documento: {this.props.usuario.documento}
+                        Apellidos: {this.props.usuario.surnames}
                         </Typography>
                         <Typography variant="body1" color="textPrimary" component="p">
-                        Correo: {this.props.usuario.correo}
+                        Identificación: {this.props.usuario.id}
                         </Typography>
                         <Typography variant="body1" color="textPrimary" component="p">
-                        Celular: {this.props.usuario.celular}
+                        Fecha de nacimiento: {this.props.usuario.birthdate}
+                        </Typography>
+                        <Typography variant="body1" color="textPrimary" component="p">
+                        E-mail: {this.props.usuario.email}
+                        </Typography>
+                        <Typography variant="body1" color="textPrimary" component="p">
+                        Phone: {this.props.usuario.phone}
                         </Typography>
                     </CardContent>
                 </CardActionArea>

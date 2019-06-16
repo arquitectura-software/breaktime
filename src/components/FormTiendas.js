@@ -75,7 +75,7 @@ class FormTiendas extends Component {
       return (
         <React.Fragment>
           <Typography variant="h5" gutterBottom>
-            Editar tienda
+            Crear tienda
           </Typography>
           <Grid container spacing={3}>
 

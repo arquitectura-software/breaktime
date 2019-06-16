@@ -79,7 +79,7 @@ class FormEvents extends Component {
       return (
         <React.Fragment>
           <Typography variant="h5" gutterBottom>
-            Editar evento
+            Crear evento
           </Typography>
           <Grid container spacing={3}>
 

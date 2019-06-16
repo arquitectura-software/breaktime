@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid' 
 import Container from '@material-ui/core/Container';
 import Navbar from './NavBar'
-import Card from './cards/CardEventos'
+import Card from './cards/CardDestinos'
 import Loading from './Loading'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
@@ -99,7 +99,7 @@ class Diary extends Component{
             <div className={classes.appBarSpacer}>
               <Container maxWidth="lg" direction="row" className={classes.container}>
                 <Grid container direction="row" justify="flex-start" alignItems="flex-start">
-                  <Grid container xs={12} sm={12}  spacing={2}>{cards}</Grid>
+                  <Grid container xs={12} sm={12} item={true} spacing={2}>{cards}</Grid>
                 </Grid>
               </Container> 
             </div>

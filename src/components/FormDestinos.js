@@ -79,7 +79,7 @@ class FormDestinos extends Component {
       return (
         <React.Fragment>
           <Typography variant="h5" gutterBottom>
-            Editar destino
+            Crear destino
           </Typography>
           <Grid container spacing={3}>
 

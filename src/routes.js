@@ -43,12 +43,12 @@ export default props => (
             <Route exact path="/admin_usuarios" component={AdminUsuarios}/>
             <Route exact path="/admin_tiendas" component={AdminTiendas}/>
 
-            <Route exact path="/editar_evento" component={CheckoutEvents}/>
-            <Route exact path="/editar_promo" component={CheckoutPromos}/>
-            <Route exact path="/editar_reserva" component={CheckoutReservas}/>
-            <Route exact path="/editar_destino" component={CheckoutDestinos}/>
-            <Route exact path="/editar_usuario" component={CheckoutUsuarios}/>
-            <Route exact path="/editar_tienda" component={CheckoutTiendas}/>
+            <Route exact path="/crear_evento" component={CheckoutEvents}/>
+            <Route exact path="/crear_promo" component={CheckoutPromos}/>
+            <Route exact path="/crear_reserva" component={CheckoutReservas}/>
+            <Route exact path="/crear_destino" component={CheckoutDestinos}/>
+            <Route exact path="/crear_usuario" component={CheckoutUsuarios}/>
+            <Route exact path="/crear_tienda" component={CheckoutTiendas}/>
 
         </Switch>
       </ScrollToTop>

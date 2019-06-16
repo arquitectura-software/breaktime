@@ -8,6 +8,8 @@ import { CssBaseline } from '@material-ui/core';
 import BarraAdmin from './BarraAdmin';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import {URLGRAPH} from '../constants'
+import axios from 'axios'
 
 const styles = theme => ({
   
@@ -49,9 +51,6 @@ class AdminDestinos extends Component{
 
     this.state = {
       isDataLoaded: false,
-    };
-
-    this.state = {
       cards: [
         {
           nombre: "Cartagena",
@@ -87,16 +86,47 @@ class AdminDestinos extends Component{
 
   async componentDidMount(){
     await this.setState( {isDataLoaded: true} );
+    await this.cargarDatos();
+    this.formatDatos();
   }
+
+  async cargarDatos () {
+
+    await axios({
+      url: URLGRAPH,
+      method: 'post',
+      data: {"query":"query{ getDestinations{ id name weather description timezone landingtime boardingtime } }","variables":null}
+    })
+      .then((result) => {
+        let data = result.data.data.getDestinations
+
+        this.setState({
+          cards: data
+        })
+        console.log(this.state.cards)
+      })
+      .catch(err => console.log(err))
+  }
+
+  async formatDatos () {
+    console.log(this.state.cards)
+    let newdata = this.state.cards
+    for (let i = 0; i < newdata.length; i++) {
+      newdata[i].landingtime = newdata[i].landingtime.substring(0,10) + " a las " + newdata[i].landingtime.substring(12,16) + "."
+      newdata[i].boardingtime = newdata[i].boardingtime.substring(0,10) + " a las " + newdata[i].boardingtime.substring(12,16) + "."     
+    }
+    this.setState({
+      cards: newdata
+    })
+
+    }
 
   render(){
 
     let cards = this.state.cards.map(card => {
-      return (        
-        <Grid item xs={12} sm={6} md={4}>
+      return (       
           <Card card={card}>
           </Card>
-        </Grid>      
       )
     })
 
@@ -110,13 +140,13 @@ class AdminDestinos extends Component{
       <main className={classes.content}>
             <div className={classes.appBarSpacer}/>
               <Container maxWidth="lg" direction="row" className={classes.container}>
-                <Grid container direction="row" justify="flex-start" alignItems="flex-start">
-                  <Grid container xs={12} sm={12}  spacing={2}>{cards}</Grid>
+                <Grid container spacing={2} direction="row" justify="flex-start" alignItems="flex-start">
+                  {cards}
                 </Grid>
               </Container>
-              <Link className={classes.textoButton} to="/editar_destino">
+              <Link to="/crear_destino">
               <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
-                <AddIcon color="white"/>            
+                <AddIcon />            
               </Fab>
               </Link>
         </main>

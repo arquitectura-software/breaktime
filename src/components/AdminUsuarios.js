@@ -8,6 +8,8 @@ import BarraAdmin from './BarraAdmin';
 import Card from './cards/CardUsersAdmin'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import {URLGRAPH} from '../constants'
+import axios from 'axios'
 
 
 const styles = theme => ({
@@ -50,40 +52,73 @@ class AdminUsuarios extends Component{
 
     this.state = {
       isDataLoaded: false,
-      usuarios: [
-        {
-          id: 1,
-          username: "Alejosebasp",
-          name: "Alejandro Sebastian Alejo Patarroyo",
-          documento: "1030677408",
-          correo: "alsalejopa@unal.edu.co",
-          celular: "3213892239"
-        },
-
-        {
-          id: 2,
-          username: "Alejosebasp",
-          name: "Alejandro Sebastian Alejo Patarroyo",
-          documento: "1030677408",
-          correo: "alsalejopa@unal.edu.co",
-          celular: "3213892239"
-        },
-
-        {
-          id: 3,
-          username: "Alejosebasp",
-          name: "Alejandro Sebastian Alejo Patarroyo",
-          documento: "1030677408",
-          correo: "alsalejopa@unal.edu.co",
-          celular: "3213892239"
-        },
-      ]
+      usuarios: [],
+      passengers: [],
+      usuariosFusion: [],
     };
   }
 
+ 
   async componentDidMount(){
     await this.setState( {isDataLoaded: true} );
+    await this.cargarDatos();
+    this.normalizarDatos();
   }
+
+  async normalizarDatos () {
+    
+    let usuarios1 = this.state.usuarios
+    let pasajeros1 = this.state.passengers
+    let nuevosUsuarios = []
+
+    for (let i = 0; i < pasajeros1.length; i++) {
+      for (let j = 0; j < usuarios1.length; j++) {
+        if(pasajeros1[i].id_user === usuarios1[j].id){
+            nuevosUsuarios.push({names: usuarios1[j].names, surnames: usuarios1[j].surnames, 
+                                  id: usuarios1[j].id, birthdate: pasajeros1[i].birthdate, 
+                                  email: pasajeros1[i].email, phone: pasajeros1[i].phone})
+        }        
+      }      
+    }
+
+    this.setState({
+      usuariosFusion: nuevosUsuarios,
+    })
+    console.log(this.state.usuariosFusion)
+  }
+
+  async cargarDatos () {
+    //e.preventDefault();
+
+    await axios({
+      url: URLGRAPH,
+      method: 'post',
+      data: {"query":"query{ getUsers{ id names surnames } }","variables":null},
+      })
+      .then((result) => {
+        let data = result.data.data.getUsers
+
+        this.setState({
+          usuarios: data,
+        })
+      })
+      .catch(err => console.log(err))
+
+
+  await axios({
+    url: URLGRAPH,
+    method: 'post',
+    data: {"query":"query{ getPassengers{ id id_user birthdate email phone } }","variables":null}
+  })
+    .then((result) => {
+      let data = result.data.data.getPassengers
+      
+      this.setState({
+        passengers: data,
+      })
+    })
+    .catch(err => console.log(err))
+    }
 
   render(){
     const { classes } = this.props;
@@ -95,16 +130,16 @@ class AdminUsuarios extends Component{
           <div className={classes.appBarSpacer} />
           <Container maxWidth="lg" direction="row" className={classes.container}>
             <Grid container spacing={2} direction="row" justify="flex-start" alignItems="center">
-                {this.state.usuarios.map(usuario => {
+                {this.state.usuariosFusion.map(usuario => {
                   return (
-                    <Card usuario={usuario}/>
+                    <Card key={usuario.id} usuario={usuario} />
                   )
                 })}
             </Grid>
           </Container>
-          <Link className={classes.textoButton} to="/editar_usuario">
+          <Link className={classes.textoButton} to="/crear_usuario">
               <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
-                <AddIcon color="white"/>            
+                <AddIcon />            
               </Fab>
               </Link>
         </main>
