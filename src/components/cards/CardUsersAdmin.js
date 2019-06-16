@@ -49,7 +49,7 @@ class CardUsersAdmin extends Component {
                 <CardActionArea>
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2" color="primary" align="center">
-                        {this.props.usuario.surnames}
+                        {this.props.usuario.id}
                         </Typography>
                         <Typography variant="body1" color="textPrimary" component="h4">
                         Nombres: {this.props.usuario.names}
@@ -58,13 +58,16 @@ class CardUsersAdmin extends Component {
                         Apellidos: {this.props.usuario.surnames}
                         </Typography>
                         <Typography variant="body1" color="textPrimary" component="p">
-                        Phone: {this.props.usuario.surnames}
+                        Identificación: {this.props.usuario.id}
                         </Typography>
                         <Typography variant="body1" color="textPrimary" component="p">
-                        Apellidos: {this.props.usuario.surnames}
+                        Fecha de nacimiento: {this.props.usuario.birthdate}
                         </Typography>
                         <Typography variant="body1" color="textPrimary" component="p">
-                        Apellidos: {this.props.usuario.surnames}
+                        E-mail: {this.props.usuario.email}
+                        </Typography>
+                        <Typography variant="body1" color="textPrimary" component="p">
+                        Phone: {this.props.usuario.phone}
                         </Typography>
                     </CardContent>
                 </CardActionArea>

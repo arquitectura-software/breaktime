@@ -62,18 +62,29 @@ class AdminUsuarios extends Component{
   async componentDidMount(){
     await this.setState( {isDataLoaded: true} );
     await this.cargarDatos();
-    await this.normalizarDatos();
+    this.normalizarDatos();
   }
 
   async normalizarDatos () {
-    console.log(this.state.usuarios.length)    
-    this.state.passengers.forEach(passenger => {
-      this.state.usuarios.forEach(user => { 
-        if(passenger.id_user === user.id){
-          this.state.usuariosFusion.push({x: 'holi'})
-        }
-      })      
+    
+    let usuarios1 = this.state.usuarios
+    let pasajeros1 = this.state.passengers
+    let nuevosUsuarios = []
+
+    for (let i = 0; i < pasajeros1.length; i++) {
+      for (let j = 0; j < usuarios1.length; j++) {
+        if(pasajeros1[i].id_user === usuarios1[j].id){
+            nuevosUsuarios.push({names: usuarios1[j].names, surnames: usuarios1[j].surnames, 
+                                  id: usuarios1[j].id, birthdate: pasajeros1[i].birthdate, 
+                                  email: pasajeros1[i].email, phone: pasajeros1[i].phone})
+        }        
+      }      
+    }
+
+    this.setState({
+      usuariosFusion: nuevosUsuarios,
     })
+    console.log(this.state.usuariosFusion)
   }
 
   async cargarDatos () {
@@ -101,7 +112,7 @@ class AdminUsuarios extends Component{
   })
     .then((result) => {
       let data = result.data.data.getPassengers
-      console.log(data)
+      
       this.setState({
         passengers: data,
       })
@@ -121,7 +132,7 @@ class AdminUsuarios extends Component{
             <Grid container spacing={2} direction="row" justify="flex-start" alignItems="center">
                 {this.state.usuariosFusion.map(usuario => {
                   return (
-                    <Card usuario={usuario} />
+                    <Card key={usuario.id} usuario={usuario} />
                   )
                 })}
             </Grid>
