@@ -62,19 +62,26 @@ class AdminUsuarios extends Component{
   async componentDidMount(){
     await this.setState( {isDataLoaded: true} );
     await this.cargarDatos();
-    await this.normalizarDatos();
+    this.normalizarDatos();
   }
 
   async normalizarDatos () {
-    console.log(this.state.usuarios.length)    
-    this.state.passengers.forEach(passenger => {
-      this.state.usuarios.forEach(user => { 
+    let usuarios1 = this.state.usuarios
+    let pasajeros1 = this.state.pasajeros
+    let nuevosUsuarios = ''
+
+    pasajeros1.forEach(passenger => {
+      usuarios1.forEach(user => { 
         if(passenger.id_user === user.id){
-          this.state.usuariosFusion.push({names: '', surnames: '', id: '', 
-                                          birthdate: '', email: '', phone: ''})
+          nuevosUsuarios.push({names: '', surnames: '', id: '', 
+                                birthdate: '', email: '', phone: ''})
         }
       })      
     })
+    this.setState({
+      usuariosFusion: nuevosUsuarios,
+    })
+
   }
 
   async cargarDatos () {
