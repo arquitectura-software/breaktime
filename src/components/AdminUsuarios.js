@@ -88,7 +88,6 @@ class AdminUsuarios extends Component{
   }
 
   async cargarDatos () {
-    //e.preventDefault();
 
     await axios({
       url: URLGRAPH,
@@ -105,20 +104,20 @@ class AdminUsuarios extends Component{
       .catch(err => console.log(err))
 
 
-  await axios({
-    url: URLGRAPH,
-    method: 'post',
-    data: {"query":"query{ getPassengers{ id id_user birthdate email phone } }","variables":null}
-  })
-    .then((result) => {
-      let data = result.data.data.getPassengers
-      
-      this.setState({
-        passengers: data,
-      })
+    await axios({
+      url: URLGRAPH,
+      method: 'post',
+      data: {"query":"query{ getPassengers{ id id_user birthdate email phone } }","variables":null}
     })
-    .catch(err => console.log(err))
-    }
+      .then((result) => {
+        let data = result.data.data.getPassengers
+        
+        this.setState({
+          passengers: data,
+        })
+      })
+      .catch(err => console.log(err))
+  }
 
   render(){
     const { classes } = this.props;

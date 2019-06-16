@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,7 +12,8 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import withStyles from '@material-ui/core/styles/withStyles';
+import { withRouter } from 'react-router-dom';
 
 function MadeWithLove() {
   return (
@@ -26,7 +27,7 @@ function MadeWithLove() {
   );
 }
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   root: {
     height: '100vh',
   },
@@ -55,77 +56,90 @@ const useStyles = makeStyles(theme => ({
     textDecorationLine: 'none',
   },
 
-}));
+})
 
-export default function Login() {
-  const classes = useStyles();
 
-  return (
-    <Grid container component="main" className={classes.root}>
-      <CssBaseline />
-        <Grid item xs={false} sm={7} md={8} className={classes.image} />
-        <Grid item xs={12} sm={5} md={4} component={Paper} elevation={6} square>
-          <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Inicio de sesión
-            </Typography>
-            <form className={classes.form} noValidate>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="username"
-                label="Usuario"
-                name="username"
-                autoFocus
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                type="password"
-                id="password"
-                label="Contraseña"
-                name="password"
-              />
-              
-              <Grid container justify="flex-end">
-                <FormControlLabel
-                  control={<Checkbox value="remember" color="primary" />}
-                  label="Recuérdame"
-                />
+class Login extends Component{
 
-              </Grid>
-              <Link to="/events" className={classes.submit}>
-                <Button
+  constructor(props){
+    super(props);
+    this.state = {
+
+    }
+  }
+
+  render(){
+    const { classes } = this.props;
+
+    return(
+      <Grid container component="main" className={classes.root}>
+        <CssBaseline />
+          <Grid item xs={false} sm={7} md={8} className={classes.image} />
+          <Grid item xs={12} sm={5} md={4} component={Paper} elevation={6} square>
+            <div className={classes.paper}>
+              <Avatar className={classes.avatar}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography component="h1" variant="h5">
+                Inicio de sesión
+              </Typography>
+              <form className={classes.form} noValidate>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
                   fullWidth
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}>
-                  Iniciar sesión
-                </Button>
-                </Link>
+                  id="username"
+                  label="Usuario"
+                  name="username"
+                  autoFocus
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  type="password"
+                  id="password"
+                  label="Contraseña"
+                  name="password"
+                />
+                
+                <Grid container justify="flex-end">
+                  <FormControlLabel
+                    control={<Checkbox value="remember" color="primary" />}
+                    label="Recuérdame"
+                  />
 
-              <Grid container>
-                <Grid item xs>
                 </Grid>
-                <Grid item>
-                  <a href="https://github.com/Nigogu" variant="body2">
-                    {"¿No puede ingresar? ¡Podemos ayudarle!"}
-                  </a>
+                <Link to="/events" className={classes.submit}>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}>
+                    Iniciar sesión
+                  </Button>
+                  </Link>
+
+                <Grid container>
+                  <Grid item xs>
+                  </Grid>
+                  <Grid item>
+                    <a href="https://github.com/Nigogu" variant="body2">
+                      {"¿No puede ingresar? ¡Podemos ayudarle!"}
+                    </a>
+                  </Grid>
                 </Grid>
-              </Grid>
-              <Box mt={5}>
-                <MadeWithLove />
-              </Box>
-            </form>
-          </div>
-        </Grid>
-    </Grid>
-  );
+                <Box mt={5}>
+                  <MadeWithLove />
+                </Box>
+              </form>
+            </div>
+          </Grid>
+      </Grid>
+    );
+  }
 }
+
+export default withRouter(withStyles(styles)(Login));

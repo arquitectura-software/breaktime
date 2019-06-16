@@ -38,9 +38,7 @@ class Diary extends Component{
     super(props);
 
     this.state = {
-      isDataLoaded: false
-    };
-    this.state = {
+      isDataLoaded: false,
       cards: [
         {
           nombre: "Cartagena",
