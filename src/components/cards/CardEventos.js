@@ -84,10 +84,13 @@ class MediaCard extends Component {
             
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2" align="center">
-                {this.props.card.title}
+                {this.props.card.name}
               </Typography>
               <Typography gutterBottom variant="subtitle1" component="h2" className={classes.texto}>
                 {this.props.card.tipo}
+              </Typography>
+              <Typography gutterBottom variant="subtitle2" component="h2" className={classes.texto}>
+                Evento limitado a: {this.props.card.audence}
               </Typography>
               <Typography gutterBottom variant="subtitle2" component="h2" className={classes.texto}>
                 Fecha y hora: {this.props.card.date}
@@ -96,7 +99,10 @@ class MediaCard extends Component {
                 {this.props.card.description.length >=50 ? this.props.card.description.substring(0,250)+"..." : this.props.card.description}
               </Typography>
               <Typography gutterBottom variant="subtitle2" component="h2" className={classes.texto}>
-                Lugar: {this.props.card.ubicacion}
+                Lugar: {this.props.card.location}
+              </Typography>
+              <Typography gutterBottom variant="subtitle2" component="h2" className={classes.texto}>
+                Capacidad: {this.props.card.capacity}
               </Typography>
             </CardContent>
           </CardActionArea>
