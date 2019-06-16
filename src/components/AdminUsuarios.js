@@ -70,7 +70,8 @@ class AdminUsuarios extends Component{
     this.state.passengers.forEach(passenger => {
       this.state.usuarios.forEach(user => { 
         if(passenger.id_user === user.id){
-          this.state.usuariosFusion.push({x: 'holi'})
+          this.state.usuariosFusion.push({names: '', surnames: '', id: '', 
+                                          birthdate: '', email: '', phone: ''})
         }
       })      
     })
