@@ -43,8 +43,6 @@ class CardUsersAdmin extends Component {
   
   render() {
 
-    const { classes } = this.props;
-
     return (
         <Grid item xs={12} sm={6} md={6} spacing={2} key={this.props.usuario.id}>
             <Card >
