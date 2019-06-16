@@ -6,11 +6,11 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid' 
-import DialogVerMas from './DialogVerMas'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
-import DialogReservar from './DialogReservar';
-import DialogEliminar from './DialogEliminar';
+import DialogReservar from '../DialogReservar';
+import DialogEliminar from '../DialogEliminar';
+import DialogVerMas from '../DialogVerMas'
 
 const styles = theme => ({
   texto: {
@@ -23,7 +23,7 @@ const styles = theme => ({
 })
 
 
-class MediaCard extends Component {
+class CardPromos extends Component {
 
   constructor(props){
     super(props);  
@@ -31,6 +31,12 @@ class MediaCard extends Component {
       dialogVerMas: false,
       dialogReservar: false
     } 
+  }
+
+  handleCloseEliminar = () => {
+    this.setState({
+      dialogEliminar: false,
+    })
   }
 
   handleCloseVerMas = () => {
@@ -45,20 +51,26 @@ class MediaCard extends Component {
     })
   }
 
-  handleCloseEliminar = () => {
+  handleClickOpenVerMas = () => {
     this.setState({
-      dialogEliminar: false,
+      dialogVerMas: true
+    })
+  }
+  
+  handleClickOpenReservar = () => {
+    this.setState({
+      dialogReservar: true
     })
   }
 
-  handleClickButton1 = () => {
-    
+
+  handleClickButton1 = () => {    
     if(this.props.card.button1 === 'Reservar'){
       this.setState({
         dialogReservar: true
       })
     }else{
-        this.props.history.push("/editar_evento");      
+        this.props.history.push("/editar_promo");      
     }
 
   }
@@ -84,19 +96,19 @@ class MediaCard extends Component {
             
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2" align="center">
-                {this.props.card.title}
-              </Typography>
-              <Typography gutterBottom variant="subtitle1" component="h2" className={classes.texto}>
-                {this.props.card.tipo}
-              </Typography>
-              <Typography gutterBottom variant="subtitle2" component="h2" className={classes.texto}>
-                Fecha y hora: {this.props.card.date}
+                {this.props.card.nombreTienda}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p" className={classes.descripcion}>
                 {this.props.card.description.length >=50 ? this.props.card.description.substring(0,250)+"..." : this.props.card.description}
               </Typography>
-              <Typography gutterBottom variant="subtitle2" component="h2" className={classes.texto}>
-                Lugar: {this.props.card.ubicacion}
+              <Typography gutterBottom variant="subtitle2" component="h2">
+                Inicia: {this.props.card.fechaInicio}
+              </Typography>
+              <Typography gutterBottom variant="subtitle2" component="h2">
+                Finaliza: {this.props.card.fechaFin}
+              </Typography>
+              <Typography gutterBottom variant="subtitle2" component="h2">
+                Ubicada en {this.props.card.ubicacion}
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -107,12 +119,13 @@ class MediaCard extends Component {
         </Card>
 
         <DialogVerMas open={this.state.dialogVerMas} onClose={this.handleCloseVerMas} card={this.props.card}/>
-        <DialogReservar open={this.state.dialogReservar} onClose={this.handleCloseReservar} card={this.props.card}/>
+        <DialogReservar open={this.state.dialogReservar} onClose={this.handleCloseReservar} card={this.props.card}/><DialogEliminar open={this.state.dialogEliminar} onClose={this.handleCloseEliminar} card={this.props.card}/>
         <DialogEliminar open={this.state.dialogEliminar} onClose={this.handleCloseEliminar} card={this.props.card}/>
+      
       </Grid>
     );
   }
 }
 
 
-export default withRouter(withStyles(styles)(MediaCard));
+export default withRouter(withStyles(styles)(CardPromos));

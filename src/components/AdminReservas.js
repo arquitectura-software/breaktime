@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { CssBaseline, Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container';
-import Card from './CardReservas'
+import Card from './cards/CardReservas'
 import BarraAdmin from './BarraAdmin';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
@@ -110,9 +110,11 @@ class AdminReservas extends Component{
                 })}
             </Grid>
           </Container>
-          <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
-            <AddIcon color="white"/>            
-          </Fab>
+          <Link className={classes.textoButton} to="/editar_reserva">
+              <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
+                <AddIcon color="white"/>            
+              </Fab>
+              </Link>
         </main>
       </div>
     );

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid' 
 import Container from '@material-ui/core/Container';
 import Navbar from './NavBar'
-import Card from './CardEventos'
+import Card from './cards/CardEventos'
 import EventFilters from './EventFilters'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';

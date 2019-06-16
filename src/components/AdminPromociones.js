@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
 import BarraAdmin from './BarraAdmin';
 import Grid from '@material-ui/core/Grid' 
 import Container from '@material-ui/core/Container';
 import PromosFilters from './PromosFilters'
-import Card from './CardPromos'
+import Card from './cards/CardPromos'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
@@ -117,9 +117,11 @@ class AdminPromociones extends Component{
               <Grid container xs={12} sm={8} md={9} spacing={2}>{cards}</Grid>
             </Grid>
           </Container>
-          <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
-            <AddIcon color="white"/>            
-          </Fab>
+          <Link className={classes.textoButton} to="/editar_promo">
+              <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
+                <AddIcon color="white"/>            
+              </Fab>
+              </Link>
         </main>
       </div>
     );
