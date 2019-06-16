@@ -8,6 +8,8 @@ import BarraAdmin from './BarraAdmin';
 import Card from './cards/CardTiendasAdmin'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import {URLGRAPH} from '../constants'
+import axios from 'axios'
 
 const styles = theme => ({
   
@@ -44,6 +46,7 @@ const styles = theme => ({
 
 
 class AdminUsuarios extends Component{
+
   constructor(props){
     super(props);
 
@@ -76,6 +79,24 @@ class AdminUsuarios extends Component{
 
   async componentDidMount(){
     await this.setState( {isDataLoaded: true} );
+    this.cargarDatos();
+  }
+
+  async cargarDatos () {
+
+    await axios({
+      url: URLGRAPH,
+      method: 'post',
+      data: {"query":"query{ getTiendas{ id_tienda categoria ubicacion nombre } }","variables":null}
+    })
+      .then((result) => {
+        let data = result.data.data.getTiendas
+
+        this.setState({
+          tiendas: data
+        })
+      })
+      .catch(err => console.log(err))
   }
 
   render(){

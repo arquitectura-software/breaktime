@@ -80,8 +80,7 @@ class MediaCard extends Component {
     return (
       <Grid item xs={12} sm={12} md={6} spacing={2} key={this.props.card.id}>
         <Card>
-          <CardActionArea>
-            
+          <CardActionArea>       
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2" align="center">
                 {this.props.card.name}

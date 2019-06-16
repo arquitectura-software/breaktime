@@ -8,6 +8,8 @@ import BarraAdmin from './BarraAdmin';
 import Card from './cards/CardUsersAdmin'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import {URLGRAPH} from '../constants'
+import axios from 'axios'
 
 
 const styles = theme => ({
@@ -50,39 +52,31 @@ class AdminUsuarios extends Component{
 
     this.state = {
       isDataLoaded: false,
-      usuarios: [
-        {
-          id: 1,
-          username: "Alejosebasp",
-          name: "Alejandro Sebastian Alejo Patarroyo",
-          documento: "1030677408",
-          correo: "alsalejopa@unal.edu.co",
-          celular: "3213892239"
-        },
-
-        {
-          id: 2,
-          username: "Alejosebasp",
-          name: "Alejandro Sebastian Alejo Patarroyo",
-          documento: "1030677408",
-          correo: "alsalejopa@unal.edu.co",
-          celular: "3213892239"
-        },
-
-        {
-          id: 3,
-          username: "Alejosebasp",
-          name: "Alejandro Sebastian Alejo Patarroyo",
-          documento: "1030677408",
-          correo: "alsalejopa@unal.edu.co",
-          celular: "3213892239"
-        },
-      ]
+      usuarios: []
     };
   }
 
   async componentDidMount(){
     await this.setState( {isDataLoaded: true} );
+    this.cargarDatos();
+  }
+
+  async cargarDatos () {
+    //e.preventDefault();
+
+    await axios({
+      url: URLGRAPH,
+      method: 'post',
+      data: {"query":"query{ getUsers{ id names surnames } }","variables":null}
+    })
+      .then((result) => {
+        let data = result.data.data.getUsers
+
+        this.setState({
+          usuarios: data
+        })
+      })
+      .catch(err => console.log(err))
   }
 
   render(){
