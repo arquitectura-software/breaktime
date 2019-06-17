@@ -66,14 +66,14 @@ class Login extends Component{
     super(props);
     this.state = {
       username: '',
-      passwordH: '',
+      password: '',
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.sendReq = this.sendReq.bind(this);
   }
 
-  async handleInputChange(event){
+  handleInputChange(event){
 
     const target = event.target;
 
@@ -83,37 +83,22 @@ class Login extends Component{
       })
     }
     else if (target.name === "password"){
-      
-      var bcrypt = require('bcryptjs');
-
-      await bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(target.value, salt, function(err, hash) {
-            if (err){
-              console.log(err)
-            }else{
-              hashP = hash
-            }
-        });
-      })
       this.setState({
-        passwordH: hashP
+        password: target.value
       })
-      
-      /*
-      bcrypt.compare(target.value, this.state.passwordH).then((res) => {
-        console.log("respuesta: ", res);
-      });*/ 
+    }      
     }
-  }
 
   sendReq(event){
     event.preventDefault();
     console.log(this.state.username);
     console.log(this.state.passwordH);
     var bcrypt = require('bcryptjs');
-    bcrypt.compare("1234", "$2a$10$dQCH0wbwLqwX1sSj8YYk0OqVPMak/RyyTVat0oSfk1PVa9frgoEJi").then((res) => {
-      console.log("respuesta: ", res);
+    if(this.state.password != null){
+      bcrypt.compare(this.state.password, "$2a$10$GqllmBVmYKkmGIJzrwXfau0t27KNxEZW0KPRy2y/m2IhuYAOXid5y").then((res) => {
+        console.log("respuesta: ", res);
     });
+  }
   }
 
   render(){
