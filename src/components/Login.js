@@ -58,14 +58,62 @@ const styles = theme => ({
 
 })
 
+let hashP = '123456';
 
 class Login extends Component{
 
   constructor(props){
     super(props);
     this.state = {
-
+      username: '',
+      passwordH: '',
     }
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.sendReq = this.sendReq.bind(this);
+  }
+
+  async handleInputChange(event){
+
+    const target = event.target;
+
+    if (target.name === "username"){
+      this.setState({
+        username: target.value
+      })
+    }
+    else if (target.name === "password"){
+      
+      var bcrypt = require('bcryptjs');
+
+      await bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(target.value, salt, function(err, hash) {
+            if (err){
+              console.log(err)
+            }else{
+              hashP = hash
+            }
+        });
+      })
+      this.setState({
+        passwordH: hashP
+      })
+      
+      /*
+      bcrypt.compare(target.value, this.state.passwordH).then((res) => {
+        console.log("respuesta: ", res);
+      });*/ 
+    }
+  }
+
+  sendReq(event){
+    event.preventDefault();
+    console.log(this.state.username);
+    console.log(this.state.passwordH);
+    var bcrypt = require('bcryptjs');
+    bcrypt.compare("1234", "$2a$10$dQCH0wbwLqwX1sSj8YYk0OqVPMak/RyyTVat0oSfk1PVa9frgoEJi").then((res) => {
+      console.log("respuesta: ", res);
+    });
   }
 
   render(){
@@ -89,10 +137,12 @@ class Login extends Component{
                   margin="normal"
                   required
                   fullWidth
+                  type="username"
                   id="username"
                   label="Usuario"
                   name="username"
                   autoFocus
+                  onChange={this.handleInputChange}
                 />
                 <TextField
                   variant="outlined"
@@ -103,7 +153,8 @@ class Login extends Component{
                   id="password"
                   label="Contraseña"
                   name="password"
-                />
+                  onChange={this.handleInputChange}
+                />              
                 
                 <Grid container justify="flex-end">
                   <FormControlLabel
@@ -117,8 +168,9 @@ class Login extends Component{
                     fullWidth
                     variant="contained"
                     color="primary"
-                    className={classes.submit}>
-                    Iniciar sesión
+                    className={classes.submit}
+                    onClick={this.sendReq}>
+                    Iniciar sesión                    
                   </Button>
                   </Link>
 
