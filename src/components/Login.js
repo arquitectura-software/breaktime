@@ -107,23 +107,33 @@ class Login extends Component{
       this.setState({
         hash: hash
       })
-       this.sendReq()
+      this.sendReq()
     }
   }
 
   async sendReq() {
+    const axios = require("axios")
 
-    await axios({
-      url: URLGRAPH,
-      method: 'post',
-      data: {"query":"query{ getDestinations{ id name weather description timezone landingtime boardingtime } }","variables":null}
-    })
-      .then((result) => {
-        let data = result.data.data.getDestinations
+    axios.post(URLGRAPH, {
+      query : `mutation{
+        login(credentials: {
+          username:"${this.state.username}",
+          password:"${this.state.hash}"
+        })
+      }`
+    }).then((result) => {
+        let data = result.data.data.login
 
         this.setState({
           token: data
         })
+
+        if(this.state.token == "Usuario no autenticado."){
+          alert(this.state.token)
+        }else{
+          this.props.history.push("/editar_destino");
+        }
+
         console.log(this.state.token)
       })
       .catch(err => console.log(err))
