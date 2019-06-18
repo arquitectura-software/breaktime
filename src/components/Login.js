@@ -58,7 +58,6 @@ const styles = theme => ({
 
 })
 
-let hashP = '123456';
 
 class Login extends Component{
 
@@ -67,6 +66,7 @@ class Login extends Component{
     this.state = {
       username: '',
       password: '',
+      hash: '',
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -92,13 +92,18 @@ class Login extends Component{
   sendReq(event){
     event.preventDefault();
     console.log(this.state.username);
-    console.log(this.state.passwordH);
-    var bcrypt = require('bcryptjs');
+    var md5 = require('md5');
+
     if(this.state.password != null){
-      bcrypt.compare(this.state.password, "$2a$10$GqllmBVmYKkmGIJzrwXfau0t27KNxEZW0KPRy2y/m2IhuYAOXid5y").then((res) => {
-        console.log("respuesta: ", res);
-    });
-  }
+      console.log(this.state.password)
+      let hash = md5(this.state.password)
+      console.log(hash)
+
+      this.setState({
+        hash: hash
+      })
+
+    }
   }
 
   render(){
