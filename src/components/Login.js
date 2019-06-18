@@ -15,6 +15,9 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
 
+import {URLGRAPH} from '../constants'
+import axios from 'axios'
+
 function MadeWithLove() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -67,9 +70,11 @@ class Login extends Component{
       username: '',
       password: '',
       hash: '',
+      token: '',
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.hash = this.hash.bind(this);
     this.sendReq = this.sendReq.bind(this);
   }
 
@@ -85,11 +90,11 @@ class Login extends Component{
     else if (target.name === "password"){
       this.setState({
         password: target.value
-      })
-    }      
+        })
+      }      
     }
 
-  sendReq(event){
+  hash(event){
     event.preventDefault();
     console.log(this.state.username);
     var md5 = require('md5');
@@ -102,9 +107,29 @@ class Login extends Component{
       this.setState({
         hash: hash
       })
-
+       this.sendReq()
     }
   }
+
+  async sendReq() {
+
+    await axios({
+      url: URLGRAPH,
+      method: 'post',
+      data: {"query":"query{ getDestinations{ id name weather description timezone landingtime boardingtime } }","variables":null}
+    })
+      .then((result) => {
+        let data = result.data.data.getDestinations
+
+        this.setState({
+          token: data
+        })
+        console.log(this.state.token)
+      })
+      .catch(err => console.log(err))
+  }
+
+
 
   render(){
     const { classes } = this.props;
@@ -153,16 +178,16 @@ class Login extends Component{
                   />
 
                 </Grid>
-                <Link to="/events" className={classes.submit}>
+
+                
                   <Button
                     fullWidth
                     variant="contained"
                     color="primary"
                     className={classes.submit}
-                    onClick={this.sendReq}>
+                    onClick={this.hash}>
                     Iniciar sesión                    
                   </Button>
-                  </Link>
 
                 <Grid container>
                   <Grid item xs>
