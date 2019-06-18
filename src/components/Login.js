@@ -118,7 +118,7 @@ class Login extends Component{
       query : `mutation{
         login(credentials: {
           username:"${this.state.username}",
-          password:"${this.state.hash}"
+          password:"${this.state.password}"
         })
       }`
     }).then((result) => {
@@ -128,10 +128,10 @@ class Login extends Component{
           token: data
         })
 
-        if(this.state.token == "Usuario no autenticado."){
+        if(this.state.token === "Usuario no autenticado."){
           alert(this.state.token)
         }else{
-          this.props.history.push("/editar_destino");
+          this.props.history.push("/events");
         }
 
         console.log(this.state.token)
