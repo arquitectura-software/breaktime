@@ -51,36 +51,7 @@ class AdminDestinos extends Component{
 
     this.state = {
       isDataLoaded: false,
-      cards: [
-        {
-          nombre: "Cartagena",
-          clima: "30 °C",
-          descripcion: "Descripción de la ciudad",
-          horarioDesembarque: "12:30",
-          horarioEmbarque: "8:00"
-        },
-        {
-          nombre: "Cartagena",
-          clima: "30 °C",
-          descripcion: "Reservar",
-          horarioDesembarque: "Ver más",
-          horarioEmbarque: "9:00"
-        },
-        {
-          nombre: "Cartagena",
-          clima: "30 °C",
-          descripcion: "Reservar",
-          horarioDesembarque: "Ver más",
-          horarioEmbarque: ""
-        },
-        {
-          nombre: "Cartagena",
-          clima: "30 °C",
-          descripcion: "Reservar",
-          horarioDesembarque: "Ver más",
-          horarioEmbarque: ""
-        },
-      ]
+      cards: []
     }
   }
 
@@ -119,13 +90,13 @@ class AdminDestinos extends Component{
       cards: newdata
     })
 
-    }
+  }
 
   render(){
 
     let cards = this.state.cards.map(card => {
       return (       
-          <Card card={card}>
+          <Card key={card.id} card={card}>
           </Card>
       )
     })

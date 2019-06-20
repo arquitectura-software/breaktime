@@ -72,8 +72,7 @@ class CardDestinos extends Component {
               {this.props.card.weather}
             </Typography>
             <Typography variant="body2" align="justify" color="textSecondary" className={classes.description} component="p">
-              {this.props.card.description}
-              
+              {this.props.card.description.length >=50 ? this.props.card.description.substring(0,250)+"..." : this.props.card.description}
             </Typography>
             
             <Grid item xs={12} >
