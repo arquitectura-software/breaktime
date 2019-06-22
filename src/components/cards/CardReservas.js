@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid' 
-import DialogEliminar from '../DialogEliminar';
+import DialogEliminar from '../dialogs/DialogEliminar';
 
 const styles = theme => ({
   texto: {

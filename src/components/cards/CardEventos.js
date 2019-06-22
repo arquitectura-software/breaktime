@@ -6,11 +6,11 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid' 
-import DialogVerMas from '../DialogVerMas'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
-import DialogReservar from '../DialogReservar';
-import DialogEliminar from '../DialogEliminar';
+import DialogReservar from '../dialogs/DialogReservar';
+import DialogEliminar from '../dialogs/DialogEliminar';
+import DialogVerMas from '../dialogs/DialogVerMas'
 
 const styles = theme => ({
   texto: {

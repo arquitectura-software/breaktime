@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
 import CardActions from '@material-ui/core/CardActions';
-import DialogEliminar from '../DialogEliminar';
+import DialogEliminar from '../dialogs/DialogEliminar';
 
 const styles = theme => ({
     media: {

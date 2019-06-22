@@ -8,9 +8,9 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid' 
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
-import DialogReservar from '../DialogReservar';
-import DialogEliminar from '../DialogEliminar';
-import DialogVerMas from '../DialogVerMas'
+import DialogReservar from '../dialogs/DialogReservar';
+import DialogEliminar from '../dialogs/DialogEliminar';
+import DialogVerMas from '../dialogs/DialogVerMasPromos'
 
 const styles = theme => ({
   texto: {
@@ -90,26 +90,23 @@ class CardPromos extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <Grid item xs={12} sm={12} md={6} key={this.props.card.id}>
+      <Grid item xs={12} sm={12} md={6} key={this.props.card.id_promocion}>
         <Card>
           <CardActionArea>
             
             <CardContent>
-              <Typography gutterBottom variant="h5" component="h2" align="center">
-                {this.props.card.nombreTienda}
+              <Typography gutterBottom color="secondary" variant="h5" component="h2" align="center">
+                {this.props.card.nombre_tienda}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p" className={classes.descripcion}>
-                {this.props.card.description.length >=50 ? this.props.card.description.substring(0,250)+"..." : this.props.card.description}
+                {this.props.card.categoria}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p" className={classes.descripcion}>
+                {this.props.card.descripcion}
               </Typography>
               <Typography gutterBottom variant="subtitle2" component="h2">
-                Inicia: {this.props.card.fechaInicio}
-              </Typography>
-              <Typography gutterBottom variant="subtitle2" component="h2">
-                Finaliza: {this.props.card.fechaFin}
-              </Typography>
-              <Typography gutterBottom variant="subtitle2" component="h2">
-                Ubicada en {this.props.card.ubicacion}
-              </Typography>
+                Ubicada en (piso-local): {this.props.card.ubicacion}
+              </Typography>              
             </CardContent>
           </CardActionArea>
           <CardActions>
