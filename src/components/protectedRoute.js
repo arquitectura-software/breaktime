@@ -6,9 +6,10 @@ export const ProtectedRoute = ({component: Component, ...rest}) => {
     return(
         <Route {...rest} 
             render={(props) => {
-                if(auth.isAuthenticated){
+                if(auth.isAuthenticated()){
                     return <Component {...props}/>
                 }else{
+                    console.log("asdflj")
                     return <Redirect to={
                         {
                             pathname: "/",
@@ -16,6 +17,7 @@ export const ProtectedRoute = ({component: Component, ...rest}) => {
                                 from: props.location
                             }
                         }
+                        
                     }/>
                 }
             }

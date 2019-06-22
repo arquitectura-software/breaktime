@@ -136,8 +136,7 @@ class Login extends Component{
           
           auth.login(() => {
             this.props.history.push("/events")
-          }
-          
+          }         
         
           )
           
