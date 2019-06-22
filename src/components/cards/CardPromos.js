@@ -98,7 +98,7 @@ class CardPromos extends Component {
               <Typography gutterBottom color="secondary" variant="h5" component="h2" align="center">
                 {this.props.card.nombre_tienda}
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p" className={classes.descripcion}>
+              <Typography variant="body2" color="textPrimary" component="p" className={classes.descripcion}>
                 {this.props.card.categoria}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p" className={classes.descripcion}>
