@@ -1,9 +1,9 @@
 import React from 'react'
-import { Route, Redirect, Switch, BrowserRouter } from 'react-router-dom'
-import ScrollToTop from './components/ScrollTop'
+import { Route, Switch } from 'react-router-dom'
 
 //Routes
 import Login from './components/Login'
+import Register from './components/Register'
 import Events from './components/Events'
 import Diary from './components/Diary'
 import Promos from './components/Promos'
@@ -32,7 +32,8 @@ import { AdminRoute } from './components/adminRoute'
 
 export default props => (
         <Switch>
-            <Route exact path="/" component={Login}/> 
+            <Route exact path="/" component={Login}/>
+            <Route exact path="/register" component={Register}/>  
 
             <ProtectedRoute path="/events" component={Events}/>
             <ProtectedRoute path="/diary" component={Diary}/>

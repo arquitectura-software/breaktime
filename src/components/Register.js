@@ -3,35 +3,13 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import { Link } from 'react-router-dom';
-import LinkUI from '@material-ui/core/Link'
 import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
 
-import auth from './auth'
-
-import {URLGRAPH} from '../constants'
-
-let jwt = window.localStorage.getItem("token");
-
-function MadeWithLove() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Proyecto realizado para Arquitectura de Software mediante '}
-      <LinkUI color="inherit" href="https://material-ui.com/">
-        Material-UI
-      </LinkUI>
-      {'.'}
-    </Typography>
-  );
-}
 
 const styles = theme => ({
   root: {
@@ -69,21 +47,16 @@ const styles = theme => ({
 })
 
 
-class Login extends Component{
+class Register extends Component{
 
   constructor(props){
     super(props);
     this.state = {
       username: '',
       password: '',
-      hash: '',
-      token: '',
-      isAuth: false,
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.hash = this.hash.bind(this);
-    this.sendReq = this.sendReq.bind(this);
   }
 
   handleInputChange(event){
@@ -102,54 +75,6 @@ class Login extends Component{
       }      
     }
 
-  hash(event){
-    event.preventDefault();
-    console.log(this.state.username);
-    var md5 = require('md5');
-
-    if(this.state.password != null){
-      console.log(this.state.password)
-      let hash = md5(this.state.password)
-      console.log(hash)
-
-      this.setState({
-        hash: hash
-      })
-      this.sendReq()
-    }
-  }
-
-  async sendReq() {
-    const axios = require("axios")
-
-    axios.post(URLGRAPH, {
-      query : `mutation{
-        login(credentials: {
-          username:"${this.state.username}",
-          password:"${this.state.password}"
-        })
-      }`
-    }).then((result) => {
-        jwt = result.data.data.login
-        console.log(result.data)
-
-        if(jwt === "Usuario no autenticado."){
-          alert(jwt)
-        }else{
-          window.localStorage.setItem("token", jwt)
-          
-          auth.login(() => {
-            this.props.history.push("/events")
-          }         
-        
-          )
-          
-        }
-        console.log(jwt)
-      })
-      .catch(err => console.log(err))
-  }
-
 
   render(){
     const { classes } = this.props;
@@ -164,7 +89,7 @@ class Login extends Component{
                 <LockOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
-                Inicio de sesión
+                Registro
               </Typography>
               <form className={classes.form} noValidate>
                 <TextField
@@ -191,12 +116,6 @@ class Login extends Component{
                   onChange={this.handleInputChange}
                 />              
                 
-                <Grid container justify="flex-end">
-                  <FormControlLabel
-                    control={<Checkbox value="remember" color="primary" />}
-                    label="Recuérdame"
-                  />
-                </Grid>
                 
                   <Button
                     fullWidth
@@ -204,34 +123,8 @@ class Login extends Component{
                     color="secondary"
                     className={classes.submit}
                     onClick={this.hash}>
-                    Iniciar sesión                    
+                    Registrar usuario                    
                   </Button>
-
-
-                <Grid container>
-                  <Grid item xs>
-                  </Grid>
-                  <Grid item>
-                    <a href="https://github.com/Nigogu" variant="body2">
-                      {"¿No puede ingresar? ¡Podemos ayudarle!"}
-                    </a>
-                  </Grid>
-                </Grid>
-
-                <Link className={classes.textoButton} to="/Register">
-                <Button
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}>                    
-                    Registro                  
-                  </Button>
-                  </Link>
-
-                <Box mt={5}>
-                  <MadeWithLove />
-                </Box>
-
 
               </form>
             </div>
@@ -241,4 +134,4 @@ class Login extends Component{
   }
 }
 
-export default withRouter(withStyles(styles)(Login));
+export default withRouter(withStyles(styles)(Register));

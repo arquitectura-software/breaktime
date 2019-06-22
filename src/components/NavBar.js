@@ -18,7 +18,6 @@ import { Link, withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid' 
 import { withStyles } from '@material-ui/styles';
 
-import Login from './Login'
 import auth from './auth';
 
 const drawerWidth = 240;

@@ -7,7 +7,6 @@ import EventIcon from '@material-ui/icons/Event';
 import RoomIcon from '@material-ui/icons/Room'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import ArtTrackIcon from '@material-ui/icons/ArtTrack'
-import HomeIcon from '@material-ui/icons/Home'
 import { withStyles } from '@material-ui/styles';
 
 
