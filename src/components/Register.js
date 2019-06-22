@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
@@ -42,6 +42,9 @@ const styles = theme => ({
   textoButton: {
     color: 'white',
     textDecorationLine: 'none',
+  },
+  spaceDate: {
+    marginTop: theme.spacing(2)
   },
 
 })
@@ -82,16 +85,18 @@ class Register extends Component{
     return(
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
-          <Grid item xs={false} sm={7} md={8} className={classes.image} />
-          <Grid item xs={12} sm={5} md={4} component={Paper} elevation={6} square>
+          <Grid item xs={12} component={Paper} elevation={6} square>
             <div className={classes.paper}>
               <Avatar className={classes.avatar}>
-                <LockOutlinedIcon />
+                <PersonAddIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
                 Registro
               </Typography>
               <form className={classes.form} noValidate>
+
+            <Grid container spacing={3} xs={12} justify="center">
+              <Grid item xs={12} sm={5}>
                 <TextField
                   variant="outlined"
                   margin="normal"
@@ -104,19 +109,80 @@ class Register extends Component{
                   autoFocus
                   onChange={this.handleInputChange}
                 />
+              </Grid>
+
+              <Grid item xs={12} sm={5}>
                 <TextField
                   variant="outlined"
                   margin="normal"
                   required
                   fullWidth
-                  type="password"
-                  id="password"
-                  label="Contraseña"
-                  name="password"
+                  label="Nombres"
                   onChange={this.handleInputChange}
-                />              
+                />
+              </Grid>
+
+
+              <Grid item xs={12} sm={5}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  label="Apellidos"
+                  onChange={this.handleInputChange}
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={5}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  label="Identificación"
+                  onChange={this.handleInputChange}
+                />
+              </Grid>
                 
+              <Grid item xs={12} sm={5}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  label="Correo"
+                  onChange={this.handleInputChange}
+                />
+                </Grid>
                 
+                <Grid item xs={12} sm={5}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  label="Celular"
+                  onChange={this.handleInputChange}
+                />
+                </Grid>
+
+              <Grid item xs={12} sm={5} className={classes.spaceDate}>
+                <TextField
+                      fullWidth
+                      id="fecha"
+                      label="Fecha de nacimiento"
+                      type="date"
+                      defaultValue="2019-06-14"
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                    />
+                    </Grid>
+
+                    
+                    <Grid item xs={12} sm={5}>
                   <Button
                     fullWidth
                     variant="contained"
@@ -125,7 +191,10 @@ class Register extends Component{
                     onClick={this.hash}>
                     Registrar usuario                    
                   </Button>
-
+                  </Grid>
+                  </Grid>
+                    
+              
               </form>
             </div>
           </Grid>
