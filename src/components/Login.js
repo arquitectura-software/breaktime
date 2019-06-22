@@ -15,8 +15,12 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
 
+import auth from './auth'
+
 import {URLGRAPH} from '../constants'
 import axios from 'axios'
+
+let jwt = window.localStorage.getItem("token");
 
 function MadeWithLove() {
   return (
@@ -71,6 +75,7 @@ class Login extends Component{
       password: '',
       hash: '',
       token: '',
+      isAuth: false,
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -122,23 +127,25 @@ class Login extends Component{
         })
       }`
     }).then((result) => {
-        let data = result.data.data.login
+        jwt = result.data.data.login
 
-        this.setState({
-          token: data
-        })
-
-        if(this.state.token === "Usuario no autenticado."){
-          alert(this.state.token)
+        if(jwt === "Usuario no autenticado."){
+          alert(jwt)
         }else{
-          this.props.history.push("/events");
+          window.localStorage.setItem("token", jwt)
+          
+          auth.login(() => {
+            this.props.history.push("/events")
+          }
+          
+        
+          )
+          
         }
-
-        console.log(this.state.token)
+        console.log(jwt)
       })
       .catch(err => console.log(err))
   }
-
 
 
   render(){
@@ -186,9 +193,7 @@ class Login extends Component{
                     control={<Checkbox value="remember" color="primary" />}
                     label="Recuérdame"
                   />
-
                 </Grid>
-
                 
                   <Button
                     fullWidth

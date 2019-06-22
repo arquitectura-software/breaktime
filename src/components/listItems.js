@@ -27,15 +27,6 @@ class ListItems extends Component {
 
     return(
       <div>
-      <Link className={classes.texto} to="/">
-          <ListItem button >
-            <ListItemIcon >
-              <HomeIcon />
-            </ListItemIcon>
-            <ListItemText className={classes.texto} primary="Inicio" />
-          </ListItem>
-          </Link>
-
           <Link className={classes.texto} to="/events">
           <ListItem button>
             <ListItemIcon>
