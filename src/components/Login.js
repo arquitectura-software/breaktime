@@ -62,6 +62,10 @@ const styles = theme => ({
     margin: theme.spacing(3, 0, 2),
     textDecorationLine: 'none',
   },
+  textoButton: {
+    color: 'white',
+    textDecorationLine: 'none',
+  },
 
 })
 
@@ -128,6 +132,7 @@ class Login extends Component{
       }`
     }).then((result) => {
         jwt = result.data.data.login
+        console.log(result.data)
 
         if(jwt === "Usuario no autenticado."){
           alert(jwt)
@@ -197,11 +202,12 @@ class Login extends Component{
                   <Button
                     fullWidth
                     variant="contained"
-                    color="primary"
+                    color="secondary"
                     className={classes.submit}
                     onClick={this.hash}>
                     Iniciar sesión                    
                   </Button>
+
 
                 <Grid container>
                   <Grid item xs>
@@ -212,9 +218,22 @@ class Login extends Component{
                     </a>
                   </Grid>
                 </Grid>
+
+                <Link className={classes.textoButton} to="/Registro">
+                <Button
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}>                    
+                    Registro                  
+                  </Button>
+                  </Link>
+
                 <Box mt={5}>
                   <MadeWithLove />
                 </Box>
+
+
               </form>
             </div>
           </Grid>

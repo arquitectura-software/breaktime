@@ -184,9 +184,8 @@ class NavBar extends Component{
                 <Button onClick={() => 
                 auth.logout(() => {
                   this.props.history.push("/")
-                })
-                
-                }><p className ={classes.textoButton}>Cerrar Sesión</p></Button>
+                })}>
+                  <p className ={classes.textoButton}>Cerrar Sesión</p></Button>
                 
               </Toolbar>
           </AppBar>
