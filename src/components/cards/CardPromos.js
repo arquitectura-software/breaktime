@@ -106,7 +106,10 @@ class CardPromos extends Component {
               </Typography>
               <Typography gutterBottom variant="subtitle2" component="h2">
                 Ubicada en (piso-local): {this.props.card.ubicacion}
-              </Typography>              
+              </Typography>          
+              <Typography gutterBottom variant="subtitle2" component="h2">
+                Finaliza: {this.props.card.fecha_fin}
+              </Typography>    
             </CardContent>
           </CardActionArea>
           <CardActions>

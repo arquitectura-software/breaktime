@@ -54,7 +54,7 @@ class Diary extends Component{
     await axios({
       url: URLGRAPH,
       method: 'post',
-      data: {"query":"query{ getDestinations{ id name weather description timezone landingtime boardingtime } }","variables":null}
+      data: {"query":"query{ getDestinations{ id name weather description timezone landingtime boardingtime cityimage}}","variables":null}
     })
       .then((result) => {
         let data = result.data.data.getDestinations
@@ -64,11 +64,14 @@ class Diary extends Component{
         })
       })
       .catch(err => console.log(err))
+
+    console.log(this.state.cards)
   }
 
   async formatDatos () {
     
     let newdata = this.state.cards
+    
     for (let i = 0; i < newdata.length; i++) {
       newdata[i].landingtime = newdata[i].landingtime.substring(0,10) + " a las " + newdata[i].landingtime.substring(12,16) + "."
       newdata[i].boardingtime = newdata[i].boardingtime.substring(0,10) + " a las " + newdata[i].boardingtime.substring(12,16) + "."     
@@ -76,7 +79,6 @@ class Diary extends Component{
     this.setState({
       cards: newdata
     })
-    console.log(this.state.cards)
   }
 
   render(){
