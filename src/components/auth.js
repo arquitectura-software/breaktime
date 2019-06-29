@@ -31,7 +31,6 @@ class Auth {
     isAuthenticatedAdmin(){
         return this.authenticatedAdmin;
     }
-
 }
 
 export default new Auth()

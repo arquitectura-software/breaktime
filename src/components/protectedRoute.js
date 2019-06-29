@@ -9,7 +9,6 @@ export const ProtectedRoute = ({component: Component, ...rest}) => {
                 if(auth.isAuthenticated()){
                     return <Component {...props}/>
                 }else{
-                    console.log("asdflj")
                     return <Redirect to={
                         {
                             pathname: "/",

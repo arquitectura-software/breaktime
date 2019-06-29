@@ -19,7 +19,9 @@ import auth from './auth'
 
 import {URLGRAPH} from '../constants'
 
+
 let jwt = window.localStorage.getItem("token");
+
 
 function MadeWithLove() {
   return (
@@ -68,7 +70,6 @@ const styles = theme => ({
 
 })
 
-
 class Login extends Component{
 
   constructor(props){
@@ -108,9 +109,7 @@ class Login extends Component{
     var md5 = require('md5');
 
     if(this.state.password != null){
-      console.log(this.state.password)
       let hash = md5(this.state.password)
-      console.log(hash)
 
       this.setState({
         hash: hash
@@ -134,20 +133,32 @@ class Login extends Component{
         console.log(result.data)
 
         if(jwt === "Usuario no autenticado."){
-          alert(jwt)
+          alert("Inicio de sesión incorrecto. Revise su usuario y contraseña.")
         }else{
+          if(result.data.message === "Usuario autenticado."){
+            window.localStorage.setItem("token", jwt)
+            window.localStorage.setItem("user", this.state.username)
+          
+            auth.login(() => {
+              this.props.history.push("/events")
+            }         
+            )
+
+        }else if (result.data.message === "Admin autenticado."){
           window.localStorage.setItem("token", jwt)
+          window.localStorage.setItem("user", this.state.username)
           
-          auth.login(() => {
-            this.props.history.push("/events")
-          }         
-        
-          )
-          
+            auth.loginAdmin(() => {
+              this.props.history.push("/admin")
+            }         
+            )
+
+          }          
         }
         console.log(jwt)
       })
       .catch(err => console.log(err))
+      alert("Ha ocurrido un error contactándose con el servidor.")
   }
 
 
