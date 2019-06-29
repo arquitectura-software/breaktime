@@ -25,9 +25,7 @@ import CheckoutDestinos from './components/CheckoutDestinos'
 import CheckoutTiendas from './components/CheckoutTiendas'
 
 import { ProtectedRoute } from './components/protectedRoute'
-import { AdminRoute } from './components/adminRoute'
-
-
+import { ProtectedRouteAdmin } from './components/protectedRouteAdmin'
 
 
 export default props => (
@@ -40,20 +38,20 @@ export default props => (
             <ProtectedRoute path="/promos" component={Promos}/>
             <ProtectedRoute path="/reservations" component={Reservations}/>
 
-            <AdminRoute exact path="/admin" component={Admin}/>
-            <AdminRoute path="/admin_eventos" component={AdminEventos}/>
-            <AdminRoute path="/admin_promociones" component={AdminPromociones}/>
-            <AdminRoute path="/admin_reservas" component={AdminReservas}/>
-            <AdminRoute path="/admin_destinos" component={AdminDestinos}/>
-            <AdminRoute path="/admin_usuarios" component={AdminUsuarios}/>
-            <AdminRoute path="/admin_tiendas" component={AdminTiendas}/>
+            <ProtectedRouteAdmin exact path="/admin" component={Admin}/>
+            <ProtectedRouteAdmin path="/admin_eventos" component={AdminEventos}/>
+            <ProtectedRouteAdmin path="/admin_promociones" component={AdminPromociones}/>
+            <ProtectedRouteAdmin path="/admin_reservas" component={AdminReservas}/>
+            <ProtectedRouteAdmin path="/admin_destinos" component={AdminDestinos}/>
+            <ProtectedRouteAdmin path="/admin_usuarios" component={AdminUsuarios}/>
+            <ProtectedRouteAdmin path="/admin_tiendas" component={AdminTiendas}/>
 
-            <AdminRoute path="/crear_evento" component={CheckoutEvents}/>
-            <AdminRoute path="/crear_promo" component={CheckoutPromos}/>
-            <AdminRoute path="/crear_reserva" component={CheckoutReservas}/>
-            <AdminRoute path="/crear_destino" component={CheckoutDestinos}/>
-            <AdminRoute path="/crear_usuario" component={CheckoutUsuarios}/>
-            <AdminRoute path="/crear_tienda" component={CheckoutTiendas}/>
+            <ProtectedRouteAdmin path="/crear_evento" component={CheckoutEvents}/>
+            <ProtectedRouteAdmin path="/crear_promo" component={CheckoutPromos}/>
+            <ProtectedRouteAdmin path="/crear_reserva" component={CheckoutReservas}/>
+            <ProtectedRouteAdmin path="/crear_destino" component={CheckoutDestinos}/>
+            <ProtectedRouteAdmin path="/crear_usuario" component={CheckoutUsuarios}/>
+            <ProtectedRouteAdmin path="/crear_tienda" component={CheckoutTiendas}/>
 
             <Route path="*" component={() => "404 NOT FOUND"} /> 
 
