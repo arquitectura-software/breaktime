@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid' 
-import DialogEliminar from '../DialogEliminar';
+import DialogEliminar from '../dialogs/DialogEliminar';
 
 const styles = theme => ({
   texto: {
@@ -50,24 +50,27 @@ class CardReservas extends Component {
     const { classes } = this.props;
 
     return ( 
-      <Grid item xs={12} sm={6} md={4} key={this.props.card.id}>
-        <Card >
+      <Grid item xs={12} sm={6} md={4}>
+        <Card>
           <CardActionArea>              
             <CardContent>
-              <Typography gutterBottom variant="h5" component="h2" align="center">
-                {this.props.card.title}
+              <Typography gutterBottom variant="h5" color="secondary" component="h2" align="center">
+                {this.props.card.name_event}
               </Typography>
-              <Typography gutterBottom variant="subtitle1" component="h2" className={classes.texto}>
-                {this.props.card.tipo}
+              <Typography gutterBottom variant="subtitle2" color="textSecondary" component="h2" className={classes.texto}>
+                {this.props.card.descripcion}
               </Typography>
-              <Typography gutterBottom variant="subtitle2" component="h2" className={classes.texto}>
-                Fecha y hora: {this.props.card.date}
+              <Typography variant="body2" component="p" className={classes.descripcion}>
+                {this.props.card.quantity} reservas.
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p" className={classes.descripcion}>
-                {this.props.card.description.length >=50 ? this.props.card.description.substring(0,250)+"..." : this.props.card.description}
+              <Typography gutterBottom variant="body2" component="h2" className={classes.texto}>
+                Para el: {this.props.card.date}
               </Typography>
-              <Typography gutterBottom variant="subtitle2" component="h2" className={classes.texto}>
-                Lugar: {this.props.card.ubicacion}
+              <Typography variant="body2"  component="p" className={classes.descripcion}>
+                En: {this.props.card.location}
+              </Typography>
+              <Typography gutterBottom variant="body2" component="h2" className={classes.texto}>
+                A nombre de: {this.props.card.name}
               </Typography>
             </CardContent>
           </CardActionArea>

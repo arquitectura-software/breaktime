@@ -84,7 +84,6 @@ class AdminUsuarios extends Component{
     this.setState({
       usuariosFusion: nuevosUsuarios,
     })
-    console.log(this.state.usuariosFusion)
   }
 
   async cargarDatos () {

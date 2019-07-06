@@ -10,7 +10,7 @@ import { withStyles } from '@material-ui/core';
 
 const styles = theme => ({
     media: {
-        paddingTop: '25.25%', // 16:9
+        paddingTop: '60%', // 16:9
     },
     text: {
       marginTop: "1em"
@@ -29,8 +29,8 @@ class CardDestinos extends Component {
         <Card >
           <CardActionArea>
             <CardMedia className={classes.media} 
-            image="http://primicia.com.co/wp-content/uploads/2019/02/Cartagena_Colombia_cs-b9a2c77a9fe3.jpg" 
-            title="Cartagena"/>
+            image = {this.props.card.cityimage}
+            title = {this.props.card.name}/>
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
                 {this.props.card.name}
