@@ -3,15 +3,17 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { Link, withRouter } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
 import BarraAdmin from './BarraAdmin';
-import Grid from '@material-ui/core/Grid' 
+import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container';
 import Card from './cards/CardEventos'
 import EventFilters from './EventFilters'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import axios from 'axios';
+import {URLGRAPH} from '../constants';
 
 const styles = theme => ({
-  
+
   root: {
     display: 'flex',
     flex: '1',
@@ -24,7 +26,7 @@ const styles = theme => ({
   },
 
   appBarSpacer: {
-    marginBottom: theme.spacing(12) 
+    marginBottom: theme.spacing(12)
   },
 
   fab: {
@@ -94,7 +96,12 @@ class AdminEventos extends Component{
       ]
     }
   }
-
+  //peticion axios para hacer las 4 operaciones CRUD usando GraphiQL
+  async cargarDatos(){
+    await axios({url: URLGRAPH,
+    method: 'post',
+    data:{}})
+  }
   async componentDidMount(){
     await this.setState( {isDataLoaded: true} );
   }
@@ -103,10 +110,10 @@ class AdminEventos extends Component{
     const { classes } = this.props;
     return(
       <div className={classes.root}>
-        <CssBaseline/> 
+        <CssBaseline/>
         <BarraAdmin/>
       <main className={classes.content}>
-            <div className={classes.appBarSpacer} /> 
+            <div className={classes.appBarSpacer} />
               <Container maxWidth="lg" direction="row" className={classes.container}>
                 <Grid container direction="row" justify="flex-start" alignItems="flex-start">
                   <Grid item xs={12} sm={4} md={3}><Container><EventFilters/></Container></Grid>
@@ -121,7 +128,7 @@ class AdminEventos extends Component{
               </Container>
               <Link className={classes.textoButton} to="/crear_evento">
               <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
-                <AddIcon />            
+                <AddIcon />
               </Fab>
               </Link>
         </main>
