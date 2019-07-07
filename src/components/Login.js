@@ -123,14 +123,13 @@ class Login extends Component{
 
     axios.post(URLGRAPH, {
       query : `mutation{
-        login(credentials: {
-          username:"${this.state.username}",
+        loginUser(credentials: {
+          email:"${this.state.username}",
           password:"${this.state.password}"
         })
       }`
     }).then((result) => {
-        jwt = result.data.data.login
-        console.log(result.data)
+        jwt = result.data.data.loginUser
 
         if(jwt === "Usuario no autenticado."){
           alert("Inicio de sesión incorrecto. Revise su usuario y contraseña.")
@@ -138,6 +137,8 @@ class Login extends Component{
           if(result.data.message === "Usuario autenticado."){
             window.localStorage.setItem("token", jwt)
             window.localStorage.setItem("user", this.state.username)
+
+            console.log("TOKEN: ", window.localStorage.getItem("token"));
           
             auth.login(() => {
               this.props.history.push("/events")
@@ -159,6 +160,22 @@ class Login extends Component{
       })
       .catch(err => console.log(err))
       alert("Ha ocurrido un error contactándose con el servidor.")
+
+    /* axios.post(URLGRAPH, {
+      query: `query{
+        userByUsername(username: "mickney@gmail.com"){
+          id
+          uname
+          surname
+          email
+        }
+      }`
+    }).then((result) => {
+      let data = result.data.data.userByUsername
+      //console.log(data);
+      //window.localStorage.setItem("userData", data);
+      //window.localStorage.getItem("userData");
+    })*/
   }
 
 

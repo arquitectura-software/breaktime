@@ -6,7 +6,6 @@ import Card from './cards/CardReservas'
 import Loading from './Loading'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
-
 import { CssBaseline, Typography } from '@material-ui/core';
 
 const styles = theme => ({
