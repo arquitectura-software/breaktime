@@ -123,9 +123,9 @@ class Reservations extends Component{
 
     for (let i = 0; i < reservas.length; i++){
       for (let j = 0; j < usuarios.length; j++){
-        if (reservas[i].id_event === usuarios[j].id){
+        if (reservas[i].id_user === usuarios[j].id){
           aux.push({id_reserva: reservas[i].id, id_event: reservas[i].id_event,
-                    quantity: reservas[i].quantity, name: usuarios[j].names + usuarios[j].surnames})
+                    quantity: reservas[i].quantity, name: usuarios[j].uname + usuarios[j].surname})
         }
       }
     }
