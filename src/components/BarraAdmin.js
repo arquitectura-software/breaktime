@@ -15,6 +15,7 @@ import clsx from 'clsx';
 import { Link, withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/styles';
+import auth from './auth'
 
 const drawerWidth = 240;
 const styles = theme => ({
@@ -168,9 +169,10 @@ class BarraAdmin extends Component{
                 </Link>
               </Typografy>
           
-                  <Link className={classes.textoButton} to="/">
-                    <Button><p className ={classes.textoButton}>Cerrar Sesión</p></Button>
-                  </Link>
+              <Button className={classes.textoButton} onClick={() => 
+                auth.logoutAdmin(() => {
+                  this.props.history.push("/")
+                })}>Cerrar Sesión</Button>
               </Toolbar>
           </AppBar>
 

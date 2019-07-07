@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
 import CardActions from '@material-ui/core/CardActions';
-import DialogEliminar from '../DialogEliminar';
+import DialogEliminar from '../dialogs/DialogEliminar';
 
 const styles = theme => ({
     media: {
@@ -61,8 +61,8 @@ class CardDestinos extends Component {
       <Grid item xs={12} sm={6} md={4}>
       <Card>
           <CardMedia className={classes.media} 
-          image="http://primicia.com.co/wp-content/uploads/2019/02/Cartagena_Colombia_cs-b9a2c77a9fe3.jpg" 
-          title="Cartagena"
+          image = {this.props.card.cityimage}
+          title = {this.props.card.name}
           />
           <CardContent >
             <Typography gutterBottom variant="h5" component="h2">
@@ -72,8 +72,7 @@ class CardDestinos extends Component {
               {this.props.card.weather}
             </Typography>
             <Typography variant="body2" align="justify" color="textSecondary" className={classes.description} component="p">
-              {this.props.card.description}
-              
+              {this.props.card.description.length >=50 ? this.props.card.description.substring(0,250)+"..." : this.props.card.description}
             </Typography>
             
             <Grid item xs={12} >

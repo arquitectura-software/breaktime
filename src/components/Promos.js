@@ -7,7 +7,8 @@ import Loading from './Loading'
 import PromosFilters from './PromosFilters'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
-
+import {URLGRAPH} from '../constants'
+import axios from 'axios'
 import { CssBaseline } from '@material-ui/core';
 
 const styles = theme => ({
@@ -40,50 +41,88 @@ class Promos extends Component{
 
     this.state = {
       isDataLoaded: false,
-      cards: [
-          {
-            nombreTienda: "Tienda 1",
-            description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipisci[ng] velit, sed quia non numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem",
-            fechaInicio: "2019-06-30 08:00:00",
-            fechaFin: "2019-06-31 08:00:00",
-            ubicacion: "Piso 1",
-            button1: "Reservar",
-            button2: "Ver más",
-          },
-          {
-            nombreTienda: "Tienda 2",
-            description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipisci[ng] velit, sed quia non numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem",
-            fechaInicio: "2019-06-31 08:00:00",
-            fechaFin: "2019-07-02 08:00:00",
-            ubicacion: "Piso 2",
-            button1: "Reservar",
-            button2: "Ver más",
-          },
-          {
-            nombreTienda: "Tienda 3",
-            description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipisci[ng] velit, sed quia non numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem",
-            fechaInicio: "2019-07-01 08:00:00",
-            fechaFin: "2019-07-02 16:00:00",
-            ubicacion: "Piso 3",
-            button1: "Reservar",
-            button2: "Ver más",
-          },
-          {
-            nombreTienda: "Tienda 4",
-            description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipisci[ng] velit, sed quia non numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem",
-            fechaInicio: "2019-06-31 18:00:00",
-            fechaFin: "2019-06-31 23:59:00",
-            ubicacion: "Piso 4",
-            button1: "Reservar",
-            button2: "Ver más",
-          }
-      ]
+      promos: [],
+      tiendas: [],
+      cards: []
     }
   }
 
   async componentDidMount(){
     await this.setState( {isDataLoaded: true} );
+    await this.cargarDatos();
+    this.normalizarDatos();
   }
+
+  async cargarDatos () {
+
+    await axios({
+      url: URLGRAPH,
+      method: 'post',
+      data: {"query":"query{ getPromociones{ id_promocion id_tienda descripcion fecha_inicio fecha_fin}}","variables":null}
+    })
+      .then((result) => {
+        let data = result.data.data.getPromociones
+        this.setState({
+          promos: data
+        })
+      })
+      .catch(err => console.log(err))
+    
+    await axios({
+      url: URLGRAPH,
+      method: 'post',
+      data: {"query":"query{getTiendas{ id_tienda nombre ubicacion categoria}}","variables":null}
+    })
+      .then((result) => {
+        let data = result.data.data.getTiendas
+        this.setState({
+          tiendas: data
+        })
+      })
+      .catch(err => console.log(err))
+  }
+
+  async normalizarDatos () {
+
+    let tiendas = this.state.tiendas;
+    let promos = this.state.promos;
+    let newData = []
+
+    for (let i = 0; i < promos.length; i++){
+      for (let j = 0; j < tiendas.length; j++){
+        if (promos[i].id_tienda === tiendas[j].id_tienda){
+
+          let inicio = promos[i].fecha_inicio.substring(0,10) + " a las " + promos[i].fecha_inicio.substring(12,16) + "."
+          let fin = promos[i].fecha_fin.substring(0,10) + " a las " + promos[i].fecha_fin.substring(12,16) + "." 
+
+          newData.push({id_promocion: promos[i].id_promocion, nombre_tienda: tiendas[j].nombre, 
+                        categoria: tiendas[j].categoria, button1: "Reservar", button2: "Ver más",
+                        ubicacion: tiendas[j].ubicacion, descripcion: promos[i].descripcion,
+                        fecha_inicio: inicio, fecha_fin: fin});
+        }        
+      }
+    }
+
+    this.setState({
+      cards: newData
+    })
+
+    console.log(this.state.cards)
+  }
+
+  async formatDatos () {
+    
+    let newdata = this.state.cards
+    for (let i = 0; i < newdata.length; i++) {
+      newdata[i].landingtime = newdata[i].landingtime.substring(0,10) + " a las " + newdata[i].landingtime.substring(12,16) + "."
+      newdata[i].boardingtime = newdata[i].boardingtime.substring(0,10) + " a las " + newdata[i].boardingtime.substring(12,16) + "."     
+    }
+    this.setState({
+      cards: newdata
+    })
+    console.log(this.state.cards)
+  }
+  
   render(){
         const { classes } = this.props;
 
@@ -94,7 +133,7 @@ class Promos extends Component{
     // first person es para el objeto del component card y el segundo del arrow function
     let cards = this.state.cards.map(card => {
       return (        
-        <Card card={card}/>   
+        <Card key={card.id_promocion} card={card}/>   
       )
     })
     return(   

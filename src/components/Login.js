@@ -5,7 +5,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import { Link } from 'react-router-dom';
 import LinkUI from '@material-ui/core/Link'
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
@@ -13,10 +12,15 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+
+import auth from './auth'
 
 import {URLGRAPH} from '../constants'
-import axios from 'axios'
+
+
+let jwt = window.localStorage.getItem("token");
+
 
 function MadeWithLove() {
   return (
@@ -58,9 +62,12 @@ const styles = theme => ({
     margin: theme.spacing(3, 0, 2),
     textDecorationLine: 'none',
   },
+  textoButton: {
+    color: 'white',
+    textDecorationLine: 'none',
+  },
 
 })
-
 
 class Login extends Component{
 
@@ -71,17 +78,17 @@ class Login extends Component{
       password: '',
       hash: '',
       token: '',
+      isAuth: false,
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.hash = this.hash.bind(this);
     this.sendReq = this.sendReq.bind(this);
   }
 
   handleInputChange(event){
 
     const target = event.target;
-
+    var md5 = require('md5');
     if (target.name === "username"){
       this.setState({
         username: target.value
@@ -89,56 +96,90 @@ class Login extends Component{
     }
     else if (target.name === "password"){
       this.setState({
-        password: target.value
+        password: target.value,
+        hash: md5(target.value)
         })
       }      
     }
-
-  hash(event){
-    event.preventDefault();
-    console.log(this.state.username);
-    var md5 = require('md5');
-
-    if(this.state.password != null){
-      console.log(this.state.password)
-      let hash = md5(this.state.password)
-      console.log(hash)
-
-      this.setState({
-        hash: hash
-      })
-      this.sendReq()
-    }
-  }
 
   async sendReq() {
     const axios = require("axios")
 
     axios.post(URLGRAPH, {
       query : `mutation{
-        login(credentials: {
-          username:"${this.state.username}",
-          password:"${this.state.password}"
-        })
+        loginUser(credentials: {
+          email:"${this.state.username}",
+          password:"${this.state.hash}"
+        }){
+          message
+          token
+        }
       }`
     }).then((result) => {
-        let data = result.data.data.login
+        jwt = result.data.data.loginUser      
 
-        this.setState({
-          token: data
-        })
+        if(jwt.message === "Usuario  no autenticado."){
+          this.sendReqAdmin()
+        }else if(jwt.message === "Usuario autenticado."){
+            window.localStorage.setItem("token", jwt.token.replace(/['"]+/g, ''))
+            window.localStorage.setItem("user", this.state.username)
 
-        if(this.state.token === "Usuario no autenticado."){
-          alert(this.state.token)
-        }else{
-          this.props.history.push("/events");
+            axios.post(URLGRAPH, {
+              query: `query{
+                userByUsername(username: "${this.state.username}"){
+                  id
+                  uname
+                  surname
+                  email
+                }
+              }`
+            }).then((result) => {
+              let data = result.data.data.userByUsername
+              window.localStorage.setItem("idUser", data.id);
+            })
+          
+            auth.login(() => {
+              this.props.history.push("/events")
+              }         
+            )          
         }
-
-        console.log(this.state.token)
       })
       .catch(err => console.log(err))
-  }
+    }
+  
+  
+    async sendReqAdmin() {
+      const axios = require("axios")
+  
+      axios.post(URLGRAPH, {
+        query : `mutation{
+          loginAdmin(credentials: {
+            email:"${this.state.username}",
+            password:"${this.state.hash}"
+          }){
+            message
+            token
+          }
+        }`
+      }).then((result) => {
+          console.log(result)
 
+          jwt = result.data.data.loginAdmin      
+  
+          if(jwt.message === "Usuario  no autenticado."){
+            alert("Inicio de sesión incorrecto. Revise su usuario y contraseña.")
+          }else if(jwt.message === "Admin autenticado."){
+              window.localStorage.setItem("token", jwt.token.replace(/['"]+/g, ''))
+              window.localStorage.setItem("user", this.state.username)
+            
+              auth.loginAdmin(() => {
+                this.props.history.push("/admin")
+                }         
+              )          
+          }
+        })
+        .catch(err => console.log(err))
+      }
 
 
   render(){
@@ -186,18 +227,17 @@ class Login extends Component{
                     control={<Checkbox value="remember" color="primary" />}
                     label="Recuérdame"
                   />
-
                 </Grid>
-
                 
                   <Button
                     fullWidth
                     variant="contained"
-                    color="primary"
+                    color="secondary"
                     className={classes.submit}
-                    onClick={this.hash}>
+                    onClick={this.sendReq}>
                     Iniciar sesión                    
                   </Button>
+
 
                 <Grid container>
                   <Grid item xs>
@@ -208,9 +248,22 @@ class Login extends Component{
                     </a>
                   </Grid>
                 </Grid>
+
+                <Link className={classes.textoButton} to="/Register">
+                <Button
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}>                    
+                    Registro                  
+                  </Button>
+                  </Link>
+
                 <Box mt={5}>
                   <MadeWithLove />
                 </Box>
+
+
               </form>
             </div>
           </Grid>

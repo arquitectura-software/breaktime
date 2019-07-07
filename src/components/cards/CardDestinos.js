@@ -10,9 +10,11 @@ import { withStyles } from '@material-ui/core';
 
 const styles = theme => ({
     media: {
-        paddingTop: '25.25%', // 16:9
+        paddingTop: '60%', // 16:9
     },
-  
+    text: {
+      marginTop: "1em"
+    }
 })
 
 class CardDestinos extends Component {
@@ -23,34 +25,36 @@ class CardDestinos extends Component {
     const { classes } = this.props;
 
     return (
-      <Card >
-        <CardActionArea>
-          <CardMedia className={classes.media} 
-          image="http://primicia.com.co/wp-content/uploads/2019/02/Cartagena_Colombia_cs-b9a2c77a9fe3.jpg" 
-          title="Cartagena"/>
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {this.props.card.nombre}
-            </Typography>
-            <Typography variant="h4" color="textSecondary" component="h4">
-              {this.props.card.clima}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {this.props.card.descripcion}
-            </Typography>
-            
-            <Grid item xs={12} >
-                <Typography variant="body2" color="textSecondary" component="p">
-                    Hora de Desembarque: {this.props.card.horarioDesembarque}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    Hora de embarque: {this.props.card.horarioEmbarque}
-                </Typography>
-            </Grid>
-            
-          </CardContent>
-        </CardActionArea>
-      </Card>
+      <Grid item xs={12} sm={6} md={4}>
+        <Card >
+          <CardActionArea>
+            <CardMedia className={classes.media} 
+            image = {this.props.card.cityimage}
+            title = {this.props.card.name}/>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                {this.props.card.name}
+              </Typography>
+              <Typography variant="h4" color="textSecondary" component="h4">
+                {this.props.card.weather}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p" className={classes.text}>
+              {this.props.card.description.length >=50 ? this.props.card.description.substring(0,250)+"..." : this.props.card.description}
+              </Typography>
+              
+              <Grid item xs={12} >
+                  <Typography variant="body2" color="textPrimary" component="p" className={classes.text}>
+                      Hora de Desembarque: {this.props.card.landingtime}
+                  </Typography>
+                  <Typography variant="body2" color="textPrimary" component="p" className={classes.text}>
+                      Hora de embarque: {this.props.card.boardingtime}
+                  </Typography>
+              </Grid>
+              
+            </CardContent>
+          </CardActionArea>
+        </Card>
+      </Grid>
     );
   }
 }

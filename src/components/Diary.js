@@ -6,7 +6,8 @@ import Card from './cards/CardDestinos'
 import Loading from './Loading'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
-
+import {URLGRAPH} from '../constants'
+import axios from 'axios'
 import { CssBaseline } from '@material-ui/core';
 
 const styles = theme => ({
@@ -36,46 +37,50 @@ const styles = theme => ({
 class Diary extends Component{
   constructor(props){
     super(props);
-
     this.state = {
       isDataLoaded: false,
-      cards: [
-        {
-          nombre: "Cartagena",
-          clima: "30 °C",
-          descripcion: "Descripción de la ciudad",
-          horarioDesembarque: "12:30",
-          horarioEmbarque: "8:00"
-        },
-        {
-          nombre: "Cartagena",
-          clima: "30 °C",
-          descripcion: "Reservar",
-          horarioDesembarque: "Ver más",
-          horarioEmbarque: "9:00"
-        },
-        {
-          nombre: "Cartagena",
-          clima: "30 °C",
-          descripcion: "Reservar",
-          horarioDesembarque: "Ver más",
-          horarioEmbarque: ""
-        },
-        {
-          nombre: "Cartagena",
-          clima: "30 °C",
-          descripcion: "Reservar",
-          horarioDesembarque: "Ver más",
-          horarioEmbarque: ""
-        },
-      ]
+      cards: []
     }
-
   }
 
   async componentDidMount(){
     await this.setState( {isDataLoaded: true} );
+    await this.cargarDatos();
+    this.formatDatos();
   }
+
+  async cargarDatos () {
+
+    await axios({
+      url: URLGRAPH,
+      method: 'post',
+      data: {"query":"query{ getDestinations{ id name weather description timezone landingtime boardingtime cityimage}}","variables":null}
+    })
+      .then((result) => {
+        let data = result.data.data.getDestinations
+
+        this.setState({
+          cards: data
+        })
+      })
+      .catch(err => console.log(err))
+
+    console.log(this.state.cards)
+  }
+
+  async formatDatos () {
+    
+    let newdata = this.state.cards
+    
+    for (let i = 0; i < newdata.length; i++) {
+      newdata[i].landingtime = newdata[i].landingtime.substring(0,10) + " a las " + newdata[i].landingtime.substring(12,16) + "."
+      newdata[i].boardingtime = newdata[i].boardingtime.substring(0,10) + " a las " + newdata[i].boardingtime.substring(12,16) + "."     
+    }
+    this.setState({
+      cards: newdata
+    })
+  }
+
   render(){
     const { classes } = this.props;
 
@@ -86,7 +91,7 @@ class Diary extends Component{
     // first person es para el objeto del component card y el segundo del arrow function
     let cards = this.state.cards.map(card => {
       return (        
-        <Grid item xs={12} sm={6} md={4}><Card card={card}/></Grid>      
+        <Card key={card.id} card={card}/> 
       )
     })
     return(   

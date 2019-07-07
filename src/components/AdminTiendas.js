@@ -52,28 +52,7 @@ class AdminUsuarios extends Component{
 
     this.state = {
       isDataLoaded: false,
-      tiendas: [
-        {
-          id: 1,
-          nombre: "Pull and Bear",
-          ubicacion: "Piso 2 - 201",
-          categoria: "Ropa",
-        },
-
-        {
-          id: 2,
-          nombre: "Elysium",
-          ubicacion: "Piso 3 - 305",
-          categoria: "Diversión",
-        },
-
-        {
-          id: 3,
-          nombre: "Bar de Moe",
-          ubicacion: "Piso 3 - 302",
-          categoria: "Bares",
-        },
-      ]
+      tiendas: []
     };
   }
 
@@ -116,11 +95,11 @@ class AdminUsuarios extends Component{
                 })}
             </Grid>
           </Container>
-          <Link className={classes.textoButton} to="/editar_tienda">
-              <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
-                <AddIcon />            
-              </Fab>
-              </Link>
+          <Link className={classes.textoButton} to="/crear_tienda">
+            <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
+              <AddIcon />            
+            </Fab>
+          </Link>
         </main>
       </div>
     );

@@ -9,6 +9,7 @@ import { withRouter } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
 import {URLGRAPH} from '../constants'
 import axios from 'axios'
+import auth from './auth'
 
 const styles = theme => ({
   root: {
@@ -46,10 +47,10 @@ class Events extends Component{
 
   componentDidMount(){
     this.cargarDatos();
+    console.log(auth.isAuthenticated())
   }
 
   async cargarDatos () {
-    //e.preventDefault();
 
     await axios({
       url: URLGRAPH,
@@ -65,10 +66,13 @@ class Events extends Component{
 
         for (var i=0; i<data.length; i++){
 
+          let fecha = data[i].date.substring(0,10) + " a las " + data[i].date.substring(12,16) + "."
           var button1 = "Reservar"
           var button2 = "Ver más"
+          
           data[i]["button1"] = button1;
           data[i]["button2"] = button2;
+          data[i].date = fecha;
 
           this.setState({
             cards: this.state.cards.concat(data[i])
