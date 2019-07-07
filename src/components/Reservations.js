@@ -3,9 +3,13 @@ import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container';
 import Navbar from './NavBar'
 import Card from './cards/CardReservas'
-import Loading from './Loading'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
+
+import {URLGRAPH} from '../constants'
+import Loading from './Loading'
+import axios from 'axios'
+
 import { CssBaseline, Typography } from '@material-ui/core';
 
 const styles = theme => ({
@@ -42,9 +46,10 @@ class Reservations extends Component{
     super(props);
 
     this.state = {
-      isDataLoaded: false
-    };
-    this.state = {
+      isDataLoaded: false,
+      reservas: [],
+      eventos: [],
+      usuarios: [],
       cards: [
           {
             title: "Idiosincrasia --",
@@ -77,15 +82,97 @@ class Reservations extends Component{
   }
 
   async componentDidMount(){
+    await this.cargarDatos();
+    this.normalizarDatos();
     await this.setState( {isDataLoaded: true} );
   }
+
+  async cargarDatos () {
+
+    await axios({
+      url: URLGRAPH,
+      method: 'post',
+      data: {"query":"query{getReservations{ id quantity id_user id_event}}","variables":null}
+    })
+      .then((result) => {
+        let data = result.data.data.getReservations
+
+        this.setState({
+          reservas: data
+        })
+      })
+      .catch(err => console.log(err))
+
+    await axios({
+      url: URLGRAPH,
+      method: 'post',
+      data: {"query":"query{getEvents{ id name date location description}}","variables":null}
+    })
+      .then((result) => {
+        let data = result.data.data.getEvents
+
+        this.setState({
+          eventos: data
+        })
+      })
+      .catch(err => console.log(err)) 
+
+    await axios({
+      url: URLGRAPH,
+      method: 'post',
+      data: {"query":"query{getUsers{id uname surname}}","variables":null}
+    })
+      .then((result) => {
+        let data = result.data.data.getUsers
+
+        this.setState({
+          usuarios: data
+        })
+      })
+      .catch(err => console.log(err)) 
+  
+  }
+
+  async normalizarDatos () {
+
+    let reservas = this.state.reservas;
+    let usuarios = this.state.usuarios;
+    let eventos = this.state.eventos;
+    let newData = []
+    let aux = []
+
+    for (let i = 0; i < reservas.length; i++){
+      for (let j = 0; j < usuarios.length; j++){
+        if (reservas[i].id_event === usuarios[j].id){
+          aux.push({id_reserva: reservas[i].id, id_event: reservas[i].id_event,
+                    quantity: reservas[i].quantity, name: usuarios[j].names + usuarios[j].surnames})
+        }
+      }
+    }
+
+    for (let i = 0; i < aux.length; i++){
+      for (let j = 0; j < eventos.length; j++){
+        if (aux[i].id_event === eventos[j].id){
+          newData.push({id_reserva: aux[i].id_reserva, name: aux[i].name,
+                        quantity: aux[i].quantity, date: eventos[j].date,
+                        descripcion: eventos[j].description, location: eventos[j].location,
+                        name_event: eventos[j].name, button1: "Ver más", button2: "Eliminar"})
+        }
+      }
+    }
+
+    this.setState({
+      cards: newData,
+    })
+  }
+
   render(){
     const { classes } = this.props;
 
     if( !this.state.isDataLoaded ){
       return <Loading/>
     }
-    
+
     return(   
         <div className={classes.root}>
           <CssBaseline/>
@@ -101,7 +188,7 @@ class Reservations extends Component{
                     </Grid>
                     {this.state.cards.map(card => {
                       return (
-                        <Card card={card}/>
+                        <Card key = {card.id_reserva} card={card}/>
                       )
                     })}
                 </Grid>

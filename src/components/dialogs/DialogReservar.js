@@ -11,6 +11,7 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import Input from '@material-ui/core/Input';
 import { withRouter } from 'react-router-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { URLGRAPH } from '../../constants';
 
 const styles = theme => ({
     texto: {
@@ -30,25 +31,59 @@ class DialogReservar extends Component{
     constructor(props){
         super(props);
         this.state = {
-            cantidad: ""
+            cantidad: "1"
         }
+
+        this.handleChange = this.handleChange.bind(this);
+        this.sendReq = this.sendReq.bind(this);
     }
 
-    handleChange = cantidad => {
+    handleChange(event){
+        event.preventDefault();
+
         this.setState({
-            cantidad: cantidad
+            cantidad: event.target.value
         })
     }
-    //onChange={handleChange('age')}
+
+    async sendReq(event){
+        event.preventDefault();
+
+        const axios = require("axios")
+        axios.post(URLGRAPH, {
+            query: `mutation{
+                createReservation(reservation:{ 
+                    id_user: ${window.localStorage.getItem("idUser")}
+                    id_event: ${this.props.card.id} 
+                    quantity: ${this.state.cantidad}
+                }){ 
+                    id_event 
+                    id_user 
+                    quantity
+                }}`
+        }).then((result) => {
+            let data = result.data.data.createReservation
+            if (data != null){
+                alert("Reserva generada.")
+                this.props.onClose();
+            } else {
+                alert("Error realizando la reserva, por favor intente de nuevo.")
+            }
+            
+        })
+        
+    }
+    
     render(){
         const {open, onClose, card} = this.props;
         const { classes } = this.props;
 
-        return(         
+        
+        return( 
             <Dialog maxWidth="xs" fullWidth={true} open={open} onClose={onClose} scroll='paper' aria-labelledby="scroll-dialog-title">
                 
                 <DialogTitle id="scroll-dialog-title">
-                    {card.title}
+                    {card.name}
                 </DialogTitle>
                 
                 <DialogContent>
@@ -59,7 +94,7 @@ class DialogReservar extends Component{
                         <InputLabel shrink>
                             Numero de reservas
                         </InputLabel>
-                        <NativeSelect value={this.state.cantidad} onChange={event => this.handleChange(event.target.value)}
+                        <NativeSelect value={this.state.cantidad} onChange={this.handleChange}
                             input={<Input name="cantidad"/>}>
                             <option value={1}>Uno</option>
                             <option value={2}>Dos</option>
@@ -72,7 +107,7 @@ class DialogReservar extends Component{
                 </DialogContent>
 
                 <DialogActions>
-                    <Button color="primary">
+                    <Button onClick={this.sendReq} color="primary">
                         Reservar
                     </Button>
                     <Button onClick={onClose} color="primary">
