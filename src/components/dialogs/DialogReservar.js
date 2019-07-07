@@ -46,15 +46,16 @@ class DialogReservar extends Component{
         })
     }
 
-    async sendReq(){
-        const axios = require("axios")
+    async sendReq(event){
+        event.preventDefault();
 
+        const axios = require("axios")
         axios.post(URLGRAPH, {
             query: `mutation{
                 createReservation(reservation:{ 
-                    id_user: 2 
-                    id_event: 1 
-                    quantity: 1
+                    id_user: ${window.localStorage.getItem("idUser")}
+                    id_event: ${this.props.card.id} 
+                    quantity: ${this.state.cantidad}
                 }){ 
                     id_event 
                     id_user 
@@ -62,15 +63,23 @@ class DialogReservar extends Component{
                 }}`
         }).then((result) => {
             let data = result.data.data.createReservation
-            console.log(data);
+            if (data != null){
+                alert("Reserva generada.")
+                this.props.onClose();
+            } else {
+                alert("Error realizando la reserva, por favor intente de nuevo.")
+            }
+            
         })
+        
     }
     
     render(){
         const {open, onClose, card} = this.props;
         const { classes } = this.props;
 
-        return(         
+        
+        return( 
             <Dialog maxWidth="xs" fullWidth={true} open={open} onClose={onClose} scroll='paper' aria-labelledby="scroll-dialog-title">
                 
                 <DialogTitle id="scroll-dialog-title">

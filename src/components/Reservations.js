@@ -118,7 +118,7 @@ class Reservations extends Component{
     await axios({
       url: URLGRAPH,
       method: 'post',
-      data: {"query":"query{getUsers{id names surnames}}","variables":null}
+      data: {"query":"query{getUsers{id uname surname}}","variables":null}
     })
       .then((result) => {
         let data = result.data.data.getUsers
