@@ -27,13 +27,16 @@ class DialogVerMas extends Component{
         return(         
                 <Dialog open={open} onClose={onClose} scroll='paper' aria-labelledby="scroll-dialog-title">
                     
-                    <DialogTitle id="scroll-dialog-title">
-                        {card.title}
+                    <DialogTitle color="secondary" id="scroll-dialog-title">
+                        {card.name}
                     </DialogTitle>
                    
                     <DialogContent >
                         <Typography gutterBottom variant="subtitle1" component="h2" className={classes.texto}>
-                            {this.props.card.tipo}
+                            Tipo de evento: {this.props.card.tipo}
+                        </Typography>
+                        <Typography gutterBottom variant="subtitle2" component="h2" className={classes.texto}>
+                            Evento limitado a: {this.props.card.audence}
                         </Typography>
                         <Typography gutterBottom variant="subtitle2" component="h2" className={classes.texto}>
                             Fecha y hora: {this.props.card.date}
@@ -42,7 +45,10 @@ class DialogVerMas extends Component{
                             {this.props.card.description}
                         </Typography>
                         <Typography gutterBottom variant="subtitle2" component="h2" className={classes.texto}>
-                            Lugar: {this.props.card.ubicacion}
+                            Lugar: {this.props.card.location}
+                        </Typography>
+                        <Typography gutterBottom variant="subtitle2" component="h2" className={classes.texto}>
+                            Capacidad: {this.props.card.capacity}
                         </Typography>
                     </DialogContent>
 

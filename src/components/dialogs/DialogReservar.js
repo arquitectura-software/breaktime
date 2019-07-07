@@ -42,21 +42,19 @@ class DialogReservar extends Component{
         event.preventDefault();
 
         this.setState({
-            cantidad: event.target.value,
-            unmount: false
+            cantidad: event.target.value
         })
     }
 
     async sendReq(event){
-
         event.preventDefault();
 
         const axios = require("axios")
         axios.post(URLGRAPH, {
             query: `mutation{
                 createReservation(reservation:{ 
-                    id_user: 2 
-                    id_event: 3 
+                    id_user: ${window.localStorage.getItem("idUser")}
+                    id_event: ${this.props.card.id} 
                     quantity: ${this.state.cantidad}
                 }){ 
                     id_event 
@@ -65,7 +63,13 @@ class DialogReservar extends Component{
                 }}`
         }).then((result) => {
             let data = result.data.data.createReservation
-            this.props.history.push("/reservations");
+            if (data != null){
+                alert("Reserva generada.")
+                this.props.onClose();
+            } else {
+                alert("Error realizando la reserva, por favor intente de nuevo.")
+            }
+            
         })
         
     }
