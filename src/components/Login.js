@@ -116,13 +116,11 @@ class Login extends Component{
         }
       }`
     }).then((result) => {
-        jwt = result.data.data.loginUser
-        
+        jwt = result.data.data.loginUser      
 
         if(jwt.message === "Usuario  no autenticado."){
-          alert("Inicio de sesión incorrecto. Revise su usuario y contraseña.")
-        }else{
-          if(jwt.message === "Usuario autenticado."){
+          this.sendReqAdmin()
+        }else if(jwt.message === "Usuario autenticado."){
             window.localStorage.setItem("token", jwt.token.replace(/['"]+/g, ''))
             window.localStorage.setItem("user", this.state.username)
 
@@ -142,26 +140,46 @@ class Login extends Component{
           
             auth.login(() => {
               this.props.history.push("/events")
-            }         
-            )
-
-        }else if (jwt.message === "Admin autenticado."){
-          console.log(jwt.token)
-          window.localStorage.setItem("token", jwt.token.replace(/['"]+/g, ''))
-          window.localStorage.setItem("user", this.state.username)
-          
-            auth.loginAdmin(() => {
-              this.props.history.push("/admin")
-            }         
-            )
-
-          }          
+              }         
+            )          
         }
       })
       .catch(err => console.log(err))
     }
   
   
+    async sendReqAdmin() {
+      const axios = require("axios")
+  
+      axios.post(URLGRAPH, {
+        query : `mutation{
+          loginAdmin(credentials: {
+            email:"${this.state.username}",
+            password:"${this.state.hash}"
+          }){
+            message
+            token
+          }
+        }`
+      }).then((result) => {
+          console.log(result)
+
+          jwt = result.data.data.loginAdmin      
+  
+          if(jwt.message === "Usuario  no autenticado."){
+            alert("Inicio de sesión incorrecto. Revise su usuario y contraseña.")
+          }else if(jwt.message === "Admin autenticado."){
+              window.localStorage.setItem("token", jwt.token.replace(/['"]+/g, ''))
+              window.localStorage.setItem("user", this.state.username)
+            
+              auth.loginAdmin(() => {
+                this.props.history.push("/admin")
+                }         
+              )          
+          }
+        })
+        .catch(err => console.log(err))
+      }
 
 
   render(){
