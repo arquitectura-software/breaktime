@@ -9,6 +9,7 @@ import { withRouter } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
 import {URLGRAPH} from '../constants'
 import axios from 'axios'
+import auth from './auth'
 
 const styles = theme => ({
   root: {
@@ -46,6 +47,7 @@ class Events extends Component{
 
   componentDidMount(){
     this.cargarDatos();
+    console.log(auth.isAuthenticated())
   }
 
   async cargarDatos () {

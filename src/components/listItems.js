@@ -7,7 +7,6 @@ import EventIcon from '@material-ui/icons/Event';
 import RoomIcon from '@material-ui/icons/Room'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import ArtTrackIcon from '@material-ui/icons/ArtTrack'
-import HomeIcon from '@material-ui/icons/Home'
 import { withStyles } from '@material-ui/styles';
 
 
@@ -27,15 +26,6 @@ class ListItems extends Component {
 
     return(
       <div>
-      <Link className={classes.texto} to="/">
-          <ListItem button >
-            <ListItemIcon >
-              <HomeIcon />
-            </ListItemIcon>
-            <ListItemText className={classes.texto} primary="Inicio" />
-          </ListItem>
-          </Link>
-
           <Link className={classes.texto} to="/events">
           <ListItem button>
             <ListItemIcon>

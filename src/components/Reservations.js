@@ -5,9 +5,11 @@ import Navbar from './NavBar'
 import Card from './cards/CardReservas'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
+
 import {URLGRAPH} from '../constants'
 import Loading from './Loading'
 import axios from 'axios'
+
 import { CssBaseline, Typography } from '@material-ui/core';
 
 const styles = theme => ({
