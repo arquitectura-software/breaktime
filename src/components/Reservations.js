@@ -160,7 +160,7 @@ class Reservations extends Component{
           <main className={classes.content}>
             <div className={classes.appBarSpacer}>
               <Container maxWidth="lg" direction="row" className={classes.container}>
-                <Grid container spacing={2} direction="row" justify="flex-start" alignItems="center">
+                <Grid container spacing={2} direction="row" justify="flex-start" >
                     <Grid container direction="row" justify="center" alignContent="center" alignItems="center">
                       <Typography xs={12} variant="h4" className={classes.titulo}>
                         Aqui tiene todas sus reservaciones
