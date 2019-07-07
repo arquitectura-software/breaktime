@@ -111,28 +111,44 @@ class Login extends Component{
         loginUser(credentials: {
           email:"${this.state.username}",
           password:"${this.state.hash}"
-        })
+        }){
+          message
+          token
+        }
       }`
     }).then((result) => {
         jwt = result.data.data.loginUser
-        console.log(result)
+        
 
-        if(jwt === "Usuario no autenticado."){
+        if(jwt.message === "Usuario  no autenticado."){
           alert("Inicio de sesión incorrecto. Revise su usuario y contraseña.")
         }else{
-          if(result.data.message === "Usuario autenticado."){
-            window.localStorage.setItem("token", jwt)
+          if(jwt.message === "Usuario autenticado."){
+            window.localStorage.setItem("token", jwt.token.replace(/['"]+/g, ''))
             window.localStorage.setItem("user", this.state.username)
 
-            console.log("TOKEN: ", window.localStorage.getItem("token"));
+            axios.post(URLGRAPH, {
+              query: `query{
+                userByUsername(username: "${this.state.username}"){
+                  id
+                  uname
+                  surname
+                  email
+                }
+              }`
+            }).then((result) => {
+              let data = result.data.data.userByUsername
+              window.localStorage.setItem("idUser", data.id);
+            })
           
             auth.login(() => {
               this.props.history.push("/events")
             }         
             )
 
-        }else if (result.data.message === "Admin autenticado."){
-          window.localStorage.setItem("token", jwt)
+        }else if (jwt.message === "Admin autenticado."){
+          console.log(jwt.token)
+          window.localStorage.setItem("token", jwt.token.replace(/['"]+/g, ''))
           window.localStorage.setItem("user", this.state.username)
           
             auth.loginAdmin(() => {
@@ -142,26 +158,10 @@ class Login extends Component{
 
           }          
         }
-        console.log(jwt)
       })
       .catch(err => console.log(err))
     }
-
-    /* axios.post(URLGRAPH, {
-      query: `query{
-        userByUsername(username: "mickney@gmail.com"){
-          id
-          uname
-          surname
-          email
-        }
-      }`
-    }).then((result) => {
-      let data = result.data.data.userByUsername
-      //console.log(data);
-      //window.localStorage.setItem("userData", data);
-      //window.localStorage.getItem("userData");
-    })*/
+  
   
 
 
