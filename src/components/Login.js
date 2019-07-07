@@ -83,14 +83,13 @@ class Login extends Component{
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.hash = this.hash.bind(this);
     this.sendReq = this.sendReq.bind(this);
   }
 
   handleInputChange(event){
 
     const target = event.target;
-
+    var md5 = require('md5');
     if (target.name === "username"){
       this.setState({
         username: target.value
@@ -98,25 +97,11 @@ class Login extends Component{
     }
     else if (target.name === "password"){
       this.setState({
-        password: target.value
+        password: target.value,
+        hash: md5(target.value)
         })
       }      
     }
-
-  hash(event){
-    event.preventDefault();
-    console.log(this.state.username);
-    var md5 = require('md5');
-
-    if(this.state.password != null){
-      let hash = md5(this.state.password)
-
-      this.setState({
-        hash: hash
-      })
-      this.sendReq()
-    }
-  }
 
   async sendReq() {
     const axios = require("axios")
@@ -125,11 +110,12 @@ class Login extends Component{
       query : `mutation{
         loginUser(credentials: {
           email:"${this.state.username}",
-          password:"${this.state.password}"
+          password:"${this.state.hash}"
         })
       }`
     }).then((result) => {
         jwt = result.data.data.loginUser
+        console.log(result)
 
         if(jwt === "Usuario no autenticado."){
           alert("Inicio de sesión incorrecto. Revise su usuario y contraseña.")
@@ -159,7 +145,7 @@ class Login extends Component{
         console.log(jwt)
       })
       .catch(err => console.log(err))
-      alert("Ha ocurrido un error contactándose con el servidor.")
+    }
 
     /* axios.post(URLGRAPH, {
       query: `query{
@@ -176,7 +162,7 @@ class Login extends Component{
       //window.localStorage.setItem("userData", data);
       //window.localStorage.getItem("userData");
     })*/
-  }
+  
 
 
   render(){
@@ -231,7 +217,7 @@ class Login extends Component{
                     variant="contained"
                     color="secondary"
                     className={classes.submit}
-                    onClick={this.hash}>
+                    onClick={this.sendReq}>
                     Iniciar sesión                    
                   </Button>
 
