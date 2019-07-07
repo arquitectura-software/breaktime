@@ -169,7 +169,7 @@ class BarraAdmin extends Component{
                 </Link>
               </Typografy>
           
-              <Button onClick={() => 
+              <Button className={classes.textoButton} onClick={() => 
                 auth.logoutAdmin(() => {
                   this.props.history.push("/")
                 })}>Cerrar Sesión</Button>
