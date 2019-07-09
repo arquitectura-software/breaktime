@@ -73,7 +73,7 @@ class Reservations extends Component{
         let data2 = []
 
         for (let i = 0; i < data.length; i++){
-          if (data[i].id_user == window.localStorage.getItem("idUser")){
+          if (data[i].id_user === window.localStorage.getItem("idUser")){
             data2.push(data[i]);
           }
         }
