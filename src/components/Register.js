@@ -10,6 +10,10 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
 
+import {URLGRAPH} from '../constants'
+
+let jwt = window.localStorage.getItem("token");
+
 
 const styles = theme => ({
   root: {
@@ -56,6 +60,12 @@ class Register extends Component{
     super(props);
     this.state = {
       username: '',
+      nombres: '',
+      apellidos: '',
+      id: '',
+      correo: '',
+      celular: '',
+      fecha: '',
       password: '',
     }
 
@@ -65,18 +75,87 @@ class Register extends Component{
   handleInputChange(event){
 
     const target = event.target;
-
+    var md5 = require('md5');
     if (target.name === "username"){
       this.setState({
         username: target.value
       })
     }
+
+    else if (target.name === "nombres"){
+      this.setState({
+        nombres: target.value
+      })
+    }
+
+    else if (target.name === "apellidos"){
+      this.setState({
+        apellidos: target.value
+      })
+    }
+
+    else if (target.name === "id"){
+      this.setState({
+        id: target.value
+      })
+    }
+
+    else if (target.name === "correo"){
+      this.setState({
+        correo: target.value
+      })
+    }
+
+    else if (target.name === "celular"){
+      this.setState({
+        celular: target.value
+      })
+    }
+
+    else if (target.name === "fecha"){
+      this.setState({
+        fecha: target.value
+      })
+    }
+
     else if (target.name === "password"){
       this.setState({
-        password: target.value
+        password: target.value,
+        hash: md5(target.value)
         })
-      }      
+      }
     }
+
+ 
+    async sendReq() {
+      const axios = require("axios")
+  
+      axios.post(URLGRAPH, { //Por revisar cuando esté desplegado.
+        query : `mutation{
+          createUser(user: {
+            uname:"${this.state.nombres}",
+            surname:"${this.state.apellidos}",
+            email:"${this.state.email}",
+            passw:"${this.state.password}",
+          }){
+            success
+            message
+          }
+        }`
+      }).then((result) => {
+          jwt = result.data.data          
+          console.log(jwt)
+  
+          if(jwt.message === "Usuario creado."){            
+            alert("El usuario ha sido creado. Ahora puede proceder a realizar el inicio de sesión.")
+            this.props.history.push("/")
+          }else{                         
+              alert("Ha ocurrido un error realizando el registro. Por favor contacte soporte.")         
+          }
+        })
+        .catch(err => console.log(err))
+      }
+
 
 
   render(){
@@ -102,10 +181,8 @@ class Register extends Component{
                   margin="normal"
                   required
                   fullWidth
-                  type="username"
                   id="username"
                   label="Usuario"
-                  name="username"
                   autoFocus
                   onChange={this.handleInputChange}
                 />
@@ -115,6 +192,7 @@ class Register extends Component{
                 <TextField
                   variant="outlined"
                   margin="normal"
+                  id="nombres"
                   required
                   fullWidth
                   label="Nombres"
@@ -127,6 +205,7 @@ class Register extends Component{
                 <TextField
                   variant="outlined"
                   margin="normal"
+                  id="apellidos"
                   required
                   fullWidth
                   label="Apellidos"
@@ -138,6 +217,7 @@ class Register extends Component{
                 <TextField
                   variant="outlined"
                   margin="normal"
+                  id="id"
                   required
                   fullWidth
                   label="Identificación"
@@ -149,6 +229,7 @@ class Register extends Component{
                 <TextField
                   variant="outlined"
                   margin="normal"
+                  id="correo"
                   required
                   fullWidth
                   label="Correo"
@@ -160,6 +241,7 @@ class Register extends Component{
                 <TextField
                   variant="outlined"
                   margin="normal"
+                  id="celular"
                   required
                   fullWidth
                   label="Celular"
@@ -180,17 +262,16 @@ class Register extends Component{
                       }}
                     />
                     </Grid>
-
                     
-                    <Grid item xs={12} sm={5}>
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    color="secondary"
-                    className={classes.submit}
-                    onClick={this.hash}>
-                    Registrar usuario                    
-                  </Button>
+                  <Grid item xs={12} sm={5}>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      color="secondary"
+                      className={classes.submit}
+                      onClick={this.sendReq}>
+                      Registrar usuario                    
+                    </Button>
                   </Grid>
                   </Grid>
                     
