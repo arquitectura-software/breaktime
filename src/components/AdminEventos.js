@@ -60,14 +60,26 @@ class AdminEventos extends Component{
     this.state = {
       isDataLoaded: false,
       cards: [],
-      niños: false,
+      publico: {
+        niños: false,
+        familia: false,
+        adultos: false
+      },
+      tipo: {
+        diversion: false,
+        beneficencia: false,
+        relajacion: false,
+        acondicionamiento: false,
+        entretenimiento: false
+      }
+ /*      niños: false,
       familia: false,
       adultos: false,
       diversion: false,
       beneficencia: false,
       relajacion: false,
       acondicionamiento: false,
-      entretenimiento: false
+      entretenimiento: false */
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -135,9 +147,23 @@ class AdminEventos extends Component{
   async handleChange(event){
     if(this.state.isDataLoaded){
       let name = event.target.value;
-      await this.setState({ ...this.state, [name]: event.target.checked });
-      let {niños, familia, adultos, diversion, relajacion, beneficencia, entretenimiento, acondicionamiento} = this.state;
-      console.log(niños, familia, adultos, diversion, relajacion, beneficencia, entretenimiento, acondicionamiento)
+      let publico = this.state.publico
+      let tipo = this.state.tipo
+      if (!(this.state.publico[name] === undefined)){
+        let pb = this.state.publico; 
+        pb[name] = !this.state.publico[name];
+        await this.setState({ [publico]: pb});
+      }else{
+        let ty = this.state.tipo; 
+        ty[name] = !this.state.tipo[name];
+        await this.setState({ [tipo]: ty});
+        
+      }
+      
+      console.log(this.state.publico);
+      console.log(this.state.tipo);
+      //await this.setState({ ...this.state, [clase[name]]: event.target.checked});
+
     }
   };
 
@@ -147,6 +173,84 @@ class AdminEventos extends Component{
         <Loading />
       )
     }
+    let open = true;
+    let publicoC = this.state.publico;
+    let tipoC = this. state.tipo;
+    let publicoB = [];
+    let tipoB = [];
+    
+    publicoB.push(publicoC.niños);
+    publicoB.push(publicoC.adultos);
+    publicoB.push(publicoC.familia);
+
+    
+    tipoB.push(tipoC.beneficencia);
+    tipoB.push(tipoC.relajacion);
+    tipoB.push(tipoC.diversion);
+    tipoB.push(tipoC.acondicionamiento);
+    tipoB.push(tipoC.entretenimiento);
+
+    
+      
+    
+    let card2 = this.state.cards.map(card =>{
+      
+      if (publicoB.includes(true) && tipoB.includes(true)){
+        console.log("Tipos & Publico")
+        if(!this.state.publico.niños && !this.state.publico.adultos && !this.state.publico.familia){
+          return (
+            <Card key={card.id_evento} card={card}/>
+          )
+        }
+        if(this.state.publico[card.audence] === true && this.state.tipo[card.tipo] === true){
+          return (
+            <Card key={card.id_evento} card={card}/>
+          )
+        }
+        
+      }
+
+      else if (publicoB.includes(true)){
+        console.log("Solo publico");
+        if(!this.state.publico.niños && !this.state.publico.adultos && !this.state.publico.familia){
+          return (
+            <Card key={card.id_evento} card={card}/>
+          )
+        }
+        if(this.state.publico[card.audence] === true){
+          console.log("Entra al menos aqui");
+          return (
+            <Card key={card.id_evento} card={card}/>
+          )
+        }
+        // cambia open
+        open = false;
+  
+      }
+      else if (tipoB.includes(true)){
+        console.log("Solo tipo");
+        if(!this.state.tipo.diversion && !this.state.tipo.beneficencia &&!this.state.tipo.relajacion && !this.state.tipo.acondicionamiento && !this.state.tipo.entretenimiento){
+          return (
+            <Card key={card.id_evento} card={card}/>
+          )
+        }
+        if(this.state.tipo[card.tipo] === true){
+          return (
+            <Card key={card.id_evento} card={card}/>
+          )
+        }
+        
+      }else{
+        console.log("all ya no");
+        return (
+          <Card key={card.id_evento} card={card}/>
+        )
+      }
+
+      
+    });
+
+    
     const { classes } = this.props;
     return(
       <div className={classes.root}>
@@ -166,16 +270,16 @@ class AdminEventos extends Component{
         <FormLabel component="legend" className={classes.labelPublico}>Tipo de público</FormLabel>
         <FormGroup>
           <FormControlLabel
-            control={<Checkbox checked={this.state.niños} onChange={this.handleChange} value="niños" />}
+            control={<Checkbox checked={this.state.publico.niños} onChange={this.handleChange} value="niños"/>}
             label="Niños"
           />
           <FormControlLabel
-            control={<Checkbox checked={this.state.familia} onChange={this.handleChange} value="familia" />}
+            control={<Checkbox checked={this.state.publico.familia} onChange={this.handleChange} value="familia"/>}
             label="Familia"
           />
           <FormControlLabel
             control={
-              <Checkbox checked={this.state.adultos} onChange={this.handleChange} value="adultos" />
+              <Checkbox checked={this.state.adultos} onChange={this.handleChange} value="adultos"/>
             }
             label="Adultos"
           />
@@ -216,20 +320,7 @@ class AdminEventos extends Component{
 
                   </Container></Grid>
                   <Grid container xs={12} sm={8} md={9} item={true} spacing={2}>
-                    {this.state.cards.map(card => {
-                      let {niños, familia, adultos, diversion, relajacion, entretenimiento, beneficencia, acondicionamiento} = this.state;
-                      if(!niños && !familia && !adultos && !diversion && !relajacion && !entretenimiento && !beneficencia && !acondicionamiento){
-                        return (
-                          <Card key={card.id} card={card}/>
-                        )
-                      }
-                      if(this.state[card.audence] === true && this.state[card.tipo] === true){
-                        console.log('entro aqui')
-                        return (
-                          <Card key={card.id} card={card}/>
-                        )
-                      }
-                    })}
+                    {card2}
                   </Grid>
                 </Grid>
               </Container>
