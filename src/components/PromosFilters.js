@@ -6,7 +6,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
-import Grid from '@material-ui/core/Grid' 
+import Grid from '@material-ui/core/Grid'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 function PromosFilters() {
   const classes = useStyles();
   const [state, setState] = React.useState({
-    
+
     tecnología: true,
     ropahombre: true,
     ropamujer: true,
@@ -42,7 +42,7 @@ function PromosFilters() {
       <FormControl component="fieldset" className={classes.formControl}>
         <FormLabel component="legend">Ropa</FormLabel>
         <FormGroup>
-          
+
           <FormControlLabel
             control={<Checkbox checked={ropahombre} onChange={handleChange('ropahombre')} value="ropahombre" />}
             label="Hombre"
@@ -69,7 +69,7 @@ function PromosFilters() {
             control={<Checkbox checked={tecnología} onChange={handleChange('tecnología')} value="tecnología" />}
             label="Tecnología"
           />
-          
+
           <FormControlLabel
             control={<Checkbox checked={cuidado} onChange={handleChange('cuidado')} value="cuidado" />}
             label="Cuidado personal"
@@ -88,7 +88,7 @@ function PromosFilters() {
             control={<Checkbox checked={licores} onChange={handleChange('licores')} value="licores" />}
             label="Licores"
           />
-          
+
         </FormGroup>
         <FormHelperText>¡Disfrute de su estadía!</FormHelperText>
       </FormControl>

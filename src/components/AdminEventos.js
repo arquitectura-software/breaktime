@@ -3,15 +3,24 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { Link, withRouter } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
 import BarraAdmin from './BarraAdmin';
-import Grid from '@material-ui/core/Grid' 
+import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container';
-import Card from './cards/CardEventos'
-import EventFilters from './EventFilters'
+import Card from './cards/CardEventos';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import axios from 'axios';
+import {URLGRAPH} from '../constants';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Checkbox from '@material-ui/core/Checkbox';
+import { Divider } from '@material-ui/core';
+import Loading from './Loading';
 
 const styles = theme => ({
-  
+
   root: {
     display: 'flex',
     flex: '1',
@@ -24,7 +33,7 @@ const styles = theme => ({
   },
 
   appBarSpacer: {
-    marginBottom: theme.spacing(12) 
+    marginBottom: theme.spacing(12)
   },
 
   fab: {
@@ -50,78 +59,274 @@ class AdminEventos extends Component{
 
     this.state = {
       isDataLoaded: false,
-      cards: [
-          {
-            id: 1,
-            title: "Idiosincrasia --",
-            date: "2019-05-20 14:00:00",
-            tipo: "Tipo 1",
-            ubicacion: "Piso 1",
-            description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipisci[ng] velit, sed quia non numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem",
-            button1: "Editar",
-            button2: "Eliminar",
-          },
-          {
-            id: 2,
-            title: "Té con los que sobran",
-            date: "2019-05-20 14:00:00",
-            tipo: "Tipo 2",
-            ubicacion: "Piso 2",
-            description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipisci[ng] velit, sed quia non numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem",
-            button1: "Editar",
-            button2: "Eliminar",
-          },
-          {
-            id: 3,
-            title: "Baile bajo luna de sangre",
-            date: "2019-05-20 14:00:00",
-            tipo: "Tipo 3",
-            ubicacion: "Piso 3",
-            description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipisci[ng] velit, sed quia non numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem",
-            button1: "Editar",
-            button2: "Eliminar",
-          },
-          {
-            id: 4,
-            title: "La paz se acabo, la musica continua",
-            date: "2019-05-20 14:00:00",
-            tipo: "Tipo 4",
-            ubicacion: "Piso 4",
-            description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipisci[ng] velit, sed quia non numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem",
-            button1: "Editar",
-            button2: "Eliminar",
-          }
-      ]
+      cards: [],
+      publico: {
+        niños: false,
+        familia: false,
+        adultos: false
+      },
+      tipo: {
+        diversion: false,
+        beneficencia: false,
+        relajacion: false,
+        acondicionamiento: false,
+        entretenimiento: false
+      }
+ /*      niños: false,
+      familia: false,
+      adultos: false,
+      diversion: false,
+      beneficencia: false,
+      relajacion: false,
+      acondicionamiento: false,
+      entretenimiento: false */
     }
+    this.handleChange = this.handleChange.bind(this)
+  }
+  //peticion axios para hacer las 4 operaciones CRUD usando GraphiQL
+
+  async cargarDatos () {
+
+    await axios({
+      url: URLGRAPH,
+      method: 'post',
+      data: {"query":"query{  getEvents{id name location date capacity audence description tipo}}","variables":null}
+    })
+      .then((result) => {
+        let data = result.data.data.getEvents
+
+        this.setState({
+          cards: []
+        })
+
+        for (var i=0; i<data.length; i++){
+
+          let fecha = data[i].date.substring(0,10) + " a las " + data[i].date.substring(12,16) + "."
+          var button1 = "Reservar"
+          var button2 = "Ver más"
+
+          data[i]["button1"] = button1;
+          data[i]["button2"] = button2;
+          data[i].date = fecha;
+          console.log(data[i]["audence"])
+          if(data[i]["audence"] === "NiÃ±os"){
+            console.log("entro en el condicional")
+            data[i]["audence"] = "niños";
+          }
+          switch(data[i].audence){
+            case "Para toda la familia": data[i].audence = "familia";
+            break;
+            default:
+
+                data[i].audence = data[i].audence.toLowerCase();
+          }
+          switch(data[i].tipo){
+            case "DiversiÃ³n": data[i].tipo = "diversion";
+            break;
+            case "RelajaciÃ³n": data[i].tipo = "relajacion"; 
+            break;
+            default:
+              data[i].tipo = data[i].tipo.toLowerCase();
+          }
+          this.setState({
+            cards: this.state.cards.concat(data[i])
+          })
+        }
+        console.log(this.state.cards)
+        this.setState({isDataLoaded: true})
+      })
+      .catch(err => console.log(err))
   }
 
+
   async componentDidMount(){
+    await this.cargarDatos();
     await this.setState( {isDataLoaded: true} );
   }
 
+  async handleChange(event){
+    if(this.state.isDataLoaded){
+      let name = event.target.value;
+      let publico = this.state.publico
+      let tipo = this.state.tipo
+      if (!(this.state.publico[name] === undefined)){
+        let pb = this.state.publico; 
+        pb[name] = !this.state.publico[name];
+        await this.setState({ [publico]: pb});
+      }else{
+        let ty = this.state.tipo; 
+        ty[name] = !this.state.tipo[name];
+        await this.setState({ [tipo]: ty});
+        
+      }
+      
+      console.log(this.state.publico);
+      console.log(this.state.tipo);
+      //await this.setState({ ...this.state, [clase[name]]: event.target.checked});
+
+    }
+  };
+
   render(){
+    if(!this.state.isDataLoaded){
+      return(
+        <Loading />
+      )
+    }
+    let open = true;
+    let publicoC = this.state.publico;
+    let tipoC = this. state.tipo;
+    let publicoB = [];
+    let tipoB = [];
+    
+    publicoB.push(publicoC.niños);
+    publicoB.push(publicoC.adultos);
+    publicoB.push(publicoC.familia);
+
+    
+    tipoB.push(tipoC.beneficencia);
+    tipoB.push(tipoC.relajacion);
+    tipoB.push(tipoC.diversion);
+    tipoB.push(tipoC.acondicionamiento);
+    tipoB.push(tipoC.entretenimiento);
+
+    
+      
+    
+    let card2 = this.state.cards.map(card =>{
+      
+      if (publicoB.includes(true) && tipoB.includes(true)){
+        console.log("Tipos & Publico")
+        if(!this.state.publico.niños && !this.state.publico.adultos && !this.state.publico.familia){
+          return (
+            <Card key={card.id_evento} card={card}/>
+          )
+        }
+        if(this.state.publico[card.audence] === true && this.state.tipo[card.tipo] === true){
+          return (
+            <Card key={card.id_evento} card={card}/>
+          )
+        }
+        
+      }
+
+      else if (publicoB.includes(true)){
+        console.log("Solo publico");
+        if(!this.state.publico.niños && !this.state.publico.adultos && !this.state.publico.familia){
+          return (
+            <Card key={card.id_evento} card={card}/>
+          )
+        }
+        if(this.state.publico[card.audence] === true){
+          console.log("Entra al menos aqui");
+          return (
+            <Card key={card.id_evento} card={card}/>
+          )
+        }
+        // cambia open
+        open = false;
+  
+      }
+      else if (tipoB.includes(true)){
+        console.log("Solo tipo");
+        if(!this.state.tipo.diversion && !this.state.tipo.beneficencia &&!this.state.tipo.relajacion && !this.state.tipo.acondicionamiento && !this.state.tipo.entretenimiento){
+          return (
+            <Card key={card.id_evento} card={card}/>
+          )
+        }
+        if(this.state.tipo[card.tipo] === true){
+          return (
+            <Card key={card.id_evento} card={card}/>
+          )
+        }
+        
+      }else{
+        console.log("all ya no");
+        return (
+          <Card key={card.id_evento} card={card}/>
+        )
+      }
+
+      
+    });
+
+    
     const { classes } = this.props;
     return(
       <div className={classes.root}>
-        <CssBaseline/> 
+        <CssBaseline/>
         <BarraAdmin/>
       <main className={classes.content}>
-            <div className={classes.appBarSpacer} /> 
+            <div className={classes.appBarSpacer} />
               <Container maxWidth="lg" direction="row" className={classes.container}>
                 <Grid container direction="row" justify="flex-start" alignItems="flex-start">
-                  <Grid item xs={12} sm={4} md={3}><Container><EventFilters/></Container></Grid>
+                  <Grid item xs={12} sm={4} md={3}><Container>
+
+
+                  <Grid container direction="column">
+      <FormControl component="fieldset" className={classes.formControl}>
+        <FormLabel component="legend" className={classes.labelFiltro}>Filtros de busqueda</FormLabel>
+        <Divider></Divider>
+        <FormLabel component="legend" className={classes.labelPublico}>Tipo de público</FormLabel>
+        <FormGroup>
+          <FormControlLabel
+            control={<Checkbox checked={this.state.publico.niños} onChange={this.handleChange} value="niños"/>}
+            label="Niños"
+          />
+          <FormControlLabel
+            control={<Checkbox checked={this.state.publico.familia} onChange={this.handleChange} value="familia"/>}
+            label="Familia"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox checked={this.state.adultos} onChange={this.handleChange} value="adultos"/>
+            }
+            label="Adultos"
+          />
+        </FormGroup>
+      </FormControl>
+
+      <FormControl component="fieldset" className={classes.formControl}>
+        <Divider></Divider>
+        <FormLabel component="legend" className={classes.labelPublico}>Tipo de evento</FormLabel>
+        <FormGroup>
+          <FormControlLabel
+            control={<Checkbox checked={this.state.diversion} onChange={this.handleChange} value="diversion" />}
+            label="Diversión"
+          />
+          <FormControlLabel
+            control={<Checkbox checked={this.state.beneficencia} onChange={this.handleChange} value="beneficencia" />}
+            label="Beneficiencia"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox checked={this.state.relajacion} onChange={this.handleChange} value="relajacion" />
+            }
+            label="Relajación"
+          />
+          <FormControlLabel
+            control={<Checkbox checked={this.state.acondicionamiento} onChange={this.handleChange} value="acondicionamiento" />}
+            label="Acondicionamiento"
+          />
+        </FormGroup>
+        <FormHelperText>¡Disfrute de su estadía!</FormHelperText>
+      </FormControl>
+    </Grid>
+
+
+
+
+
+
+                  </Container></Grid>
                   <Grid container xs={12} sm={8} md={9} item={true} spacing={2}>
-                    {this.state.cards.map(card => {
-                      return (
-                        <Card card={card}/>
-                      )
-                    })}
+                    {card2}
                   </Grid>
                 </Grid>
               </Container>
               <Link className={classes.textoButton} to="/crear_evento">
               <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
-                <AddIcon />            
+                <AddIcon />
               </Fab>
               </Link>
         </main>
