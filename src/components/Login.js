@@ -173,7 +173,7 @@ class Login extends Component{
           }
         }`
       }).then((result) => {
-          console.log(result)
+          //console.log(result)
 
           jwt = result.data.data.loginAdmin      
   
@@ -211,6 +211,7 @@ class Login extends Component{
               <form className={classes.form} noValidate>
                 <TextField
                   variant="outlined"
+                  autoComplete="new-password"
                   margin="normal"
                   required
                   fullWidth
@@ -224,13 +225,13 @@ class Login extends Component{
                 <TextField
                   variant="outlined"
                   margin="normal"
+                  autoComplete="new-password"
                   required
                   fullWidth
                   onKeyPress={this.handleKeyPress}
                   type="password"
                   id="password"
                   label="Contraseña"
-                  name="password"
                   onChange={this.handleInputChange}
                 />              
                 
