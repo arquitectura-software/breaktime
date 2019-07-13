@@ -17,6 +17,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Divider } from '@material-ui/core';
+import Loading from './Loading';
 
 const styles = theme => ({
 
@@ -58,48 +59,15 @@ class AdminEventos extends Component{
 
     this.state = {
       isDataLoaded: false,
-      cards: [
-          /* {
-            id: 1,
-            title: "Idiosincrasia --",
-            date: "2019-05-20 14:00:00",
-            tipo: "Tipo 1",
-            ubicacion: "Piso 1",
-            description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipisci[ng] velit, sed quia non numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem",
-            button1: "Editar",
-            button2: "Eliminar",
-          },
-          {
-            id: 2,
-            title: "Té con los que sobran",
-            date: "2019-05-20 14:00:00",
-            tipo: "Tipo 2",
-            ubicacion: "Piso 2",
-            description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipisci[ng] velit, sed quia non numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem",
-            button1: "Editar",
-            button2: "Eliminar",
-          },
-          {
-            id: 3,
-            title: "Baile bajo luna de sangre",
-            date: "2019-05-20 14:00:00",
-            tipo: "Tipo 3",
-            ubicacion: "Piso 3",
-            description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipisci[ng] velit, sed quia non numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem",
-            button1: "Editar",
-            button2: "Eliminar",
-          },
-          {
-            id: 4,
-            title: "La paz se acabo, la musica continua",
-            date: "2019-05-20 14:00:00",
-            tipo: "Tipo 4",
-            ubicacion: "Piso 4",
-            description: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipisci[ng] velit, sed quia non numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem",
-            button1: "Editar",
-            button2: "Eliminar",
-          }
-       */]
+      cards: [],
+      niños: false,
+      familia: false,
+      adultos: false,
+      diversion: false,
+      beneficencia: false,
+      relajacion: false,
+      acondicionamiento: false,
+      entretenimiento: false
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -128,29 +96,57 @@ class AdminEventos extends Component{
           data[i]["button1"] = button1;
           data[i]["button2"] = button2;
           data[i].date = fecha;
+          console.log(data[i]["audence"])
+          if(data[i]["audence"] === "NiÃ±os"){
+            console.log("entro en el condicional")
+            data[i]["audence"] = "niños";
+          }
+          switch(data[i].audence){
+            case "Para toda la familia": data[i].audence = "familia";
+            break;
+            default:
 
+                data[i].audence = data[i].audence.toLowerCase();
+          }
+          switch(data[i].tipo){
+            case "DiversiÃ³n": data[i].tipo = "diversion";
+            break;
+            case "RelajaciÃ³n": data[i].tipo = "relajacion"; 
+            break;
+            default:
+              data[i].tipo = data[i].tipo.toLowerCase();
+          }
           this.setState({
             cards: this.state.cards.concat(data[i])
           })
         }
+        console.log(this.state.cards)
+        this.setState({isDataLoaded: true})
       })
       .catch(err => console.log(err))
   }
 
 
   async componentDidMount(){
-    await this.setState( {isDataLoaded: true} );
     await this.cargarDatos();
+    await this.setState( {isDataLoaded: true} );
   }
 
   async handleChange(event){
-    let name = event.target.value;
-    await this.setState({ ...this.state, [name]: event.target.checked });
-    let {niños, adultos, adultosm, conciertos, teatros, bailes, pilates, zumba, yoga} = this.state;
-    console.log(niños, adultos, adultosm, conciertos, teatros, bailes, pilates, zumba, yoga)
+    if(this.state.isDataLoaded){
+      let name = event.target.value;
+      await this.setState({ ...this.state, [name]: event.target.checked });
+      let {niños, familia, adultos, diversion, relajacion, beneficencia, entretenimiento, acondicionamiento} = this.state;
+      console.log(niños, familia, adultos, diversion, relajacion, beneficencia, entretenimiento, acondicionamiento)
+    }
   };
 
   render(){
+    if(!this.state.isDataLoaded){
+      return(
+        <Loading />
+      )
+    }
     const { classes } = this.props;
     return(
       <div className={classes.root}>
@@ -174,14 +170,14 @@ class AdminEventos extends Component{
             label="Niños"
           />
           <FormControlLabel
-            control={<Checkbox checked={this.state.adultos} onChange={this.handleChange} value="adultos" />}
-            label="Adultos"
+            control={<Checkbox checked={this.state.familia} onChange={this.handleChange} value="familia" />}
+            label="Familia"
           />
           <FormControlLabel
             control={
-              <Checkbox checked={this.state.adultosm} onChange={this.handleChange} value="adultosm" />
+              <Checkbox checked={this.state.adultos} onChange={this.handleChange} value="adultos" />
             }
-            label="Adultos mayores"
+            label="Adultos"
           />
         </FormGroup>
       </FormControl>
@@ -191,32 +187,22 @@ class AdminEventos extends Component{
         <FormLabel component="legend" className={classes.labelPublico}>Tipo de evento</FormLabel>
         <FormGroup>
           <FormControlLabel
-            control={<Checkbox checked={this.state.conciertos} onChange={this.handleChange} value="conciertos" />}
-            label="Conciertos"
+            control={<Checkbox checked={this.state.diversion} onChange={this.handleChange} value="diversion" />}
+            label="Diversión"
           />
           <FormControlLabel
-            control={<Checkbox checked={this.state.teatros} onChange={this.handleChange} value="teatros" />}
-            label="Teatros"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox checked={this.state.bailes} onChange={this.handleChange} value="bailes" />
-            }
-            label="Bailes"
-          />
-          <FormControlLabel
-            control={<Checkbox checked={this.state.pilates} onChange={this.handleChange} value="pilates" />}
-            label="Pilates"
-          />
-          <FormControlLabel
-            control={<Checkbox checked={this.state.zumba} onChange={this.handleChange} value="zumba" />}
-            label="Zumba"
+            control={<Checkbox checked={this.state.beneficencia} onChange={this.handleChange} value="beneficencia" />}
+            label="Beneficiencia"
           />
           <FormControlLabel
             control={
-              <Checkbox checked={this.state.yoga} onChange={this.handleChange} value="yoga" />
+              <Checkbox checked={this.state.relajacion} onChange={this.handleChange} value="relajacion" />
             }
-            label="Yoga"
+            label="Relajación"
+          />
+          <FormControlLabel
+            control={<Checkbox checked={this.state.acondicionamiento} onChange={this.handleChange} value="acondicionamiento" />}
+            label="Acondicionamiento"
           />
         </FormGroup>
         <FormHelperText>¡Disfrute de su estadía!</FormHelperText>
@@ -228,17 +214,17 @@ class AdminEventos extends Component{
 
 
 
-
                   </Container></Grid>
                   <Grid container xs={12} sm={8} md={9} item={true} spacing={2}>
                     {this.state.cards.map(card => {
-                      let {niños, adultos, adultosm, conciertos, teatros, bailes, pilates, zumba, yoga} = this.state;
-                      if(!niños && !adultos && !adultosm && !conciertos && !teatros && !bailes && !pilates && !zumba && !yoga){
+                      let {niños, familia, adultos, diversion, relajacion, entretenimiento, beneficencia, acondicionamiento} = this.state;
+                      if(!niños && !familia && !adultos && !diversion && !relajacion && !entretenimiento && !beneficencia && !acondicionamiento){
                         return (
                           <Card key={card.id} card={card}/>
                         )
                       }
-                      if(this.state[card.audence] === true || this.state[card.tipo] === true){
+                      if(this.state[card.audence] === true && this.state[card.tipo] === true){
+                        console.log('entro aqui')
                         return (
                           <Card key={card.id} card={card}/>
                         )
