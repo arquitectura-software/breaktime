@@ -103,54 +103,11 @@ class Login extends Component{
     }
 
   async sendReq() {
-    const axios = require("axios")
-
     auth.login(() => {
       this.props.history.push("/events")
       }         
     )
-
-    axios.post(URLGRAPH, {
-      query : `mutation{
-        loginUser(credentials: {
-          email:"${this.state.username}",
-          password:"${this.state.hash}"
-        }){
-          message
-          token
-        }
-      }`
-    }).then((result) => {
-        jwt = result.data.data.loginUser      
-
-        if(jwt.message === "Usuario  no autenticado."){
-          this.sendReqAdmin()
-        }else if(jwt.message === "Usuario autenticado."){
-            window.localStorage.setItem("token", jwt.token.replace(/['"]+/g, ''))
-            window.localStorage.setItem("user", this.state.username)
-
-            axios.post(URLGRAPH, {
-              query: `query{
-                userByUsername(username: "${this.state.username}"){
-                  id
-                  uname
-                  surname
-                  email
-                }
-              }`
-            }).then((result) => {
-              let data = result.data.data.userByUsername
-              window.localStorage.setItem("idUser", data.id);
-            })
-          
-            auth.login(() => {
-              this.props.history.push("/events")
-              }         
-            )          
-        }
-      })
-      .catch(err => console.log(err))
-    }
+  }
 
     handleKeyPress = (event) => {
       if(event.key === 'Enter'){
