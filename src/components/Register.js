@@ -139,7 +139,7 @@ class Register extends Component{
             passw:"${this.state.password}",
           }){
             success
-            message
+            data
           }
         }`
       }).then((result) => {

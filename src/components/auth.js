@@ -41,8 +41,7 @@ class Auth {
         axios.post(URLGRAPH, {
         query : `mutation{
             validate(credentials: {
-            token:"${tok}",
-            password:"${this.state.hash}"
+            token:"${tok}"
             }){
             message
             }
