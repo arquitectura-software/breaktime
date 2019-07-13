@@ -201,6 +201,10 @@ class Events extends Component{
                         return (
                           <Card key={card.id} card={card}/>
                         )
+                      }else{
+                        return (
+                          <br/>
+                        )
                       }
                     })}
                   </Grid>

@@ -173,9 +173,8 @@ class AdminEventos extends Component{
         <Loading />
       )
     }
-    let open = true;
     let publicoC = this.state.publico;
-    let tipoC = this. state.tipo;
+    let tipoC = this.state.tipo;
     let publicoB = [];
     let tipoB = [];
     
@@ -206,8 +205,7 @@ class AdminEventos extends Component{
           return (
             <Card key={card.id_evento} card={card}/>
           )
-        }
-        
+        }       
       }
 
       else if (publicoB.includes(true)){
@@ -223,8 +221,6 @@ class AdminEventos extends Component{
             <Card key={card.id_evento} card={card}/>
           )
         }
-        // cambia open
-        open = false;
   
       }
       else if (tipoB.includes(true)){
@@ -239,13 +235,12 @@ class AdminEventos extends Component{
             <Card key={card.id_evento} card={card}/>
           )
         }
-        
-      }else{
-        console.log("all ya no");
-        return (
-          <Card key={card.id_evento} card={card}/>
-        )
       }
+      
+        return (
+          <Card key={card.id_evento} card={card}/> //Check for bugs (Cambio warning).
+        )
+      
 
       
     });

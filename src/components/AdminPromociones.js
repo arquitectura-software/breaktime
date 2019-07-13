@@ -15,7 +15,6 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
 
 
@@ -74,9 +73,9 @@ class AdminPromociones extends Component{
 
   handleChange(event){
     if(this.state.isDataLoaded){
-      let name= event.target.value
+      //let name= event.target.value
       console.log(this.state)
-      const response = this.setState({ [name]: !this.state[name]})
+      //const response = this.setState({ [name]: !this.state[name]})
 
     }
 
@@ -157,7 +156,11 @@ class AdminPromociones extends Component{
       return (
         <Card key={card.id_promocion} card={card}/>
       )
-      }
+      }else{
+      return (
+        <br/>
+      )
+    }
     })
 
     const { classes } = this.props;
