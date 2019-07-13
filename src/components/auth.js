@@ -33,34 +33,10 @@ class Auth {
     }
 
     isAuthenticated(){
-        console.log(window.localStorage.getItem("token"))
-        let tok = window.localStorage.getItem("token")
-
-        const axios = require("axios")
-
-        axios.post(URLGRAPH, {
-        query : `mutation{
-            validate(credentials: {
-            token:"${tok}"
-            }){
-            message
-            }
-        }`
-        }).then((result) => {
-            let jwt = result.data.data
-            console.log(jwt)      
-
-            if(jwt.message === "Token válido."){
-                return this.authenticated;
-            }else{
-                this.logout(() => {
-                    alert("Su sesión ha expirado. Por favor vuelva a iniciar sesión.")
-                    this.props.history.push("/")
-                  })
-                return this.authenticated;
-            }
-        })
-        .catch(err => console.log(err))
+        if(window.localStorage.getItem("token").length > 1){ //TODO ISVALID
+            return true;
+        }
+        return this.authenticatedAdmin;
     }
 
     isAuthenticatedAdmin(){
