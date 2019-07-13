@@ -71,12 +71,12 @@ class AdminPromociones extends Component{
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event){
+  async handleChange(event){
     if(this.state.isDataLoaded){
-      //let name= event.target.value
+      let name= event.target.value
       console.log(this.state)
-      //const response = this.setState({ [name]: !this.state[name]})
-
+      await this.setState({ [name]: !this.state[name]})
+      console.log(this.state)
     }
 
   }

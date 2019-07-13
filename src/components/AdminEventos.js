@@ -18,6 +18,8 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Divider } from '@material-ui/core';
 import Loading from './Loading';
+import utf8 from 'utf8';
+
 
 const styles = theme => ({
 
@@ -109,9 +111,7 @@ class AdminEventos extends Component{
           data[i]["button2"] = button2;
           data[i].date = fecha;
           console.log(data[i]["audence"])
-          if(data[i]["audence"] === "NiÃ±os"){
-            console.log("entro en el condicional")
-            data[i]["audence"] = "niños";
+          data[i]["audence"]= utf.decode(data[i]["audence"])
           }
           switch(data[i].audence){
             case "Para toda la familia": data[i].audence = "familia";
@@ -120,10 +120,11 @@ class AdminEventos extends Component{
 
                 data[i].audence = data[i].audence.toLowerCase();
           }
+          data[i].tipo = utf8.decode(data[i].tipo);
           switch(data[i].tipo){
             case "DiversiÃ³n": data[i].tipo = "diversion";
             break;
-            case "RelajaciÃ³n": data[i].tipo = "relajacion"; 
+            case "RelajaciÃ³n": data[i].tipo = "relajacion";
             break;
             default:
               data[i].tipo = data[i].tipo.toLowerCase();
@@ -131,7 +132,7 @@ class AdminEventos extends Component{
           this.setState({
             cards: this.state.cards.concat(data[i])
           })
-        }
+
         console.log(this.state.cards)
         this.setState({isDataLoaded: true})
       })
@@ -150,16 +151,16 @@ class AdminEventos extends Component{
       let publico = this.state.publico
       let tipo = this.state.tipo
       if (!(this.state.publico[name] === undefined)){
-        let pb = this.state.publico; 
+        let pb = this.state.publico;
         pb[name] = !this.state.publico[name];
         await this.setState({ [publico]: pb});
       }else{
-        let ty = this.state.tipo; 
+        let ty = this.state.tipo;
         ty[name] = !this.state.tipo[name];
         await this.setState({ [tipo]: ty});
-        
+
       }
-      
+      console.log("esta vaina da: ",utf8.decode("DiversiÃ³n"));
       console.log(this.state.publico);
       console.log(this.state.tipo);
       //await this.setState({ ...this.state, [clase[name]]: event.target.checked});
@@ -177,23 +178,23 @@ class AdminEventos extends Component{
     let tipoC = this.state.tipo;
     let publicoB = [];
     let tipoB = [];
-    
+
     publicoB.push(publicoC.niños);
     publicoB.push(publicoC.adultos);
     publicoB.push(publicoC.familia);
 
-    
+
     tipoB.push(tipoC.beneficencia);
     tipoB.push(tipoC.relajacion);
     tipoB.push(tipoC.diversion);
     tipoB.push(tipoC.acondicionamiento);
     tipoB.push(tipoC.entretenimiento);
 
-    
-      
-    
+
+
+
     let card2 = this.state.cards.map(card =>{
-      
+
       if (publicoB.includes(true) && tipoB.includes(true)){
         console.log("Tipos & Publico")
         if(!this.state.publico.niños && !this.state.publico.adultos && !this.state.publico.familia){
@@ -205,7 +206,7 @@ class AdminEventos extends Component{
           return (
             <Card key={card.id_evento} card={card}/>
           )
-        }       
+        }
       }
 
       else if (publicoB.includes(true)){
@@ -221,7 +222,7 @@ class AdminEventos extends Component{
             <Card key={card.id_evento} card={card}/>
           )
         }
-  
+
       }
       else if (tipoB.includes(true)){
         console.log("Solo tipo");
@@ -236,16 +237,16 @@ class AdminEventos extends Component{
           )
         }
       }
-      
+
         return (
           <Card key={card.id_evento} card={card}/> //Check for bugs (Cambio warning).
         )
-      
 
-      
+
+
     });
 
-    
+
     const { classes } = this.props;
     return(
       <div className={classes.root}>
