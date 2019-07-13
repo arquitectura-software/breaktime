@@ -105,6 +105,11 @@ class Login extends Component{
   async sendReq() {
     const axios = require("axios")
 
+    auth.login(() => {
+      this.props.history.push("/events")
+      }         
+    )
+
     axios.post(URLGRAPH, {
       query : `mutation{
         loginUser(credentials: {
@@ -145,6 +150,12 @@ class Login extends Component{
         }
       })
       .catch(err => console.log(err))
+    }
+
+    handleKeyPress = (event) => {
+      if(event.key === 'Enter'){
+        this.sendReq()
+      }
     }
   
   
@@ -215,6 +226,7 @@ class Login extends Component{
                   margin="normal"
                   required
                   fullWidth
+                  onKeyPress={this.handleKeyPress}
                   type="password"
                   id="password"
                   label="Contraseña"
