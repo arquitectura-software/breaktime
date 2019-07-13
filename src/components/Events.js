@@ -9,6 +9,7 @@ import { withRouter } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
 import {URLGRAPH} from '../constants'
 import axios from 'axios'
+
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -16,6 +17,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Divider } from '@material-ui/core';
+
+import auth from './auth'
 
 const styles = theme => ({
   root: {
@@ -66,6 +69,7 @@ class Events extends Component{
 
   componentDidMount(){
     this.cargarDatos();
+    console.log(auth.isAuthenticated())
   }
 
   async cargarDatos () {

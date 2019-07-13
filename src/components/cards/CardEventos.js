@@ -82,7 +82,7 @@ class MediaCard extends Component {
         <Card>
           <CardActionArea>       
             <CardContent>
-              <Typography gutterBottom variant="h5" component="h2" align="center">
+              <Typography gutterBottom variant="h5" color="secondary" component="h2" align="center">
                 {this.props.card.name}
               </Typography>
               <Typography gutterBottom variant="subtitle1" component="h2" className={classes.texto}>

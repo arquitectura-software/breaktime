@@ -3,6 +3,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './App.css';
 import Routes from './routes'
 
+
 const theme = createMuiTheme({
   palette: {
     secondary: {

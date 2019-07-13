@@ -18,6 +18,8 @@ import { Link, withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid' 
 import { withStyles } from '@material-ui/styles';
 
+import auth from './auth';
+
 const drawerWidth = 240;
 const styles = theme => ({
     root: {
@@ -141,12 +143,20 @@ class NavBar extends Component{
     }
   }
 
+
+
   handleDrawerOpen = () => {
     this.setState({open: true})
   };
 
   handleDrawerClose = () => {
     this.setState({open: false})
+  };
+
+  logout(){
+    auth.logout(() => {
+      this.props.history.push("/")
+    })
   };
 
   render(){
@@ -170,9 +180,12 @@ class NavBar extends Component{
                   </Typografy>
 
           
-                  <Link className={classes.textoButton} to="#">
-                    <Button><p className ={classes.textoButton}>Username</p></Button>
-                  </Link>
+                <Button onClick={() => 
+                auth.logout(() => {
+                  this.props.history.push("/")
+                })}>
+                  <p className ={classes.textoButton}>Cerrar Sesión</p></Button>
+                
               </Toolbar>
           </AppBar>
 

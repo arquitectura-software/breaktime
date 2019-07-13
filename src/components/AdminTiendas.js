@@ -95,11 +95,11 @@ class AdminUsuarios extends Component{
                 })}
             </Grid>
           </Container>
-          <Link className={classes.textoButton} to="/editar_tienda">
-              <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
-                <AddIcon />            
-              </Fab>
-              </Link>
+          <Link className={classes.textoButton} to="/crear_tienda">
+            <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
+              <AddIcon />            
+            </Fab>
+          </Link>
         </main>
       </div>
     );

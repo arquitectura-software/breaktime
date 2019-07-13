@@ -67,9 +67,11 @@ class CheckoutTiendas extends Component{
             <FormTiendas />
               
               <React.Fragment>
-                <div className={classes.buttons}>
+                <div className = {classes.buttons}>
                   
-                  <Button className={classes.button}>
+                  <Button 
+                    className = {classes.button}
+                  >
                     Cancelar
                   </Button>
                   
