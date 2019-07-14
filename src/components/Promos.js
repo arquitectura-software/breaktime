@@ -96,7 +96,7 @@ class Promos extends Component{
           let fin = promos[i].fecha_fin.substring(0,10) + " a las " + promos[i].fecha_fin.substring(12,16) + "." 
 
           newData.push({id_promocion: promos[i].id_promocion, nombre_tienda: tiendas[j].nombre, 
-                        categoria: tiendas[j].categoria, button1: "Reservar", button2: "Ver más",
+                        categoria: tiendas[j].categoria, button1: "Notificar", button2: "Ver más",
                         ubicacion: tiendas[j].ubicacion, descripcion: promos[i].descripcion,
                         fecha_inicio: inicio, fecha_fin: fin});
         }        
