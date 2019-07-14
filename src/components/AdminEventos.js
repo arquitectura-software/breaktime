@@ -235,13 +235,11 @@ class AdminEventos extends Component{
             <Card key={card.id_evento} card={card}/>
           )
         }
-      }
-      
+      }else{
         return (
           <Card key={card.id_evento} card={card}/> //Check for bugs (Cambio warning).
         )
-      
-
+      }
       
     });
 
