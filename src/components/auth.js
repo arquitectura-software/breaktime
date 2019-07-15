@@ -49,7 +49,7 @@ class Auth {
         }).then((result) => {
             let jwt = result.data.data.validate
             console.log(jwt)      
-
+            
             if(jwt.message === "Token Valido"){
                 /*this.login(props, () => {
                     this.props.history.push("/events")
