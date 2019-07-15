@@ -16,6 +16,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import utf8 from 'utf8'
 
 
 const styles = theme => ({
@@ -80,10 +81,23 @@ class AdminPromociones extends Component{
     }
 
   }
+  async decodificarDatos(){
+    let decodedCards =[]
+    for(let i=0; i< this.state.cards.length;i++){
+      let auxCard = this.state.cards[i]
+      for(let j in auxCard){
+        auxCard.j= utf8.decode(auxCard.j);
+      }
+      decodedCards.push(auxCard);
+    }
+    await this.setState({ cards: decodedCards})
+  }
   async componentDidMount(){
     await this.setState( {isDataLoaded: true} );
     await this.cargarDatos();
-    this.normalizarDatos();
+    await this.normalizarDatos();
+    await this.decodificarDatos();
+
   }
 
   async cargarDatos () {

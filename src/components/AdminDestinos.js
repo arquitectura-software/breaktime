@@ -10,9 +10,10 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import {URLGRAPH} from '../constants'
 import axios from 'axios'
+import utf8 from 'utf8'
 
 const styles = theme => ({
-  
+
   root: {
     display: 'flex',
     flex: '1',
@@ -58,9 +59,21 @@ class AdminDestinos extends Component{
   async componentDidMount(){
     await this.setState( {isDataLoaded: true} );
     await this.cargarDatos();
-    this.formatDatos();
+    await this.formatDatos();
+    await this.decodificarDatos();
   }
 
+  async decodificarDatos(){
+    let decodedCards =[]
+    for(let i=0; i< this.state.cards.length;i++){
+      let auxCard = this.state.cards[i]
+      for(let j in auxCard){
+        auxCard.j= utf8.decode(auxCard.j);
+      }
+      decodedCards.push(auxCard);
+    }
+    await this.setState({ cards: decodedCards})
+  }
   async cargarDatos () {
 
     await axios({
@@ -84,7 +97,7 @@ class AdminDestinos extends Component{
     let newdata = this.state.cards
     for (let i = 0; i < newdata.length; i++) {
       newdata[i].landingtime = newdata[i].landingtime.substring(0,10) + " a las " + newdata[i].landingtime.substring(12,16) + "."
-      newdata[i].boardingtime = newdata[i].boardingtime.substring(0,10) + " a las " + newdata[i].boardingtime.substring(12,16) + "."     
+      newdata[i].boardingtime = newdata[i].boardingtime.substring(0,10) + " a las " + newdata[i].boardingtime.substring(12,16) + "."
     }
     this.setState({
       cards: newdata
@@ -95,7 +108,7 @@ class AdminDestinos extends Component{
   render(){
 
     let cards = this.state.cards.map(card => {
-      return (       
+      return (
           <Card key={card.id} card={card}>
           </Card>
       )
@@ -105,7 +118,7 @@ class AdminDestinos extends Component{
 
     return(
       <div className={classes.root}>
-        <CssBaseline/> 
+        <CssBaseline/>
         <BarraAdmin/>
 
       <main className={classes.content}>
@@ -117,7 +130,7 @@ class AdminDestinos extends Component{
               </Container>
               <Link to="/crear_destino">
               <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
-                <AddIcon />            
+                <AddIcon />
               </Fab>
               </Link>
         </main>

@@ -87,6 +87,17 @@ class AdminEventos extends Component{
   }
   //peticion axios para hacer las 4 operaciones CRUD usando GraphiQL
 
+  async decodificarDatos(){
+    let decodedCards =[]
+    for(let i=0; i< this.state.cards.length;i++){
+      let auxCard = this.state.cards[i]
+      for(let j in auxCard){
+        auxCard.j= utf8.decode(auxCard.j);
+      }
+      decodedCards.push(auxCard);
+    }
+    await this.setState({ cards: decodedCards})
+  }
   async cargarDatos () {
 
     await axios({
@@ -109,26 +120,18 @@ class AdminEventos extends Component{
 
           data[i]["button1"] = button1;
           data[i]["button2"] = button2;
-          data[i].date = fecha;
+          data[i].date = utf8.decode(fecha);
           console.log(data[i]["audence"])
-          data[i]["audence"]= utf.decode(data[i]["audence"])
+          data[i]["audence"]= utf8.decode(data[i]["audence"])
           }
           switch(data[i].audence){
             case "Para toda la familia": data[i].audence = "familia";
             break;
             default:
 
-                data[i].audence = data[i].audence.toLowerCase();
+                data[i].audence = utf8.decode(data[i].audence).toLowerCase();
           }
-          data[i].tipo = utf8.decode(data[i].tipo);
-          switch(data[i].tipo){
-            case "DiversiÃ³n": data[i].tipo = "diversion";
-            break;
-            case "RelajaciÃ³n": data[i].tipo = "relajacion";
-            break;
-            default:
-              data[i].tipo = data[i].tipo.toLowerCase();
-          }
+          data[i].tipo = utf8.decode(data[i].tipo).toLowerCase();
           this.setState({
             cards: this.state.cards.concat(data[i])
           })
@@ -142,6 +145,7 @@ class AdminEventos extends Component{
 
   async componentDidMount(){
     await this.cargarDatos();
+    await this.decodificarDatos();
     await this.setState( {isDataLoaded: true} );
   }
 
@@ -160,9 +164,9 @@ class AdminEventos extends Component{
         await this.setState({ [tipo]: ty});
 
       }
-      console.log("esta vaina da: ",utf8.decode("DiversiÃ³n"));
+      /* console.log("esta vaina da: ",utf8.decode("DiversiÃ³n"));
       console.log(this.state.publico);
-      console.log(this.state.tipo);
+      console.log(this.state.tipo); */
       //await this.setState({ ...this.state, [clase[name]]: event.target.checked});
 
     }
