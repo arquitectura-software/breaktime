@@ -68,7 +68,7 @@ class AdminDestinos extends Component{
     for(let i=0; i< this.state.cards.length;i++){
       let auxCard = this.state.cards[i]
       for(let j in auxCard){
-        auxCard.j= utf8.decode(auxCard.j);
+        auxCard.j= utf8.decode(auxCard[j]);
       }
       decodedCards.push(auxCard);
     }
