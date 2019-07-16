@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles';
-import Grid from '@material-ui/core/Grid' 
+import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container';
 import { Link, withRouter } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
@@ -10,10 +10,11 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import {URLGRAPH} from '../constants'
 import axios from 'axios'
+import utf8 from 'utf8'
 
 
 const styles = theme => ({
-  
+
   root: {
     display: 'flex',
     flex: '1',
@@ -58,15 +59,27 @@ class AdminUsuarios extends Component{
     };
   }
 
- 
+
   async componentDidMount(){
     await this.setState( {isDataLoaded: true} );
     await this.cargarDatos();
-    this.normalizarDatos();
+    await this.normalizarDatos();
+    await this.decodificarDatos();
   }
 
+  async decodificarDatos(){
+    let decodedCards =[]
+    for(let i=0; i< this.state.cards.length;i++){
+      let auxCard = this.state.cards[i]
+      for(let j in auxCard){
+        auxCard.j= utf8.decode(auxCard[j]);
+      }
+      decodedCards.push(auxCard);
+    }
+    await this.setState({ cards: decodedCards})
+  }
   async normalizarDatos () {
-    
+
     let usuarios1 = this.state.usuarios
     let pasajeros1 = this.state.passengers
     let nuevosUsuarios = []
@@ -74,11 +87,11 @@ class AdminUsuarios extends Component{
     for (let i = 0; i < pasajeros1.length; i++) {
       for (let j = 0; j < usuarios1.length; j++) {
         if(pasajeros1[i].id_user === usuarios1[j].id){
-            nuevosUsuarios.push({names: usuarios1[j].names, surnames: usuarios1[j].surnames, 
-                                  id: usuarios1[j].id, birthdate: pasajeros1[i].birthdate, 
+            nuevosUsuarios.push({names: usuarios1[j].names, surnames: usuarios1[j].surnames,
+                                  id: usuarios1[j].id, birthdate: pasajeros1[i].birthdate,
                                   email: pasajeros1[i].email, phone: pasajeros1[i].phone})
-        }        
-      }      
+        }
+      }
     }
 
     this.setState({
@@ -110,7 +123,7 @@ class AdminUsuarios extends Component{
     })
       .then((result) => {
         let data = result.data.data.getPassengers
-        
+
         this.setState({
           passengers: data,
         })
@@ -122,7 +135,7 @@ class AdminUsuarios extends Component{
     const { classes } = this.props;
     return(
       <div className={classes.root}>
-        <CssBaseline/> 
+        <CssBaseline/>
         <BarraAdmin/>
       <main className={classes.content}>
           <div className={classes.appBarSpacer} />
@@ -137,7 +150,7 @@ class AdminUsuarios extends Component{
           </Container>
           <Link className={classes.textoButton} to="/crear_usuario">
               <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
-                <AddIcon />            
+                <AddIcon />
               </Fab>
               </Link>
         </main>

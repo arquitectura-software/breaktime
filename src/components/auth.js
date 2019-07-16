@@ -2,8 +2,8 @@ import {URLGRAPH} from '../constants'
 
 class Auth {
     constructor(){
-        this.authenticated = false;
-        this.authenticatedAdmin = false;
+        this.authenticated = true;
+        this.authenticatedAdmin = true;
     }
 
     login(cb){
@@ -67,9 +67,6 @@ class Auth {
     }
 
     isAuthenticatedAdmin(){
-        if(window.localStorage.getItem("token").length > 1){ //TODO ISVALID
-            return true;
-        } 
         return this.authenticatedAdmin;
     }
 }

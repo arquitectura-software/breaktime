@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Grid from '@material-ui/core/Grid' 
+import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container';
 import Navbar from './NavBar'
 import Card from './cards/CardDestinos'
@@ -9,6 +9,7 @@ import { withRouter } from 'react-router-dom';
 import {URLGRAPH} from '../constants'
 import axios from 'axios'
 import { CssBaseline } from '@material-ui/core';
+import utf8 from 'utf8'
 
 const styles = theme => ({
   root: {
@@ -46,7 +47,8 @@ class Diary extends Component{
   async componentDidMount(){
     await this.setState( {isDataLoaded: true} );
     await this.cargarDatos();
-    this.formatDatos();
+    await this.formatDatos();
+    await this.decodificarDatos();
   }
 
   async cargarDatos () {
@@ -68,13 +70,24 @@ class Diary extends Component{
     console.log(this.state.cards)
   }
 
+  async decodificarDatos(){
+    let decodedCards =[]
+    for(let i=0; i< this.state.cards.length;i++){
+      let auxCard = this.state.cards[i]
+      for(let j in auxCard){
+        auxCard.j= utf8.decode(auxCard[j]);
+      }
+      decodedCards.push(auxCard);
+    }
+    await this.setState({ cards: decodedCards})
+  }
   async formatDatos () {
-    
+
     let newdata = this.state.cards
-    
+
     for (let i = 0; i < newdata.length; i++) {
       newdata[i].landingtime = newdata[i].landingtime.substring(0,10) + " a las " + newdata[i].landingtime.substring(12,16) + "."
-      newdata[i].boardingtime = newdata[i].boardingtime.substring(0,10) + " a las " + newdata[i].boardingtime.substring(12,16) + "."     
+      newdata[i].boardingtime = newdata[i].boardingtime.substring(0,10) + " a las " + newdata[i].boardingtime.substring(12,16) + "."
     }
     this.setState({
       cards: newdata
@@ -90,11 +103,11 @@ class Diary extends Component{
     // person = person
     // first person es para el objeto del component card y el segundo del arrow function
     let cards = this.state.cards.map(card => {
-      return (        
-        <Card key={card.id} card={card}/> 
+      return (
+        <Card key={card.id} card={card}/>
       )
     })
-    return(   
+    return(
         <div className={classes.root}>
           <CssBaseline/>
           <Navbar/>
@@ -104,7 +117,7 @@ class Diary extends Component{
                 <Grid container direction="row" justify="flex-start" alignItems="flex-start">
                   <Grid container xs={12} sm={12} item={true} spacing={2}>{cards}</Grid>
                 </Grid>
-              </Container> 
+              </Container>
             </div>
           </main>
         </div>
