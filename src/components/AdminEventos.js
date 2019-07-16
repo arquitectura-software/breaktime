@@ -46,11 +46,17 @@ const styles = theme => ({
     left: 'auto',
     position: 'fixed',
   },
-
+  formControl: {
+    margin: theme.spacing(2),
+  },
   content: {
     flexGrow: 1,
     height: '100vh',
     overflow: 'auto',
+  },
+  labelPublico: {
+    marginBottom: '1em',
+    marginTop: '2em'
   },
 });
 
@@ -264,10 +270,9 @@ class AdminEventos extends Component{
 
 
                   <Grid container direction="column">
-      <FormControl component="fieldset" className={classes.formControl}>
-        <FormLabel component="legend" className={classes.labelFiltro}>Filtros de busqueda</FormLabel>
-        <Divider></Divider>
+                  <FormControl component="fieldset" className={classes.formControl}>        
         <FormLabel component="legend" className={classes.labelPublico}>Tipo de público</FormLabel>
+        <Divider></Divider>
         <FormGroup>
           <FormControlLabel
             control={<Checkbox checked={this.state.publico.niños} onChange={this.handleChange} value="niños"/>}
@@ -287,8 +292,8 @@ class AdminEventos extends Component{
       </FormControl>
 
       <FormControl component="fieldset" className={classes.formControl}>
-        <Divider></Divider>
         <FormLabel component="legend" className={classes.labelPublico}>Tipo de evento</FormLabel>
+        <Divider></Divider>
         <FormGroup>
           <FormControlLabel
             control={<Checkbox checked={this.state.diversion} onChange={this.handleChange} value="diversion" />}
@@ -309,7 +314,6 @@ class AdminEventos extends Component{
             label="Acondicionamiento"
           />
         </FormGroup>
-        <FormHelperText>¡Disfrute de su estadía!</FormHelperText>
       </FormControl>
     </Grid>
 
