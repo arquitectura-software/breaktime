@@ -80,7 +80,7 @@ class CardPromos extends Component {
         }
       }`
     }).then(result => {
-      let data = result.data.data.createNotification
+      //let data = result.data.data.createNotification //Not used
     })
   }
 

@@ -174,7 +174,7 @@ class Register extends Component{
               </Typography>
               <form className={classes.form} noValidate>
 
-            <Grid container spacing={3} xs={12} justify="center">
+            <Grid container item spacing={3} xs={12} justify="center">
               <Grid item xs={12} sm={5}>
                 <TextField
                   variant="outlined"
@@ -261,6 +261,19 @@ class Register extends Component{
                         shrink: true,
                       }}
                     />
+                    </Grid>
+
+                    <Grid item xs={12} sm={5}>
+                      <TextField
+                        variant="outlined"
+                        margin="normal"
+                        id="password"
+                        required
+                        fullWidth
+                        label="Contraseña"
+                        type="password"
+                        onChange={this.handleInputChange}
+                      />
                     </Grid>
                     
                   <Grid item xs={12} sm={5}>

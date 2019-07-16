@@ -2,8 +2,8 @@ import {URLGRAPH} from '../constants'
 
 class Auth {
     constructor(){
-        this.authenticated = true;
-        this.authenticatedAdmin = true;
+        this.authenticated = false;
+        this.authenticatedAdmin = false;
     }
 
     login(cb){
@@ -32,7 +32,7 @@ class Auth {
         cb();
     }
 
-    isAuthenticated(){
+    checkToken(){
         console.log(window.localStorage.getItem("token"))
         let tok = window.localStorage.getItem("token")
 
@@ -51,19 +51,19 @@ class Auth {
             console.log(jwt)      
             
             if(jwt.message === "Token Valido"){
-                /*this.login(props, () => {
-                    this.props.history.push("/events")
-                })*/
-                return this.authenticated;
+                //ContinueNavigation
             }else{
                 this.logout(() => {
                     alert("Su sesión ha expirado. Por favor vuelva a iniciar sesión.")
                     this.props.history.push("/")
                   })
-                return this.authenticated;
             }
         })
         .catch(err => console.log(err))
+    }
+
+    isAuthenticated(){
+        return this.authenticated;
     }
 
     isAuthenticatedAdmin(){

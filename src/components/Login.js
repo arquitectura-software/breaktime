@@ -84,6 +84,16 @@ class Login extends Component{
     this.sendReq = this.sendReq.bind(this);
   }
 
+  componentWillMount(){
+    if(window.localStorage.getItem("token") != null){
+      auth.checkToken();
+      auth.login(() => {
+        this.props.history.push("/events")
+        }         
+      )
+  }
+}
+
   handleInputChange(event){
 
     const target = event.target;
@@ -209,7 +219,6 @@ class Login extends Component{
               <form className={classes.form} noValidate>
                 <TextField
                   variant="outlined"
-                  autoComplete="new-password"
                   margin="normal"
                   required
                   fullWidth
@@ -223,7 +232,6 @@ class Login extends Component{
                 <TextField
                   variant="outlined"
                   margin="normal"
-                  autoComplete="new-password"
                   required
                   fullWidth
                   onKeyPress={this.handleKeyPress}
