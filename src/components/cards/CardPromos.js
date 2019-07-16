@@ -11,6 +11,7 @@ import { withRouter } from 'react-router-dom';
 import DialogReservar from '../dialogs/DialogReservar';
 import DialogEliminar from '../dialogs/DialogEliminar';
 import DialogVerMas from '../dialogs/DialogVerMasPromos'
+import { URLGRAPH } from '../../constants';
 
 const styles = theme => ({
   texto: {
@@ -28,9 +29,10 @@ class CardPromos extends Component {
   constructor(props){
     super(props);  
     this.state = {
-      dialogVerMas: false,
-      dialogReservar: false
-    } 
+      dialogVerMas: false
+      
+    }
+    this.crearNotificacion = this.crearNotificacion.bind(this);
   }
 
   handleCloseEliminar = () => {
@@ -39,40 +41,12 @@ class CardPromos extends Component {
     })
   }
 
-  handleCloseVerMas = () => {
-    this.setState({
-      dialogVerMas: false,
-    })
-  }
-
-  handleCloseReservar = () => {
-    this.setState({
-      dialogReservar: false,
-    })
-  }
-
-  handleClickOpenVerMas = () => {
-    this.setState({
-      dialogVerMas: true
-    })
-  }
-  
-  handleClickOpenReservar = () => {
-    this.setState({
-      dialogReservar: true
-    })
-  }
-
-
   handleClickButton1 = () => {    
-    if(this.props.card.button1 === 'Reservar'){
-      this.setState({
-        dialogReservar: true
-      })
+    if(this.props.card.button1 === 'Notificar'){
+      //this.crearNotificacion();
     }else{
         this.props.history.push("/editar_promo");      
     }
-
   }
   
   handleClickButton2 = () => {
@@ -85,6 +59,29 @@ class CardPromos extends Component {
         dialogEliminar: true
       })      
     }
+  }
+
+  async crearNotificacion(){
+    const axios = require("axios");
+
+    axios.post(URLGRAPH, {
+      query: `mutation{
+        createNotification(Notification: {
+          id_persona: 2
+          tipo: "recordatorio"
+          medio: "pop-up"
+          titulo: "Promoción Pull and Bear"
+          descripcion: "Le recordamor que la promoción de Pull and Bear vencerá pronto"
+        }){
+          id_persona
+          titulo
+          medio
+          descripcion
+        }
+      }`
+    }).then(result => {
+      let data = result.data.data.createNotification
+    })
   }
 
   render() {
@@ -119,7 +116,7 @@ class CardPromos extends Component {
         </Card>
 
         <DialogVerMas open={this.state.dialogVerMas} onClose={this.handleCloseVerMas} card={this.props.card}/>
-        <DialogReservar open={this.state.dialogReservar} onClose={this.handleCloseReservar} card={this.props.card}/><DialogEliminar open={this.state.dialogEliminar} onClose={this.handleCloseEliminar} card={this.props.card}/>
+        <DialogReservar open={this.state.dialogReservar} onClose={this.handleCloseReservar} card={this.props.card}/>
         <DialogEliminar open={this.state.dialogEliminar} onClose={this.handleCloseEliminar} card={this.props.card}/>
       
       </Grid>
