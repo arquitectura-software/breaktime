@@ -1,1 +1,1 @@
-export const URLGRAPH = 'http://34.66.154.191:5000/graphql';
+export const URLGRAPH = 'http://35.239.229.10:5000/graphql';
