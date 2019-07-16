@@ -3,7 +3,6 @@ import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container';
 import Navbar from './NavBar'
 import Card from './cards/CardEventos'
-//import EventFilters from './EventFilters'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
@@ -43,6 +42,13 @@ const styles = theme => ({
   columna: {
     direction: 'row',
   },
+  formControl: {
+    margin: theme.spacing(2),
+  },
+  labelPublico: {
+    marginBottom: '1em',
+    marginTop: '2em'
+  },
 
 })
 
@@ -71,7 +77,6 @@ class Events extends Component{
 
   componentDidMount(){
     this.cargarDatos();
-    console.log(auth.isAuthenticated())
   }
 
   async cargarDatos () {
@@ -129,9 +134,8 @@ class Events extends Component{
 
                   <Grid container direction="column">
       <FormControl component="fieldset" className={classes.formControl}>
-        <FormLabel component="legend" className={classes.labelFiltro}>Filtros de busqueda</FormLabel>
-        <Divider></Divider>
         <FormLabel component="legend" className={classes.labelPublico}>Tipo de público</FormLabel>
+        <Divider></Divider>
         <FormGroup>
           <FormControlLabel
             control={<Checkbox checked={this.state.niños} onChange={this.handleChange} value="niños" />}

@@ -13,7 +13,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Link, withRouter } from 'react-router-dom';
-
 import auth from './auth'
 
 import {URLGRAPH} from '../constants'
@@ -85,6 +84,16 @@ class Login extends Component{
     this.sendReq = this.sendReq.bind(this);
   }
 
+  componentWillMount(){
+    if(window.localStorage.getItem("token") != null){
+      auth.checkToken();
+      auth.login(() => {
+        this.props.history.push("/events")
+        }         
+      )
+  }
+}
+
   handleInputChange(event){
 
     const target = event.target;
@@ -99,15 +108,56 @@ class Login extends Component{
         password: target.value,
         hash: md5(target.value)
         })
-      }      
+      }
     }
 
   async sendReq() {
-    auth.login(() => {
-      this.props.history.push("/events")
-      }         
-    )
-  }
+    const axios = require("axios")
+
+    axios.post(URLGRAPH, {
+      query : `mutation{
+        loginUser(credentials: {
+          email: "${this.state.username}",
+          password: "${this.state.hash}"
+        }){
+          token
+          data
+          success
+        }
+      }`
+    }).then((result) => {
+        jwt = result.data.data.loginUser  
+
+        if(!jwt.success){
+          this.sendReqAdmin()
+        }
+        else if(jwt.success){
+          console.log(jwt.token)
+            window.localStorage.setItem("token", jwt.token.replace(/['"]+/g, ''))
+            window.localStorage.setItem("user", this.state.username)
+
+            axios.post(URLGRAPH, {
+              query: `query{
+                userByUsername(username: "${this.state.username}"){
+                  id
+                  uname
+                  surname
+                  email
+                }
+              }`
+            }).then((result) => {
+              let data = result.data.data.userByUsername
+              window.localStorage.setItem("idUser", data.id);
+            })
+          
+            auth.login(() => {
+              this.props.history.push("/events")
+              }         
+            )          
+        }
+      })
+      .catch(err => console.log(err))
+    }
 
     handleKeyPress = (event) => {
       if(event.key === 'Enter'){
@@ -125,18 +175,19 @@ class Login extends Component{
             email:"${this.state.username}",
             password:"${this.state.hash}"
           }){
-            message
             token
+            success
+            data
           }
         }`
       }).then((result) => {
           //console.log(result)
 
-          jwt = result.data.data.loginAdmin      
+          jwt = result.data.data.loginAdmin
   
-          if(jwt.message === "Usuario  no autenticado."){
+          if(!jwt.success){
             alert("Inicio de sesión incorrecto. Revise su usuario y contraseña.")
-          }else if(jwt.message === "Admin autenticado."){
+          }else if(jwt.success){
               window.localStorage.setItem("token", jwt.token.replace(/['"]+/g, ''))
               window.localStorage.setItem("user", this.state.username)
             
@@ -168,7 +219,6 @@ class Login extends Component{
               <form className={classes.form} noValidate>
                 <TextField
                   variant="outlined"
-                  autoComplete="new-password"
                   margin="normal"
                   required
                   fullWidth
@@ -182,13 +232,13 @@ class Login extends Component{
                 <TextField
                   variant="outlined"
                   margin="normal"
-                  autoComplete="new-password"
                   required
                   fullWidth
                   onKeyPress={this.handleKeyPress}
                   type="password"
                   id="password"
                   label="Contraseña"
+                  name= "password"
                   onChange={this.handleInputChange}
                 />              
                 

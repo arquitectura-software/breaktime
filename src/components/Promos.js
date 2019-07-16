@@ -15,7 +15,9 @@ import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import utf8 from 'utf8'
+//import wtf8 from 'wtf8'
+import wtf8 from 'wtf-8';
+
 
 const styles = theme => ({
   root: {
@@ -78,7 +80,7 @@ class Promos extends Component{
     for(let i=0; i< this.state.cards.length;i++){
       let auxCard = this.state.cards[i]
       for(let j in auxCard){
-        auxCard.j= utf8.decode(auxCard[j]);
+        auxCard.j= wtf8.decode(auxCard[j]);
       }
       decodedCards.push(auxCard);
     }

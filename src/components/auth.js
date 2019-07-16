@@ -2,8 +2,8 @@ import {URLGRAPH} from '../constants'
 
 class Auth {
     constructor(){
-        this.authenticated = true;
-        this.authenticatedAdmin = true;
+        this.authenticated = false;
+        this.authenticatedAdmin = false;
     }
 
     login(cb){
@@ -32,8 +32,38 @@ class Auth {
         cb();
     }
 
+    checkToken(){
+        console.log(window.localStorage.getItem("token"))
+        let tok = window.localStorage.getItem("token")
+
+        const axios = require("axios")
+
+        axios.post(URLGRAPH, {
+        query : `mutation{
+            validate(credentials: {
+                token:"${tok}"
+            }){
+                message
+            }
+        }`
+        }).then((result) => {
+            let jwt = result.data.data.validate
+            console.log(jwt)      
+            
+            if(jwt.message === "Token Valido"){
+                //ContinueNavigation
+            }else{
+                this.logout(() => {
+                    alert("Su sesión ha expirado. Por favor vuelva a iniciar sesión.")
+                    this.props.history.push("/")
+                  })
+            }
+        })
+        .catch(err => console.log(err))
+    }
+
     isAuthenticated(){
-        return this.authenticatedAdmin;
+        return this.authenticated;
     }
 
     isAuthenticatedAdmin(){
