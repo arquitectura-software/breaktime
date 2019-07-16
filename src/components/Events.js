@@ -3,7 +3,6 @@ import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container';
 import Navbar from './NavBar'
 import Card from './cards/CardEventos'
-//import EventFilters from './EventFilters'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { withRouter } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
@@ -17,8 +16,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Divider } from '@material-ui/core';
-
-import auth from './auth'
 
 const styles = theme => ({
   root: {

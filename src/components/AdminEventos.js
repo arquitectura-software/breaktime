@@ -14,7 +14,6 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Divider } from '@material-ui/core';
 import Loading from './Loading';
@@ -316,11 +315,6 @@ class AdminEventos extends Component{
         </FormGroup>
       </FormControl>
     </Grid>
-
-
-
-
-
 
                   </Container></Grid>
                   <Grid container xs={12} sm={8} md={9} item={true} spacing={2}>

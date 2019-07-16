@@ -219,7 +219,6 @@ class Login extends Component{
               <form className={classes.form} noValidate>
                 <TextField
                   variant="outlined"
-                  autoComplete="new-password"
                   margin="normal"
                   required
                   fullWidth
@@ -233,7 +232,6 @@ class Login extends Component{
                 <TextField
                   variant="outlined"
                   margin="normal"
-                  autoComplete="new-password"
                   required
                   fullWidth
                   onKeyPress={this.handleKeyPress}
