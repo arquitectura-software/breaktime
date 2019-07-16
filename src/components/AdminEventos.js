@@ -18,7 +18,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Divider } from '@material-ui/core';
 import Loading from './Loading';
-import utf8 from 'utf8';
+var wtf8 = require('wtf-8');
 
 
 const styles = theme => ({
@@ -92,7 +92,7 @@ class AdminEventos extends Component{
     for(let i=0; i< this.state.cards.length;i++){
       let auxCard = this.state.cards[i]
       for(let j in auxCard){
-        auxCard.j= utf8.decode(auxCard[j]);
+        auxCard.j= wtf8.decode(auxCard[j]);
       }
       decodedCards.push(auxCard);
     }
@@ -120,18 +120,18 @@ class AdminEventos extends Component{
 
           data[i]["button1"] = button1;
           data[i]["button2"] = button2;
-          data[i].date = utf8.decode(fecha);
+          data[i].date = wtf8.decode(fecha);
           console.log(data[i]["audence"])
-          data[i]["audence"]= utf8.decode(data[i]["audence"])
+          data[i]["audence"]= wtf8.decode(data[i]["audence"])
           }
           switch(data[i].audence){
             case "Para toda la familia": data[i].audence = "familia";
             break;
             default:
 
-                data[i].audence = utf8.decode(data[i].audence).toLowerCase();
+                data[i].audence = wtf8.decode(data[i].audence).toLowerCase();
           }
-          data[i].tipo = utf8.decode(data[i].tipo).toLowerCase();
+          data[i].tipo = wtf8.decode(data[i].tipo).toLowerCase();
           this.setState({
             cards: this.state.cards.concat(data[i])
           })
@@ -164,7 +164,7 @@ class AdminEventos extends Component{
         await this.setState({ [tipo]: ty});
 
       }
-      /* console.log("esta vaina da: ",utf8.decode("DiversiÃ³n"));
+      /* console.log("esta vaina da: ",wtf8.decode("DiversiÃ³n"));
       console.log(this.state.publico);
       console.log(this.state.tipo); */
       //await this.setState({ ...this.state, [clase[name]]: event.target.checked});

@@ -18,7 +18,9 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Divider } from '@material-ui/core';
 
+
 import auth from './auth'
+var wtf8 = require('wtf-8');
 
 const styles = theme => ({
   root: {

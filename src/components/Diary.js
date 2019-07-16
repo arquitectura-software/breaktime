@@ -9,7 +9,7 @@ import { withRouter } from 'react-router-dom';
 import {URLGRAPH} from '../constants'
 import axios from 'axios'
 import { CssBaseline } from '@material-ui/core';
-import utf8 from 'utf8'
+var wtf8 = require('wtf-8');
 
 const styles = theme => ({
   root: {
@@ -75,7 +75,7 @@ class Diary extends Component{
     for(let i=0; i< this.state.cards.length;i++){
       let auxCard = this.state.cards[i]
       for(let j in auxCard){
-        auxCard.j= utf8.decode(auxCard[j]);
+        auxCard.j= wtf8.decode(auxCard[j]);
       }
       decodedCards.push(auxCard);
     }

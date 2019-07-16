@@ -10,7 +10,7 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import {URLGRAPH} from '../constants'
 import axios from 'axios'
-import utf8 from 'utf8'
+var wtf8 = require('wtf-8');
 
 const styles = theme => ({
 
@@ -68,7 +68,7 @@ class AdminDestinos extends Component{
     for(let i=0; i< this.state.cards.length;i++){
       let auxCard = this.state.cards[i]
       for(let j in auxCard){
-        auxCard.j= utf8.decode(auxCard[j]);
+        auxCard.j= wtf8.decode(auxCard[j]);
       }
       decodedCards.push(auxCard);
     }
