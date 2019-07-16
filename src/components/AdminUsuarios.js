@@ -57,8 +57,11 @@ class AdminUsuarios extends Component{
       passengers: [],
       usuariosFusion: [],
     };
-  }
+    this.cargarDatos = this.cargarDatos.bind(this);
+    this.normalizarDatos = this.normalizarDatos.bind(this);
+    this.decodificarDatos = this.decodificarDatos.bind(this);
 
+  }
 
   async componentDidMount(){
     await this.setState( {isDataLoaded: true} );
@@ -68,15 +71,17 @@ class AdminUsuarios extends Component{
   }
 
   async decodificarDatos(){
+
     let decodedCards =[]
-    for(let i=0; i< this.state.cards.length;i++){
-      let auxCard = this.state.cards[i]
+
+    for(let i = 0; i < this.state.usuariosFusion.length; i++){
+      let auxCard = this.state.usuariosFusion[i]
       for(let j in auxCard){
         auxCard.j= utf8.decode(auxCard[j]);
       }
       decodedCards.push(auxCard);
     }
-    await this.setState({ cards: decodedCards})
+    await this.setState({ usuariosFusion: decodedCards})
   }
   async normalizarDatos () {
 
@@ -87,7 +92,7 @@ class AdminUsuarios extends Component{
     for (let i = 0; i < pasajeros1.length; i++) {
       for (let j = 0; j < usuarios1.length; j++) {
         if(pasajeros1[i].id_user === usuarios1[j].id){
-            nuevosUsuarios.push({names: usuarios1[j].names, surnames: usuarios1[j].surnames,
+            nuevosUsuarios.push({names: usuarios1[j].uname, surnames: usuarios1[j].surname,
                                   id: usuarios1[j].id, birthdate: pasajeros1[i].birthdate,
                                   email: pasajeros1[i].email, phone: pasajeros1[i].phone})
         }
@@ -104,7 +109,7 @@ class AdminUsuarios extends Component{
     await axios({
       url: URLGRAPH,
       method: 'post',
-      data: {"query":"query{ getUsers{ id names surnames } }","variables":null},
+      data: {"query":"query{ getUsers{id uname surname}}","variables":null},
       })
       .then((result) => {
         let data = result.data.data.getUsers
