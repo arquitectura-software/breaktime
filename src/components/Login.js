@@ -84,6 +84,16 @@ class Login extends Component{
     this.sendReq = this.sendReq.bind(this);
   }
 
+  componentWillMount(){
+    if(window.localStorage.getItem("token") != null){
+      auth.checkToken();
+      auth.login(() => {
+        this.props.history.push("/events")
+        }         
+      )
+  }
+}
+
   handleInputChange(event){
 
     const target = event.target;
