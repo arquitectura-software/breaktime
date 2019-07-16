@@ -69,7 +69,6 @@ class Events extends Component{
 
   componentDidMount(){
     this.cargarDatos();
-    console.log(auth.isAuthenticated())
   }
 
   async cargarDatos () {

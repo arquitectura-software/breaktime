@@ -7,7 +7,8 @@ import auth from './auth'
 export const ProtectedRoute = ({component: Component, ...rest}) => {
     return(
         <Route {...rest} 
-            render={(props) => {               
+            render={(props) => {
+                auth.checkToken() //Revisa el token asíncronamente.               
                 if(auth.isAuthenticated()){
                     return <Component {...props}/>
                 }else{

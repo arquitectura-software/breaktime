@@ -6,6 +6,7 @@ export const ProtectedRouteAdmin = ({component: Component, ...rest}) => {
     return(
         <Route {...rest} 
             render={(props) => {
+                auth.checkToken();
                 if(auth.isAuthenticatedAdmin()){
                     return <Component {...props}/>
                 }else{
