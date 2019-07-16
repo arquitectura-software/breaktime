@@ -172,7 +172,7 @@ class AdminEventos extends Component {
     if (!this.state.isDataLoaded) {
       return (
         <div className = {classes.containerProgress}>
-          <CircularProgress size = {'70%'} className = {classes.progress}/>
+          <CircularProgress size = {'30em'} className = {classes.progress}/>
         </div>
       )
     }
