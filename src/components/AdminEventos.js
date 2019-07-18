@@ -16,7 +16,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Divider } from '@material-ui/core';
-import Loading from './Loading';
+import CircularProgress from '@material-ui/core/CircularProgress';
 var wtf8 = require('wtf-8');
 
 
