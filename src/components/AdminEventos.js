@@ -102,10 +102,17 @@ class AdminEventos extends Component {
   }
   //peticion axios para hacer las 4 operaciones CRUD usando GraphiQL
 
-  async componentDidMount() {
-    await this.cargarDatos();
-    await this.setState({ isDataLoaded: true });
-  }  
+  async decodificarDatos(){
+    let decodedCards =[]
+    for(let i=0; i< this.state.cards.length;i++){
+      let auxCard = this.state.cards[i]
+      for(let j in auxCard){
+        auxCard.j= wtf8.decode(auxCard[j]);
+      }
+      decodedCards.push(auxCard);
+    }
+    await this.setState({ cards: decodedCards})
+  }
 
   async cargarDatos() {
 
@@ -158,12 +165,12 @@ class AdminEventos extends Component {
       let name = event.target.value;
       let publico = this.state.publico
       let tipo = this.state.tipo
-      
+
       if (!(this.state.publico[name] === undefined)) {
         let pb = this.state.publico;
         pb[name] = !this.state.publico[name];
         await this.setState({ [publico]: pb });
-      }      
+      }
       else {
         let ty = this.state.tipo;
         ty[name] = !this.state.tipo[name];
@@ -183,8 +190,8 @@ class AdminEventos extends Component {
 
     if (!this.state.isDataLoaded) {
       return (
-        <div className = {classes.containerProgress}>
-          <CircularProgress size = {'30em'} className = {classes.progress}/>
+        <div className={classes.containerProgress}>
+          <CircularProgress size={'30em'} className={classes.progress} />
         </div>
       )
     }
@@ -266,71 +273,69 @@ class AdminEventos extends Component {
               <Grid item xs={12} sm={4} md={3}>
                 <Container>
                   <Grid container direction="column">
-                  <FormControl component="fieldset" className={classes.formControl}>        
-        <FormLabel component="legend" className={classes.labelPublico}>Tipo de público</FormLabel>
-        <Divider></Divider>
-        <FormGroup>
-          <FormControlLabel
-            control={<Checkbox checked={this.state.publico.niños} onChange={this.handleChange} value="niños"/>}
-            label="Niños"
-          />
-          <FormControlLabel
-            control={<Checkbox checked={this.state.publico.familia} onChange={this.handleChange} value="familia"/>}
-            label="Familia"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox checked={this.state.adultos} onChange={this.handleChange} value="adultos"/>
-            }
-            label="Adultos"
-          />
-        </FormGroup>
-      </FormControl>
+                    <FormControl component="fieldset" className={classes.formControl}>
+                      <FormLabel component="legend" className={classes.labelPublico}>Tipo de público</FormLabel>
+                      <Divider></Divider>
+                      <FormGroup>
+                        <FormControlLabel
+                          control={<Checkbox checked={this.state.publico.niños} onChange={this.handleChange} value="niños" />}
+                          label="Niños"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox checked={this.state.publico.familia} onChange={this.handleChange} value="familia" />}
+                          label="Familia"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox checked={this.state.adultos} onChange={this.handleChange} value="adultos" />
+                          }
+                          label="Adultos"
+                        />
+                      </FormGroup>
+                    </FormControl>
 
-      <FormControl component="fieldset" className={classes.formControl}>
-        <FormLabel component="legend" className={classes.labelPublico}>Tipo de evento</FormLabel>
-        <Divider></Divider>
-        <FormGroup>
-          <FormControlLabel
-            control={<Checkbox checked={this.state.diversion} onChange={this.handleChange} value="diversion" />}
-            label="Diversión"
-          />
-          <FormControlLabel
-            control={<Checkbox checked={this.state.beneficencia} onChange={this.handleChange} value="beneficencia" />}
-            label="Beneficiencia"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox checked={this.state.relajacion} onChange={this.handleChange} value="relajacion" />
-            }
-            label="Relajación"
-          />
-          <FormControlLabel
-            control={<Checkbox checked={this.state.acondicionamiento} onChange={this.handleChange} value="acondicionamiento" />}
-            label="Acondicionamiento"
-          />
-        </FormGroup>
-      </FormControl>
-    </Grid>
-
-                  </Container></Grid>
-                  <Grid container xs={12} sm={8} md={9} item={true} spacing={2}>
-                    {card2}
+                    <FormControl component="fieldset" className={classes.formControl}>
+                      <FormLabel component="legend" className={classes.labelPublico}>Tipo de evento</FormLabel>
+                      <Divider></Divider>
+                      <FormGroup>
+                        <FormControlLabel
+                          control={<Checkbox checked={this.state.diversion} onChange={this.handleChange} value="diversion" />}
+                          label="Diversión"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox checked={this.state.beneficencia} onChange={this.handleChange} value="beneficencia" />}
+                          label="Beneficiencia"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox checked={this.state.relajacion} onChange={this.handleChange} value="relajacion" />
+                          }
+                          label="Relajación"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox checked={this.state.acondicionamiento} onChange={this.handleChange} value="acondicionamiento" />}
+                          label="Acondicionamiento"
+                        />
+                      </FormGroup>
+                    </FormControl>
                   </Grid>
                 </Container>
               </Grid>
+
               <Grid container xs={12} sm={8} md={9} item={true} spacing={2}>
                 {card2}
               </Grid>
             </Grid>
           </Container>
+
           <Link className={classes.textoButton} to="/crear_evento">
             <Fab color="primary" size="large" aria-label="Add" className={classes.fab}>
               <AddIcon />
             </Fab>
           </Link>
-        </main>
-      </div>
+
+        </main >
+      </div >
     );
   }
 }
