@@ -60,16 +60,20 @@ class Events extends Component{
       isDataLoaded: false,
       cards: [],
       // clasificacion
-      niños: true,
-      adultos: true,
-      adultosm: true,
-
-      conciertos: true,
-      teatros: true,
-      bailes: true,
-      pilates: true,
-      zumba: true,
-      yoga: true,
+      publico:{
+        niños: false,
+        adultos: false,
+        familia: false,
+      },
+      tipo: {
+        beneficencia: false,
+        teatros: false,
+        bailes: false,
+        pilates: false,
+        zumba: false,
+        yoga: false,
+      },
+      
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -113,13 +117,93 @@ class Events extends Component{
 
   async handleChange(event){
     let name = event.target.value;
-    await this.setState({ ...this.state, [name]: event.target.checked });
-    let {niños, adultos, adultosm, conciertos, teatros, bailes, pilates, zumba, yoga} = this.state;
-    console.log(niños, adultos, adultosm, conciertos, teatros, bailes, pilates, zumba, yoga)
+    let publico = this.state.publico
+    let tipo = this.state.tipo
+
+    if (!(this.state.publico[name] === undefined)) {
+      let pb = this.state.publico;
+      console.log("not undifined")
+      pb[name] = !this.state.publico[name];
+      await this.setState({ [publico]: pb });
+    }
+    else {
+      let ty = this.state.tipo;
+      ty[name] = !this.state.tipo[name];
+      await this.setState({ [tipo]: ty });
+    }
+    //await this.setState({ ...this.state, [name]: event.target.checked });
+    //let {niños, adultos, adultosm, conciertos, teatros, bailes, pilates, zumba, yoga} = this.state;
+    //console.log(niños, adultos, adultosm, conciertos, teatros, bailes, pilates, zumba, yoga)
   };
   render(){
 
     const { classes } = this.props;
+    let publicoC = this.state.publico;
+    let tipoC = this.state.tipo;
+    let publicoB = [];
+    let tipoB = [];
+
+    publicoB.push(publicoC.niños);
+    publicoB.push(publicoC.adultos);
+    publicoB.push(publicoC.familia);
+
+    
+    tipoB.push(tipoC.beneficencia);
+    tipoB.push(tipoC.teatros);
+    tipoB.push(tipoC.bailes);
+    tipoB.push(tipoC.pilates);
+    tipoB.push(tipoC.zumba);
+    tipoB.push(tipoC.yoga);
+
+    let card2 = this.state.cards.map(card => {
+
+      if (publicoB.includes(true) && tipoB.includes(true)) {
+        console.log("Tipos & Publico")
+        if (!this.state.publico.niños && !this.state.publico.adultos && !this.state.publico.familia) {
+          return (
+            <Card key={card.id} card={card} />
+          )
+        }
+        if (this.state.publico[card.audence] === true && this.state.tipo[card.tipo] === true) {
+          return (
+            <Card key={card.id} card={card} />
+          )
+        }
+      }
+
+      else if (publicoB.includes(true)) {
+        console.log("Solo publico");
+        if (!this.state.publico.niños && !this.state.publico.adultos && !this.state.publico.familia) {
+          return (
+            <Card key={card.id} card={card} />
+          )
+        }
+        if (this.state.publico[card.audence] === true) {
+          console.log("Entra al menos aqui");
+          return (
+            <Card key={card.id} card={card} />
+          )
+        }
+
+      }
+      else if (tipoB.includes(true)) {
+        console.log("Solo tipo");
+        if (!this.state.tipo.diversion && !this.state.tipo.beneficencia && !this.state.tipo.relajacion && !this.state.tipo.acondicionamiento && !this.state.tipo.entretenimiento) {
+          return (
+            <Card key={card.id} card={card} />
+          )
+        }
+        if (this.state.tipo[card.tipo] === true) {
+          return (
+            <Card key={card.id} card={card} />
+          )
+        }
+      }
+      return (
+        <Card key={card.id} card={card} /> //Check for bugs (Cambio warning).
+      )
+
+    });
 
     return(
         <div className={classes.root}>
@@ -138,16 +222,16 @@ class Events extends Component{
         <Divider></Divider>
         <FormGroup>
           <FormControlLabel
-            control={<Checkbox checked={this.state.niños} onChange={this.handleChange} value="niños" />}
+            control={<Checkbox checked={this.state.publico.niños} onChange={this.handleChange} value="niños" />}
             label="Niños"
           />
           <FormControlLabel
-            control={<Checkbox checked={this.state.adultos} onChange={this.handleChange} value="adultos" />}
+            control={<Checkbox checked={this.state.publico.adultos} onChange={this.handleChange} value="adultos" />}
             label="Adultos"
           />
           <FormControlLabel
             control={
-              <Checkbox checked={this.state.adultosm} onChange={this.handleChange} value="adultosm" />
+              <Checkbox checked={this.state.publico.adultosm} onChange={this.handleChange} value="adultosm" />
             }
             label="Adultos mayores"
           />
@@ -159,30 +243,30 @@ class Events extends Component{
         <FormLabel component="legend" className={classes.labelPublico}>Tipo de evento</FormLabel>
         <FormGroup>
           <FormControlLabel
-            control={<Checkbox checked={this.state.conciertos} onChange={this.handleChange} value="conciertos" />}
-            label="Conciertos"
+            control={<Checkbox checked={this.state.tipo.beneficencia} onChange={this.handleChange} value="beneficencia" />}
+            label="Beneficiencia"
           />
           <FormControlLabel
-            control={<Checkbox checked={this.state.teatros} onChange={this.handleChange} value="teatros" />}
+            control={<Checkbox checked={this.state.tipo.teatros} onChange={this.handleChange} value="teatros" />}
             label="Teatros"
           />
           <FormControlLabel
             control={
-              <Checkbox checked={this.state.bailes} onChange={this.handleChange} value="bailes" />
+              <Checkbox checked={this.state.tipo.bailes} onChange={this.handleChange} value="bailes" />
             }
             label="Bailes"
           />
           <FormControlLabel
-            control={<Checkbox checked={this.state.pilates} onChange={this.handleChange} value="pilates" />}
+            control={<Checkbox checked={this.state.tipo.pilates} onChange={this.handleChange} value="pilates" />}
             label="Pilates"
           />
           <FormControlLabel
-            control={<Checkbox checked={this.state.zumba} onChange={this.handleChange} value="zumba" />}
+            control={<Checkbox checked={this.state.tipo.umba} onChange={this.handleChange} value="zumba" />}
             label="Zumba"
           />
           <FormControlLabel
             control={
-              <Checkbox checked={this.state.yoga} onChange={this.handleChange} value="yoga" />
+              <Checkbox checked={this.state.tipo.yoga} onChange={this.handleChange} value="yoga" />
             }
             label="Yoga"
           />
@@ -196,23 +280,7 @@ class Events extends Component{
 
                   </Container></Grid>
                   <Grid container xs={12} sm={8} md={9} item={true} spacing={2}>
-                    {this.state.cards.map(card => {
-                      let {niños, adultos, adultosm, conciertos, teatros, bailes, pilates, zumba, yoga} = this.state;
-                      if(!niños && !adultos && !adultosm && !conciertos && !teatros && !bailes && !pilates && !zumba && !yoga){
-                        return (
-                          <Card key={card.id} card={card}/>
-                        )
-                      }
-                      if(this.state[card.audence] === true || this.state[card.tipo] === true){
-                        return (
-                          <Card key={card.id} card={card}/>
-                        )
-                      }else{
-                        return (
-                          <br/>
-                        )
-                      }
-                    })}
+                    {card2}
                   </Grid>
                 </Grid>
               </Container>
