@@ -67,10 +67,7 @@ class Promos extends Component{
 
   handleChange(event){
     if(this.state.isDataLoaded){
-      //let name= event.target.value
       console.log(this.state)
-      //const response = this.setState({ [name]: !this.state[name]})
-
     }
 
   }
