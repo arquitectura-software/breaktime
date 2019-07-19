@@ -276,7 +276,7 @@ class Login extends Component {
                 className={classes.submit}
                 onClick={this.isVerifiedSuccess}>
                 Iniciar sesión
-                  </Button>
+              </Button>
 
 
               <Link className={classes.textoButton} to="/Register">
