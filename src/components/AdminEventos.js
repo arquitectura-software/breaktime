@@ -89,18 +89,14 @@ class AdminEventos extends Component {
         acondicionamiento: false,
         entretenimiento: false
       }
-      /*      niños: false,
-           familia: false,
-           adultos: false,
-           diversion: false,
-           beneficencia: false,
-           relajacion: false,
-           acondicionamiento: false,
-           entretenimiento: false */
     }
     this.handleChange = this.handleChange.bind(this)
   }
-  //peticion axios para hacer las 4 operaciones CRUD usando GraphiQL
+  
+  async componentDidMount(){
+    await this.cargarDatos();
+    //await this.decodificarDatos();
+  }
 
   async decodificarDatos(){
     let decodedCards =[]
@@ -137,24 +133,22 @@ class AdminEventos extends Component {
           data[i]["button1"] = button1;
           data[i]["button2"] = button2;
           data[i].date = wtf8.decode(fecha);
-          console.log(data[i]["audence"])
           data[i]["audence"]= wtf8.decode(data[i]["audence"])
-          }
+          
           switch(data[i].audence){
             case "Para toda la familia": data[i].audence = "familia";
             break;
             default:
-
-                data[i].audence = wtf8.decode(data[i].audence).toLowerCase();
+              data[i].audence = data[i].audence.toLowerCase();
           }
           data[i].tipo = wtf8.decode(data[i].tipo).toLowerCase();
+          data[i].description = wtf8.decode(data[i].description);
           this.setState({
             cards: this.state.cards.concat(data[i])
           })
+        }
           this.setState({ isDataLoaded: true })
         }
-
-
       )
       .catch(err => console.log(err))
   }
