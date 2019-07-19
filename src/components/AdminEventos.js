@@ -119,22 +119,26 @@ class AdminEventos extends Component {
     })
       .then((result) => {
 
-        let data = result.data.data.getEvents
-        this.setState({
-          cards: []
-        })
 
-        for (var i = 0; i < data.length; i++) {
+          let data = result.data.data.getEvents
+          this.setState({
+            cards: []
+          })
 
-          let fecha = data[i].date.substring(0, 10) + " a las " + data[i].date.substring(12, 16) + "."
-          var button1 = "Reservar"
-          var button2 = "Ver más"
+          for (var i = 0; i < data.length; i++) {
 
-          data[i]["button1"] = button1;
-          data[i]["button2"] = button2;
-          data[i].date = wtf8.decode(fecha);
-          data[i]["audence"]= wtf8.decode(data[i]["audence"])
-          
+            let fecha = data[i].date.substring(0, 10) + " a las " + data[i].date.substring(12, 16) + "."
+            var button1 = "Reservar"
+            var button2 = "Ver más"
+
+            data[i]["button1"] = button1;
+            data[i]["button2"] = button2;
+            data[i].date = wtf8.decode(fecha);
+            console.log(data[i]["audence"])
+            data[i]["audence"]= wtf8.decode(data[i]["audence"])
+          }
+
+
           switch(data[i].audence){
             case "Para toda la familia": data[i].audence = "familia";
             break;

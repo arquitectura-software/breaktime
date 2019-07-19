@@ -31,11 +31,11 @@ const useStyles = makeStyles(theme => ({
 function EventFilters() {
   const classes = useStyles();
   const [state, setState] = React.useState({
-    niños: true,
+    niños: false,
     adultos: true,
     adultosm: true,
     
-    conciertos: true,
+    conciertos: false,
     teatros: true,
     bailes: true,
     pilates: true,

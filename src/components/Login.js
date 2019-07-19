@@ -14,8 +14,9 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Link, withRouter } from 'react-router-dom';
 import auth from './auth'
+import Recaptcha from 'react-recaptcha';
 
-import {URLGRAPH} from '../constants'
+import { URLGRAPH } from '../constants'
 
 
 let jwt = window.localStorage.getItem("token");
@@ -68,9 +69,9 @@ const styles = theme => ({
 
 })
 
-class Login extends Component{
+class Login extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       username: '',
@@ -78,44 +79,47 @@ class Login extends Component{
       hash: '',
       token: '',
       isAuth: false,
+      // para el captcha
+      isVerified: false,
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.sendReq = this.sendReq.bind(this);
+    this.recaptchaLoaded = this.recaptchaLoaded.bind(this);
   }
 
-  componentWillMount(){
-    if(window.localStorage.getItem("token") != null){
+  componentWillMount() {
+    if (window.localStorage.getItem("token") != null) {
       auth.checkToken();
       auth.login(() => {
         this.props.history.push("/events")
-        }         
+      }
       )
+    }
   }
-}
 
-  handleInputChange(event){
+  handleInputChange(event) {
 
     const target = event.target;
     var md5 = require('md5');
-    if (target.name === "username"){
+    if (target.name === "username") {
       this.setState({
         username: target.value
       })
     }
-    else if (target.name === "password"){
+    else if (target.name === "password") {
       this.setState({
         password: target.value,
         hash: md5(target.value)
-        })
-      }
+      })
     }
+  }
 
   async sendReq() {
     const axios = require("axios")
 
     axios.post(URLGRAPH, {
-      query : `mutation{
+      query: `mutation{
         loginUser(credentials: {
           email: "${this.state.username}",
           password: "${this.state.hash}"
@@ -126,18 +130,18 @@ class Login extends Component{
         }
       }`
     }).then((result) => {
-        jwt = result.data.data.loginUser  
+      jwt = result.data.data.loginUser
 
-        if(!jwt.success){
-          this.sendReqAdmin()
-        }
-        else if(jwt.success){
-          console.log(jwt.token)
-            window.localStorage.setItem("token", jwt.token.replace(/['"]+/g, ''))
-            window.localStorage.setItem("user", this.state.username)
+      if (!jwt.success) {
+        this.sendReqAdmin()
+      }
+      else if (jwt.success) {
+        console.log(jwt.token)
+        window.localStorage.setItem("token", jwt.token.replace(/['"]+/g, ''))
+        window.localStorage.setItem("user", this.state.username)
 
-            axios.post(URLGRAPH, {
-              query: `query{
+        axios.post(URLGRAPH, {
+          query: `query{
                 userByUsername(username: "${this.state.username}"){
                   id
                   uname
@@ -145,32 +149,48 @@ class Login extends Component{
                   email
                 }
               }`
-            }).then((result) => {
-              let data = result.data.data.userByUsername
-              window.localStorage.setItem("idUser", data.id);
-            })
-          
-            auth.login(() => {
-              this.props.history.push("/events")
-              }         
-            )          
-        }
-      })
-      .catch(err => console.log(err))
-    }
+        }).then((result) => {
+          let data = result.data.data.userByUsername
+          window.localStorage.setItem("idUser", data.id);
+        })
 
-    handleKeyPress = (event) => {
-      if(event.key === 'Enter'){
-        this.sendReq()
+        auth.login(() => {
+          this.props.history.push("/events")
+        }
+        )
       }
+    })
+      .catch(err => console.log(err))
+  }
+
+  handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      this.sendReq()
     }
-  
-  
-    async sendReqAdmin() {
-      const axios = require("axios")
-  
-      axios.post(URLGRAPH, {
-        query : `mutation{
+  }
+
+  // captcha
+  isVerifiedSuccess = (event) => {
+    if (this.state.isVerified) {
+      this.sendReq('login');
+    } else {
+      alert("Please complete the Captcha");
+    }
+  }
+  recaptchaLoaded = (event) => {
+    console.log("Captcha complete");
+  }
+  verifyCallback = (event) => {
+    this.setState({
+      isVerified: true
+    })
+  }
+
+  async sendReqAdmin() {
+    const axios = require("axios")
+
+    axios.post(URLGRAPH, {
+      query: `mutation{
           loginAdmin(credentials: {
             email:"${this.state.username}",
             password:"${this.state.hash}"
@@ -180,113 +200,122 @@ class Login extends Component{
             data
           }
         }`
-      }).then((result) => {
-          //console.log(result)
+    }).then((result) => {
+      //console.log(result)
 
-          jwt = result.data.data.loginAdmin
-  
-          if(!jwt.success){
-            alert("Inicio de sesión incorrecto. Revise su usuario y contraseña.")
-          }else if(jwt.success){
-              window.localStorage.setItem("token", jwt.token.replace(/['"]+/g, ''))
-              window.localStorage.setItem("user", this.state.username)
-            
-              auth.loginAdmin(() => {
-                this.props.history.push("/admin")
-                }         
-              )          
-          }
-        })
-        .catch(err => console.log(err))
+      jwt = result.data.data.loginAdmin
+
+      if (!jwt.success) {
+        alert("Inicio de sesión incorrecto. Revise su usuario y contraseña.")
+      } else if (jwt.success) {
+        window.localStorage.setItem("token", jwt.token.replace(/['"]+/g, ''))
+        window.localStorage.setItem("user", this.state.username)
+
+        auth.loginAdmin(() => {
+          this.props.history.push("/admin")
+        }
+        )
       }
+    })
+      .catch(err => console.log(err))
+  }
 
 
-  render(){
+  render() {
     const { classes } = this.props;
 
-    return(
+    return (
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
-          <Grid item xs={false} sm={7} md={8} className={classes.image} />
-          <Grid item xs={12} sm={5} md={4} component={Paper} elevation={6} square>
-            <div className={classes.paper}>
-              <Avatar className={classes.avatar}>
-                <LockOutlinedIcon />
-              </Avatar>
-              <Typography component="h1" variant="h5">
-                Inicio de sesión
+        <Grid item xs={false} sm={7} md={8} className={classes.image} />
+        <Grid item xs={12} sm={5} md={4} component={Paper} elevation={6} square>
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Inicio de sesión
               </Typography>
-              <form className={classes.form} noValidate>
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  type="username"
-                  id="username"
-                  label="Usuario"
-                  name="username"
-                  autoFocus
-                  onChange={this.handleInputChange}
+            <form className={classes.form} noValidate>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                type="username"
+                id="username"
+                label="Usuario"
+                name="username"
+                autoFocus
+                onChange={this.handleInputChange}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                onKeyPress={this.handleKeyPress}
+                type="password"
+                id="password"
+                label="Contraseña"
+                name="password"
+                onChange={this.handleInputChange}
+              />
+
+              <Grid container justify="flex-end">
+                <FormControlLabel
+                  control={<Checkbox value="remember" color="primary" />}
+                  label="Recuérdame"
                 />
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  onKeyPress={this.handleKeyPress}
-                  type="password"
-                  id="password"
-                  label="Contraseña"
-                  name= "password"
-                  onChange={this.handleInputChange}
-                />              
-                
-                <Grid container justify="flex-end">
-                  <FormControlLabel
-                    control={<Checkbox value="remember" color="primary" />}
-                    label="Recuérdame"
-                  />
-                </Grid>
-                
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    color="secondary"
-                    className={classes.submit}
-                    onClick={this.sendReq}>
-                    Iniciar sesión                    
-                  </Button>
+              </Grid>
+
+              <Button
+                fullWidth
+                variant="contained"
+                color="secondary"
+                className={classes.submit}
+                onClick={this.isVerifiedSuccess}>
+                Iniciar sesión
+              </Button>
 
 
-                <Grid container>
-                  <Grid item xs>
-                  </Grid>
-                  <Grid item>
-                    <a href="https://github.com/Nigogu" variant="body2">
-                      {"¿No puede ingresar? ¡Podemos ayudarle!"}
-                    </a>
-                  </Grid>
-                </Grid>
-
-                <Link className={classes.textoButton} to="/Register">
+              <Link className={classes.textoButton} to="/Register">
                 <Button
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}>                    
-                    Registro                  
-                  </Button>
-                  </Link>
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}>
+                  Registro
+                </Button>
+              </Link>
+              <Grid container>
+                <Grid item xs>
+                </Grid>
+                <Grid item>
+                  <a href="https://github.com/Nigogu" variant="body2">
+                    {"¿No puede ingresar? ¡Podemos ayudarle!"}
+                  </a>
+                </Grid>
+              </Grid>
+              
+              <Grid container justify="flex-end">
+              <Recaptcha
+                sitekey="6LeADK4UAAAAADsPQ17MWODvv3cAE5ENeem2zD5e"
+                render="explicit"
+                onloadCallback={this.recaptchaLoaded}
+                verifyCallback={this.verifyCallback}
+              />
+              </Grid>
+              
+              <Box mt={5}>
+                <MadeWithLove />
+              </Box>
+              
 
-                <Box mt={5}>
-                  <MadeWithLove />
-                </Box>
 
-
-              </form>
-            </div>
-          </Grid>
+            </form>
+          </div>
+        </Grid>
       </Grid>
     );
   }

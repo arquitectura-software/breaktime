@@ -70,72 +70,77 @@ class Register extends Component{
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.sendReq = this.sendReq.bind(this);
   }
 
-  handleInputChange(event){
+  
+  async handleInputChange(event) {
 
-    const target = event.target;
+    const target = event.target.id;
+    const value = event.target.value;
     var md5 = require('md5');
-    if (target.name === "username"){
-      this.setState({
-        username: target.value
-      })
+    console.log("entry in Handle")
+    
+    if (target === "username") {
+      console.log("entry in username")
+      await this.setState({ username: value})
+      console.log(this.state)
     }
 
-    else if (target.name === "nombres"){
-      this.setState({
-        nombres: target.value
-      })
+    else if (target === "nombres") {
+      await this.setState({ nombres: value})
+      console.log(this.state)
     }
 
-    else if (target.name === "apellidos"){
-      this.setState({
-        apellidos: target.value
-      })
+    else if (target === "apellidos") {
+      await this.setState({ apellidos: value})
+      console.log(this.state)
     }
 
-    else if (target.name === "id"){
-      this.setState({
-        id: target.value
-      })
+    else if (target === "id") {
+      await this.setState({ id: value})
+      console.log(this.state)
     }
 
-    else if (target.name === "correo"){
-      this.setState({
-        correo: target.value
-      })
+    else if (target === "correo") {
+      await this.setState({ correo: value })
+      console.log(this.state.correo)
     }
 
-    else if (target.name === "celular"){
-      this.setState({
-        celular: target.value
-      })
+    else if (target === "celular") {
+      await this.setState({ celular: value})
+      console.log(this.state)
     }
 
-    else if (target.name === "fecha"){
-      this.setState({
-        fecha: target.value
-      })
+    else if (target === "fecha") {
+      await this.setState({ fecha: value })
+      console.log(this.state)
     }
 
-    else if (target.name === "password"){
-      this.setState({
-        password: target.value,
-        hash: md5(target.value)
-        })
-      }
+    else if (target === "password") {
+      const hash = md5(value);
+      await this.setState({ password: hash })
+      console.log(this.state.password)
     }
-
- 
+  }
+  
     async sendReq() {
       const axios = require("axios")
-  
+      console.log("entry to sendReq")
+      
+      console.log("this.state,: ",this.state)
+      //console.log("this.state.nombres: ",this.state.nombres)
+      //console.log("this.state.apellidos: ",this.state.apellidos)
+      //console.log("this.state.email: ",this.state.correo)
+      //console.log("this.state.password: ",this.state.password)
+      
+      // Crear un usuario en LDAP
       axios.post(URLGRAPH, { //Por revisar cuando esté desplegado.
         query : `mutation{
-          createUser(user: {
+          createUserld(user: {
             uname:"${this.state.nombres}",
             surname:"${this.state.apellidos}",
-            email:"${this.state.email}",
+            email:"${this.state.correo}",
             passw:"${this.state.password}",
           }){
             success
@@ -143,19 +148,43 @@ class Register extends Component{
           }
         }`
       }).then((result) => {
+          
           jwt = result.data.data          
           console.log(jwt)
-  
-          if(jwt.message === "Usuario creado."){            
+          if(jwt === "LDAP: usuario creado"){            
             alert("El usuario ha sido creado. Ahora puede proceder a realizar el inicio de sesión.")
             this.props.history.push("/")
           }else{                         
               alert("Ha ocurrido un error realizando el registro. Por favor contacte soporte.")         
           }
-        })
-        .catch(err => console.log(err))
-      }
-
+      }).catch(err => console.log(err))
+      
+      //Crear un usuario en la DB login
+      axios.post(URLGRAPH, { //Por revisar cuando esté desplegado.
+        query : `mutation{
+          createUser(user: {
+            uname:"${this.state.nombres}",
+            surname:"${this.state.apellidos}",
+            email:"${this.state.correo}",
+            passw:"${this.state.password}",
+          }){
+            id
+            uname
+            surname
+          }
+        }`
+      }).then((result) => {
+          
+          const res = result.data.uname          
+          console.log(res)
+          if(res != " "){            
+            alert("El usuario ha sido creado. Ahora puede proceder a realizar el inicio de sesión.")
+            this.props.history.push("/")
+          }else{                         
+              alert("Ha ocurrido un error realizando el registro. Por favor contacte soporte.")         
+          }
+      }).catch(err => console.log(err))
+  }
 
 
   render(){
@@ -213,18 +242,7 @@ class Register extends Component{
                 />
               </Grid>
 
-              <Grid item xs={12} sm={5}>
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  id="id"
-                  required
-                  fullWidth
-                  label="Identificación"
-                  onChange={this.handleInputChange}
-                />
-              </Grid>
-                
+             
               <Grid item xs={12} sm={5}>
                 <TextField
                   variant="outlined"
@@ -235,46 +253,47 @@ class Register extends Component{
                   label="Correo"
                   onChange={this.handleInputChange}
                 />
-                </Grid>
-                
+              </Grid>
+
+              <Grid item xs={12} sm={5}>
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    id="password"
+                    required
+                    fullWidth
+                    label="Contraseña"
+                    type="password"
+                    onChange={this.handleInputChange}
+                  />
+              </Grid>  
                 <Grid item xs={12} sm={5}>
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  id="celular"
-                  required
-                  fullWidth
-                  label="Celular"
-                  onChange={this.handleInputChange}
-                />
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    id="celular"
+                    required
+                    fullWidth
+                    label="Celular"
+                    onChange={this.handleInputChange}
+                  />
                 </Grid>
 
-              <Grid item xs={12} sm={5} className={classes.spaceDate}>
-                <TextField
-                      fullWidth
-                      id="fecha"
-                      label="Fecha de nacimiento"
-                      type="date"
-                      defaultValue="2019-06-14"
-                      className={classes.textField}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                    />
-                    </Grid>
+                <Grid item xs={12} sm={5} className={classes.spaceDate}>
+                  <TextField
+                    fullWidth
+                    id="fecha"
+                    label="Fecha de nacimiento"
+                    type="date"
+                    defaultValue="2019-06-14"
+                    className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                </Grid>
 
-                    <Grid item xs={12} sm={5}>
-                      <TextField
-                        variant="outlined"
-                        margin="normal"
-                        id="password"
-                        required
-                        fullWidth
-                        label="Contraseña"
-                        type="password"
-                        onChange={this.handleInputChange}
-                      />
-                    </Grid>
+                
                     
                   <Grid item xs={12} sm={5}>
                     <Button
